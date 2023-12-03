@@ -28,8 +28,7 @@ This is a Capstone's source code for Software Design and Construction project
 
 - Implementation details:
   - Pull Request(s): [Attach links to your pull requests here. You can attach multiple pull requests]()
-  - Specific implementation details:
-    - Didn't find any instance of content and common coupling
+  - Specific implementation details: Find content and common coupling in the code base but didn't find anything
 
 </details>
 
