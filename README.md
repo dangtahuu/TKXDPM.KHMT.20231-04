@@ -15,22 +15,21 @@ This is a Capstone's source code for Software Design and Construction project
 ## Report Content
 
 <details>
-  <summary>W3: 27/11/2023~03/12/2023 </summary>
+  <summary>W1: 27/11/2023~03/12/2023 </summary>
 <br>
 <details>
 <summary>Team Member 1</summary>
 <br>
 
 - Assigned tasks:
-  - Task 1
-  - Task 2
+  - Find content coupling
+  - Find common coupling
   - ...
 
 - Implementation details:
   - Pull Request(s): [Attach links to your pull requests here. You can attach multiple pull requests]()
   - Specific implementation details:
-    - Describe specific in detail what you did last week
-    - You can attach images if you want
+    - Didn't find any instance of content and common coupling
 
 </details>
 

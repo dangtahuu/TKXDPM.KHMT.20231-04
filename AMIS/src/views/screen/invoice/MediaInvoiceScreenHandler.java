@@ -52,6 +52,7 @@ public class MediaInvoiceScreenHandler extends FXMLScreenHandler{
     }
 
     public void setMediaInfo() throws SQLException{
+        
         title.setText(orderMedia.getMedia().getTitle());
         price.setText(Utils.getCurrencyFormat(orderMedia.getPrice()));
         numOfProd.setText(String.valueOf(orderMedia.getQuantity()));

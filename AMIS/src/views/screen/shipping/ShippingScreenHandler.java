@@ -81,12 +81,14 @@ public class ShippingScreenHandler extends BaseScreenHandler implements Initiali
 		}
 	
 		// calculate shipping fees
+		
 		int shippingFees = getBController().calculateShippingFee(order);
 		order.setShippingFees(shippingFees);
 		order.setDeliveryInfo(messages);
 		
 		// create invoice screen
 		Invoice invoice = getBController().createInvoice(order);
+		
 		BaseScreenHandler InvoiceScreenHandler = new InvoiceScreenHandler(this.stage, Configs.INVOICE_SCREEN_PATH, invoice);
 		InvoiceScreenHandler.setPreviousScreen(this);
 		InvoiceScreenHandler.setHomeScreenHandler(homeScreenHandler);
@@ -96,7 +98,7 @@ public class ShippingScreenHandler extends BaseScreenHandler implements Initiali
 	}
 
 	public PlaceOrderController getBController(){
-		return (PlaceOrderController) super.getBController();
+		return (PlaceOrderController) super.getBController(); 
 	}
 
 	public void notifyError(){

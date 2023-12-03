@@ -24,7 +24,7 @@ public class InterbankSubsystem implements InterbankInterface {
 	/**
 	 * Initializes a newly created {@code InterbankSubsystem} object so that it
 	 * represents an Interbank subsystem.
-	 */
+	 */	
 	public InterbankSubsystem() {
 		String str = new String();
 		this.ctrl = new InterbankSubsystemController();
@@ -35,7 +35,7 @@ public class InterbankSubsystem implements InterbankInterface {
 	 *      java.lang.String)
 	 */
 	public PaymentTransaction payOrder(CreditCard card, int amount, String contents) {
-		PaymentTransaction transaction = ctrl.payOrder(card, amount, contents);
+		PaymentTransaction transaction = ctrl.payOrder(card, amount, contents); 
 		return transaction;
 	}
 
@@ -44,7 +44,7 @@ public class InterbankSubsystem implements InterbankInterface {
 	 *      java.lang.String)
 	 */
 	public PaymentTransaction refund(CreditCard card, int amount, String contents) {
-		PaymentTransaction transaction = ctrl.refund(card, amount, contents);
+		PaymentTransaction transaction = ctrl.refund(card, amount, contents); 
 		return transaction;
 	}
 }

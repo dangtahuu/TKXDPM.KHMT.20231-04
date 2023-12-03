@@ -37,7 +37,7 @@ public class ResultScreenHandler extends BaseScreenHandler {
 
 	@FXML
 	void confirmPayment(MouseEvent event) throws IOException {
-		homeScreenHandler.show();
+		homeScreenHandler.show(); 
 	}
 
 }

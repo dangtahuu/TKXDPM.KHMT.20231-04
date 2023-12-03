@@ -19,7 +19,7 @@ public class HomeController extends BaseController{
      * @throws SQLException
      */
     public List getAllMedia() throws SQLException{
-        return new Media().getAllMedia();
+        return new Media().getAllMedia(); 
     }
 
 }

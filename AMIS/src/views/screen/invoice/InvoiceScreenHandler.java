@@ -23,7 +23,7 @@ import views.screen.payment.PaymentScreenHandler;
 
 public class InvoiceScreenHandler extends BaseScreenHandler {
 
-	private static Logger LOGGER = Utils.getLogger(InvoiceScreenHandler.class.getName());
+	private static Logger LOGGER = Utils.getLogger(InvoiceScreenHandler.class.getName()); 
 
 	@FXML
 	private Label pageTitle;
@@ -64,7 +64,8 @@ public class InvoiceScreenHandler extends BaseScreenHandler {
 	}
 
 	private void setInvoiceInfo(){
-		HashMap<String, String> deliveryInfo = invoice.getOrder().getDeliveryInfo();
+		
+		HashMap<String, String> deliveryInfo = invoice.getOrder().getDeliveryInfo(); 
 		name.setText(deliveryInfo.get("name"));
 		province.setText(deliveryInfo.get("province"));
 		instructions.setText(deliveryInfo.get("instructions"));
@@ -90,6 +91,7 @@ public class InvoiceScreenHandler extends BaseScreenHandler {
 
 	@FXML
 	void confirmInvoice(MouseEvent event) throws IOException {
+		
 		BaseScreenHandler paymentScreen = new PaymentScreenHandler(this.stage, Configs.PAYMENT_SCREEN_PATH, invoice);
 		paymentScreen.setBController(new PaymentController());
 		paymentScreen.setPreviousScreen(this);

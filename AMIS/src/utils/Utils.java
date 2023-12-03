@@ -16,13 +16,14 @@ import java.util.logging.Logger;
 public class Utils {
 
 	public static DateFormat DATE_FORMATER = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
-	private static Logger LOGGER = getLogger(Utils.class.getName());
+	private static Logger LOGGER = getLogger(Utils.class.getName()); 				
+
 	static {
 		System.setProperty("java.util.logging.SimpleFormatter.format", "[%4$-4s] [%1$tF %1$tT] [%2$-7s] %5$s %n");
 	}
 
 	public static Logger getLogger(String className) {
-		return Logger.getLogger(className);
+		return Logger.getLogger(className); 			
 	}
 
 	public static String getCurrencyFormat(int num) {
@@ -63,7 +64,7 @@ public class Utils {
 			}
 			digest = sb.toString();
 		} catch (UnsupportedEncodingException | NoSuchAlgorithmException ex) {
-			Utils.getLogger(Utils.class.getName());
+			Utils.getLogger(Utils.class.getName()); 				
 			digest = "";
 		}
 		return digest;
