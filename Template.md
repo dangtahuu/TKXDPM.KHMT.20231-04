@@ -6,29 +6,51 @@ This is a Capstone's source code for Software Design and Construction project
 
 | Name           | Role        |
 | :------------- | :---------- |
-| Lê Thanh Giang | Team Leader |
-| Nguyễn Văn A   | Member      |
-| Nguyễn Văn B   | Member      |
+| Tạ Hữu Đăng    | Team Leader |
+| Trịnh Quốc Đạt | Member      |
+| Ngô Hoàng Hải Đăng  | Member      |
+| Trần Văn Điền  | Member      |
 
 ## Report Content
 
 <details>
-  <summary>W3: 01/10/2023~08/10/2023 </summary>
+  <summary>27/11/2023~03/12/2023 </summary>
 <br>
 <details>
-<summary>Team Member 1</summary>
+<summary>Trịnh Quốc Đạt</summary>
 <br>
 
 - Assigned tasks:
-  - Task 1
-  - Task 2
-  - ...
+  - Chỉ ra các loại coupling cho các hàm trong CartScreenHandler.java, MediaHandler.java, HomeScreenHandler.java, MediaHandler.java
+
 
 - Implementation details:
   - Pull Request(s): [Attach links to your pull requests here. You can attach multiple pull requests]()
   - Specific implementation details:
-    - Describe specific in detail what you did last week
-    - You can attach images if you want
+
+    -Trong CartScreenHandler.java:
+    
+      - Phương thức CartScreenHandle(...) sử dụng **Control coupling**, **Data coupling**,**Content coupling**.
+
+      - Phương thức requestToViewCart(...) sử dụng **Control coupling**, **Data coupling**,**Content coupling**.
+
+      - Phương thức CartScreenHandle(...) sử dụng **Control coupling**, **Data coupling**,**Content coupling**, **Common coupling**.
+
+      - Phương thức CartScreenHandle(...) sử dụng **Control coupling**, **Data coupling**,**Content coupling**, **Common coupling**.
+
+      - Phương thức CartScreenHandle(...) sử dụng **Control coupling**, **Data coupling**,**Content coupling**, **Common coupling**.
+
+      - Phương thức CartScreenHandle(...) sử dụng **Control coupling**, **Data coupling**,**Content coupling**, **Common coupling**.
+
+      - Phương thức CartScreenHandle(...) sử dụng **Control coupling**, **Data coupling**,**Content coupling**, **Common coupling**.
+
+      - Phương thức CartScreenHandle(...) sử dụng **Control coupling**, **Data coupling**,**Content coupling**, **Common coupling**.
+
+      - Phương thức CartScreenHandle(...) sử dụng **Control coupling**, **Data coupling**,**Content coupling**, **Common coupling**.
+
+    
+    
+    
 
 </details>
 
