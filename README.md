@@ -18,7 +18,7 @@ This is a Capstone's source code for Software Design and Construction project
   <summary>W1: 27/11/2023~03/12/2023 </summary>
 <br>
 <details>
-<summary>Tạ Hữu Đăng</summary>
+<summary>Trần Văn Điền</summary>
 <br>
 
 - Assigned tasks:
