@@ -59,7 +59,7 @@ public class Cart {
         boolean allAvai = true;
         for (Object object : lstCartMedia) {
             CartMedia cartMedia = (CartMedia) object;
-            int requiredQuantity = cartMedia.getQuantity();
+            int requiredQuantity = cartMedia.getQuantity(); 
             int availQuantity = cartMedia.getMedia().getQuantity();
             if (requiredQuantity > availQuantity) allAvai = false;
         }
@@ -68,7 +68,7 @@ public class Cart {
 
     public CartMedia checkMediaInCart(Media media){
         for (CartMedia cartMedia : lstCartMedia) {
-            if (cartMedia.getMedia().getId() == media.getId()) return cartMedia;
+            if (cartMedia.getMedia().getId() == media.getId()) return cartMedia; 
         }
         return null;
     }

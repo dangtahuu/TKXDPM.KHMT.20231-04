@@ -30,14 +30,14 @@ public class InterbankSubsystemController {
 	}
 	
 	private String generateData(Map<String, Object> data) {
-		return ((MyMap) data).toJSON();
+		return ((MyMap) data).toJSON(); 
 	}
 
 	public PaymentTransaction payOrder(CreditCard card, int amount, String contents) {
 		Map<String, Object> transaction = new MyMap();
 
 		try {
-			transaction.putAll(MyMap.toMyMap(card));
+			transaction.putAll(MyMap.toMyMap(card)); 
 		} catch (IllegalArgumentException | IllegalAccessException e) {
 			// TODO Auto-generated catch block
 			throw new InvalidCardException();
@@ -51,10 +51,12 @@ public class InterbankSubsystemController {
 		requestMap.put("version", VERSION);
 		requestMap.put("transaction", transaction);
 
-		String responseText = interbankBoundary.query(Configs.PROCESS_TRANSACTION_URL, generateData(requestMap));
+		String responseText = interbankBoundary.query(Configs.PROCESS_TRANSACTION_URL,
+			 generateData(requestMap)); 
+
 		MyMap response = null;
 		try {
-			response = MyMap.toMyMap(responseText, 0);
+			response = MyMap.toMyMap(responseText, 0); 
 		} catch (IllegalArgumentException e) {
 			e.printStackTrace();
 			throw new UnrecognizedException();
@@ -69,11 +71,12 @@ public class InterbankSubsystemController {
 		MyMap transcation = (MyMap) response.get("transaction");
 		CreditCard card = new CreditCard((String) transcation.get("cardCode"), (String) transcation.get("owner"),
 				Integer.parseInt((String) transcation.get("cvvCode")), (String) transcation.get("dateExpired"));
+				
 		PaymentTransaction trans = new PaymentTransaction((String) response.get("errorCode"), card,
 				(String) transcation.get("transactionId"), (String) transcation.get("transactionContent"),
 				Integer.parseInt((String) transcation.get("amount")), (String) transcation.get("createdAt"));
-
-		switch (trans.getErrorCode()) {
+				
+		switch (trans.getErrorCode()) { 
 		case "00":
 			break;
 		case "01":

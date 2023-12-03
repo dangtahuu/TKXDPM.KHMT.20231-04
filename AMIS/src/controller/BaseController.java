@@ -18,7 +18,7 @@ public class BaseController {
      * @return CartMedia or null
      */
     public CartMedia checkMediaInCart(Media media){
-        return Cart.getCart().checkMediaInCart(media);
+        return Cart.getCart().checkMediaInCart(media); 
     }
 
     /**
@@ -26,6 +26,6 @@ public class BaseController {
      * @return List[CartMedia]
      */
     public List getListCartMedia(){
-        return Cart.getCart().getListMedia();
+        return Cart.getCart().getListMedia(); 
     }
 }

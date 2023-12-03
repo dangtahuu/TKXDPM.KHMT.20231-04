@@ -16,7 +16,7 @@ import utils.Utils;
  */
 public class Media {
 
-    private static Logger LOGGER = Utils.getLogger(Media.class.getName());
+    private static Logger LOGGER = Utils.getLogger(Media.class.getName()); 
 
     protected Statement stm;
     protected int id;
@@ -29,7 +29,7 @@ public class Media {
     protected String imageURL;
 
     public Media() throws SQLException{
-        stm = AIMSDB.getConnection().createStatement();
+        stm = AIMSDB.getConnection().createStatement(); 
     }
 
     public Media (int id, String title, String category, int price, int quantity, String type) throws SQLException{
@@ -51,8 +51,8 @@ public class Media {
 
     public Media getMediaById(int id) throws SQLException{
         String sql = "SELECT * FROM Media ;";
-        Statement stm = AIMSDB.getConnection().createStatement();
-        ResultSet res = stm.executeQuery(sql);
+        Statement stm = AIMSDB.getConnection().createStatement(); 
+        ResultSet res = stm.executeQuery(sql); 
 		if(res.next()) {
 
             return new Media()
@@ -68,7 +68,7 @@ public class Media {
     }
 
     public List getAllMedia() throws SQLException{
-        Statement stm = AIMSDB.getConnection().createStatement();
+        Statement stm = AIMSDB.getConnection().createStatement(); 
         ResultSet res = stm.executeQuery("select * from Media");
         ArrayList medium = new ArrayList<>();
         while (res.next()) {
@@ -86,7 +86,7 @@ public class Media {
     }
 
     public void updateMediaFieldById(String tbname, int id, String field, Object value) throws SQLException {
-        Statement stm = AIMSDB.getConnection().createStatement();
+        Statement stm = AIMSDB.getConnection().createStatement(); 
         if (value instanceof String){
             value = "\"" + value + "\"";
         }

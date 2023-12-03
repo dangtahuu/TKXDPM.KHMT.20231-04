@@ -37,7 +37,7 @@ import views.screen.cart.CartScreenHandler;
 
 public class HomeScreenHandler extends BaseScreenHandler implements Initializable{
 
-    public static Logger LOGGER = Utils.getLogger(HomeScreenHandler.class.getName());
+    public static Logger LOGGER = Utils.getLogger(HomeScreenHandler.class.getName()); 
 
     @FXML
     private Label numMediaInCart;
@@ -79,6 +79,7 @@ public class HomeScreenHandler extends BaseScreenHandler implements Initializabl
 
     @Override
     public void show() {
+        
         numMediaInCart.setText(String.valueOf(Cart.getCart().getListMedia().size()) + " media");
         super.show();
     }
@@ -91,7 +92,7 @@ public class HomeScreenHandler extends BaseScreenHandler implements Initializabl
             this.homeItems = new ArrayList<>();
             for (Object object : medium) {
                 Media media = (Media)object;
-                MediaHandler m1 = new MediaHandler(Configs.HOME_MEDIA_PATH, media, this);
+                MediaHandler m1 = new MediaHandler(Configs.HOME_MEDIA_PATH, media, this); 
                 this.homeItems.add(m1);
             }
         }catch (SQLException | IOException e){
@@ -108,10 +109,10 @@ public class HomeScreenHandler extends BaseScreenHandler implements Initializabl
             CartScreenHandler cartScreen;
             try {
                 LOGGER.info("User clicked to view cart");
-                cartScreen = new CartScreenHandler(this.stage, Configs.CART_SCREEN_PATH);
-                cartScreen.setHomeScreenHandler(this);
-                cartScreen.setBController(new ViewCartController());
-                cartScreen.requestToViewCart(this);
+                cartScreen = new CartScreenHandler(this.stage, Configs.CART_SCREEN_PATH); 
+                cartScreen.setHomeScreenHandler(this); 
+                cartScreen.setBController(new ViewCartController()); 
+                cartScreen.requestToViewCart(this); 
             } catch (IOException | SQLException e1) {
                 throw new ViewCartException(Arrays.toString(e1.getStackTrace()).replaceAll(", ", "\n"));
             }
@@ -124,11 +125,11 @@ public class HomeScreenHandler extends BaseScreenHandler implements Initializabl
 
     public void setImage(){
         // fix image path caused by fxml
-        File file1 = new File(Configs.IMAGE_PATH + "/" + "Logo.png");
+        File file1 = new File(Configs.IMAGE_PATH + "/" + "Logo.png"); 
         Image img1 = new Image(file1.toURI().toString());
         aimsImage.setImage(img1);
 
-        File file2 = new File(Configs.IMAGE_PATH + "/" + "cart.png");
+        File file2 = new File(Configs.IMAGE_PATH + "/" + "cart.png"); 
         Image img2 = new Image(file2.toURI().toString());
         cartImage.setImage(img2);
     }

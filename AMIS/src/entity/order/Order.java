@@ -58,7 +58,7 @@ public class Order {
             OrderMedia om = (OrderMedia) object;
             amount += om.getPrice();
         }
-        return (int) (amount + (Configs.PERCENT_VAT/100)*amount);
+        return (int) (amount + (Configs.PERCENT_VAT/100)*amount); 
     }
 
 }

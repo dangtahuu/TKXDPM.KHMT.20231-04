@@ -31,7 +31,7 @@ public class PlaceOrderController extends BaseController{
      * @throws SQLException
      */
     public void placeOrder() throws SQLException{
-        Cart.getCart().checkAvailabilityOfProduct();
+        Cart.getCart().checkAvailabilityOfProduct(); 
     }
 
     /**
@@ -57,7 +57,7 @@ public class PlaceOrderController extends BaseController{
      * @return Invoice
      */
     public Invoice createInvoice(Order order) {
-        return new Invoice(order);
+        return new Invoice(order); 
     }
 
     /**

@@ -23,10 +23,10 @@ import entity.payment.PaymentTransaction;
 public class API {
 
 	public static DateFormat DATE_FORMATER = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
-	private static Logger LOGGER = Utils.getLogger(Utils.class.getName());
+	private static Logger LOGGER = Utils.getLogger(Utils.class.getName()); 
 
 	public static String get(String url, String token) throws Exception {
-		LOGGER.info("Request URL: " + url + "\n");
+		LOGGER.info("Request URL: " + url + "\n"); 
 		URL line_api_url = new URL(url);
 		HttpURLConnection conn = (HttpURLConnection) line_api_url.openConnection();
 		conn.setDoInput(true);
@@ -41,7 +41,8 @@ public class API {
 			System.out.println(inputLine);
 		respone.append(inputLine + "\n");
 		in.close();
-		LOGGER.info("Respone Info: " + respone.substring(0, respone.length() - 1).toString());
+		
+		LOGGER.info("Respone Info: " + respone.substring(0, respone.length() - 1).toString()); 
 		return respone.substring(0, respone.length() - 1).toString();
 	}
 
@@ -53,7 +54,8 @@ public class API {
 		allowMethods("PATCH");
 		URL line_api_url = new URL(url);
 		String payload = data;
-		LOGGER.info("Request Info:\nRequest URL: " + url + "\n" + "Payload Data: " + payload + "\n");
+		
+		LOGGER.info("Request Info:\nRequest URL: " + url + "\n" + "Payload Data: " + payload + "\n"); 
 		HttpURLConnection conn = (HttpURLConnection) line_api_url.openConnection();
 		conn.setDoInput(true);
 		conn.setDoOutput(true);
@@ -74,7 +76,7 @@ public class API {
 		while ((inputLine = in.readLine()) != null)
 			response.append(inputLine);
 		in.close();
-		LOGGER.info("Respone Info: " + response.toString());
+		LOGGER.info("Respone Info: " + response.toString()); 
 		return response.toString();
 	}
 

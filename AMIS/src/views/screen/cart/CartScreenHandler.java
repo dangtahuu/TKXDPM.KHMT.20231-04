@@ -28,7 +28,7 @@ import views.screen.shipping.ShippingScreenHandler;
 
 public class CartScreenHandler extends BaseScreenHandler {
 
-	private static Logger LOGGER = Utils.getLogger(CartScreenHandler.class.getName());
+	private static Logger LOGGER = Utils.getLogger(CartScreenHandler.class.getName()); 
 
 	@FXML
 	private ImageView aimsImage;
@@ -64,7 +64,7 @@ public class CartScreenHandler extends BaseScreenHandler {
 
 		// on mouse clicked, we back to home
 		aimsImage.setOnMouseClicked(e -> {
-			homeScreenHandler.show();
+			homeScreenHandler.show(); 
 		});
 
 		// on mouse clicked, we start processing place order usecase
@@ -105,20 +105,20 @@ public class CartScreenHandler extends BaseScreenHandler {
 		try {
 			// create placeOrderController and process the order
 			PlaceOrderController placeOrderController = new PlaceOrderController();
-			if (placeOrderController.getListCartMedia().size() == 0){
-				PopupScreen.error("You don't have anything to place");
+			if (placeOrderController.getListCartMedia().size() == 0){ 
+				PopupScreen.error("You don't have anything to place"); 
 				return;
 			}
 
-			placeOrderController.placeOrder();
+			placeOrderController.placeOrder(); 
 			
 			// display available media
 			displayCartWithMediaAvailability();
 
 			// create order
-			Order order = placeOrderController.createOrder();
+			Order order = placeOrderController.createOrder(); 
 
-			// display shipping form
+			// display shipping form 
 			ShippingScreenHandler ShippingScreenHandler = new ShippingScreenHandler(this.stage, Configs.SHIPPING_SCREEN_PATH, order);
 			ShippingScreenHandler.setPreviousScreen(this);
 			ShippingScreenHandler.setHomeScreenHandler(homeScreenHandler);
@@ -140,7 +140,7 @@ public class CartScreenHandler extends BaseScreenHandler {
 	void updateCartAmount(){
 		// calculate subtotal and amount
 		int subtotal = getBController().getCartSubtotal();
-		int vat = (int)((Configs.PERCENT_VAT/100)*subtotal);
+		int vat = (int)((Configs.PERCENT_VAT/100)*subtotal); 
 		int amount = subtotal + vat;
 		LOGGER.info("amount" + amount);
 
@@ -162,8 +162,8 @@ public class CartScreenHandler extends BaseScreenHandler {
 
 				// display the attribute of vboxCart media
 				CartMedia cartMedia = (CartMedia) cm;
-				MediaHandler mediaCartScreen = new MediaHandler(Configs.CART_MEDIA_PATH, this);
-				mediaCartScreen.setCartMedia(cartMedia);
+				MediaHandler mediaCartScreen = new MediaHandler(Configs.CART_MEDIA_PATH, this); 
+				mediaCartScreen.setCartMedia(cartMedia); 
 
 				// add spinner
 				vboxCart.getChildren().add(mediaCartScreen.getContent());
