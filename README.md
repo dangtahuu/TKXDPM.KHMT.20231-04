@@ -18,7 +18,7 @@ This is a Capstone's source code for Software Design and Construction project
   <summary>W1: 27/11/2023~03/12/2023 </summary>
 <br>
 <details>
-<summary>Team Member 1</summary>
+<summary>Tạ Hữu Đăng</summary>
 <br>
 
 - Assigned tasks:
@@ -27,7 +27,7 @@ This is a Capstone's source code for Software Design and Construction project
   - ...
 
 - Implementation details:
-  - Pull Request(s): [Attach links to your pull requests here. You can attach multiple pull requests]()
+  - Pull Request(s): [https://github.com/dangtahuu/TKXDPM.KHMT.20231-04/pull/1]()
   - Specific implementation details: Find content and common coupling in the code base but didn't find anything
 
 </details>
