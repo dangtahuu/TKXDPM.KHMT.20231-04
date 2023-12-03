@@ -173,20 +173,20 @@ This is a Capstone's source code for Software Design and Construction project
 </details>
 
 <details>
-<summary>Team Member 2</summary>
+<summary>Ngô Hoàng Hải Đăng</summary>
 <br>
 
 - Assigned tasks:
-  - Task 1
-  - Task 2
-  - ...
+  - Tìm control coupling trong file src
 
 - Implementation details:
   - Pull Request(s): [Attach links to your pull requests here. You can attach multiple pull requests]()
   - Specific implementation details:
-    - Describe specific in detail what you did last week
-    - You can attach images if you want
-
+    ![Alt text](image.png)
+    ![Alt text](image-1.png)
+    ![Alt text](image-2.png)
+    ![Alt text](image-3.png)
+    ![Alt text](image-4.png)
 </details>
 
 </details>
