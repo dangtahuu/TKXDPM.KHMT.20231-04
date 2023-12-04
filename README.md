@@ -40,7 +40,7 @@ This is a Capstone's source code for Software Design and Construction project
   - Find Control coupling: 
 
 - Implementation details:
-  - Pull Request(s): [https://github.com/dangtahuu/TKXDPM.KHMT.20231-04/pull/1]()
+  - Pull Request(s): [https://github.com/dangtahuu/TKXDPM.KHMT.20231-04/pull/2]()
   - Specific implementation details: Find Control coupling.
 </details>
 
