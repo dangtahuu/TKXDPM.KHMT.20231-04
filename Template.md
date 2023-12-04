@@ -78,6 +78,49 @@ This is a Capstone's source code for Software Design and Construction project
       Phương thức getCartSubtotal:
         Phương thức này gọi phương thức calSubtotal của Cart để tính toán tổng giá trị của giỏ hàng.
         Phương thức này không trực tiếp truy cập hoặc phụ thuộc vào cấu trúc dữ liệu của các lớp khác, chỉ gọi một phương thức của Cart.
+
+  - Cart: 
+    - Cart:
+      Phương thức addCartMedia và removeCartMedia:
+        Phương thức này nhận một đối tượng CartMedia và thêm hoặc loại bỏ nó khỏi danh sách lstCartMedia.
+        Phương thức này tương tác trực tiếp với CartMedia, có mức độ nối kết dữ liệu.
+
+      Phương thức getListMedia:
+        Phương thức này trả về danh sách lstCartMedia.
+        Phương thức này không trực tiếp tương tác với dữ liệu chi tiết của CartMedia, nhưng nó trả về danh sách, có thể dẫn đến sự nối kết dữ liệu khi ai đó có thể thay đổi danh sách này.
+
+      Phương thức emptyCart:
+        Phương thức này xóa toàn bộ danh sách lstCartMedia.
+        Phương thức này không trực tiếp tương tác với dữ liệu chi tiết của CartMedia, nhưng nó xóa toàn bộ danh sách, có thể dẫn đến sự nối kết dữ liệu khi ai đó có thể thay đổi cách danh sách được quản lý.
+
+      Phương thức getTotalMedia:
+        Phương thức này tính tổng số lượng các sản phẩm trong giỏ hàng.
+        Phương thức này tương tác trực tiếp với CartMedia, có mức độ nối kết dữ liệu.
+
+      Phương thức calSubtotal:
+        Phương thức này tính tổng số tiền cho các sản phẩm trong giỏ hàng.
+        Phương thức này tương tác trực tiếp với CartMedia, có mức độ nối kết dữ liệu.
+
+      Phương thức checkAvailabilityOfProduct:
+        Phương thức này kiểm tra tính sẵn có của sản phẩm trong giỏ hàng.
+        Phương thức này tương tác trực tiếp với CartMedia và Media, có mức độ nối kết dữ liệu.
+
+      Phương thức checkMediaInCart:
+        Phương thức này kiểm tra xem một sản phẩm có trong giỏ hàng không.
+        Phương thức này tương tác trực tiếp với CartMedia và Media, có mức độ nối kết dữ liệu.
+    
+    - CartMedia:
+      Thuộc tính media:
+        Thuộc tính này là một đối tượng của lớp Media, có nghĩa là có một mức độ nối kết dữ liệu với lớp Media.
+        Phương thức getMedia và setMedia trực tiếp truy cập và thiết lập giá trị cho thuộc tính media.
+
+      Thuộc tính quantity và price:
+        Cả hai thuộc tính này là kiểu dữ liệu cơ bản (int), không tạo ra sự nối kết mạnh với các lớp khác.
+        Cung cấp các phương thức get và set cho cả hai thuộc tính.
+
+       Phương thức toString:
+        Phương thức này sử dụng media và quantity để tạo một chuỗi biểu diễn của đối tượng CartMedia.
+        Phương thức này trực tiếp sử dụng media, có thể tạo ra sự nối kết dữ liệu.
 </details>
 
 
