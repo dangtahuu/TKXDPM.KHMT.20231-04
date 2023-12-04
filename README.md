@@ -33,20 +33,15 @@ This is a Capstone's source code for Software Design and Construction project
 </details>
 
 <details>
-<summary>Team Member 2</summary>
+<summary>Trịnh Quốc Đạt</summary>
 <br>
 
 - Assigned tasks:
-  - Task 1
-  - Task 2
-  - ...
+  - Find Control coupling: 
 
 - Implementation details:
-  - Pull Request(s): [Attach links to your pull requests here. You can attach multiple pull requests]()
-  - Specific implementation details:
-    - Describe specific in detail what you did last week
-    - You can attach images if you want
-
+  - Pull Request(s): [https://github.com/dangtahuu/TKXDPM.KHMT.20231-04/pull/1]()
+  - Specific implementation details: Find Control coupling.
 </details>
 
 </details>
