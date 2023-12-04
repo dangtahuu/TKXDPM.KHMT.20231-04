@@ -121,6 +121,109 @@ This is a Capstone's source code for Software Design and Construction project
        Phương thức toString:
         Phương thức này sử dụng media và quantity để tạo một chuỗi biểu diễn của đối tượng CartMedia.
         Phương thức này trực tiếp sử dụng media, có thể tạo ra sự nối kết dữ liệu.
+
+  - Media:
+    - Book:
+        Thuộc tính author, coverType, publisher, publishDate, numOfPages, language, bookCategory:
+        Các thuộc tính này là các kiểu dữ liệu cơ bản hoặc Date, không tạo ra sự nối kết mạnh với các lớp khác.
+        Cung cấp các phương thức get và set cho từng thuộc tính.
+
+        Phương thức getMediaById:
+        Phương thức này thực hiện truy vấn SQL để lấy thông tin về Book từ cơ sở dữ liệu.
+        Phương thức này sử dụng ResultSet để truy cập dữ liệu, có thể coi đây là mức độ nối kết dữ liệu.
+
+        Phương thức getAllMedia:
+        Phương thức này không được triển khai, nhưng nếu được triển khai trong tương lai, có thể nối kết với cơ sở dữ liệu.
+
+        Phương thức toString:
+        Phương thức này sử dụng tất cả các thuộc tính của Book để tạo một chuỗi biểu diễn.
+        Phương thức này không tạo ra sự nối kết mạnh với các lớp khác.
+    - CD:
+          Thuộc tính artist, recordLabel, musicType, releasedDate:
+        Các thuộc tính này là các kiểu dữ liệu cơ bản hoặc Date, không tạo ra sự nối kết mạnh với các lớp khác.
+        Cung cấp các phương thức get và set cho từng thuộc tính.
+
+      Phương thức getMediaById:
+        Phương thức này thực hiện truy vấn SQL để lấy thông tin về CD từ cơ sở dữ liệu.
+        Phương thức này sử dụng ResultSet để truy cập dữ liệu, có thể coi đây là mức độ nối kết dữ liệu.
+
+      Phương thức getAllMedia:
+        Phương thức này không được triển khai, nhưng nếu được triển khai trong tương lai, có thể nối kết với cơ sở dữ liệu.
+
+      Phương thức toString:
+        Phương thức này sử dụng tất cả các thuộc tính của CD để tạo một chuỗi biểu diễn.
+        Phương thức này không tạo ra sự nối kết mạnh với các lớp khác.
+    - DVD:
+        Thuộc tính discType, director, runtime, studio, subtitles, releasedDate, filmType:
+        Các thuộc tính này là các kiểu dữ liệu cơ bản hoặc Date, không tạo ra sự nối kết mạnh với các lớp khác.
+        Cung cấp các phương thức get và set cho từng thuộc tính.
+
+    Phương thức getMediaById:
+        Phương thức này thực hiện truy vấn SQL để lấy thông tin về DVD từ cơ sở dữ liệu.
+        Phương thức này sử dụng ResultSet để truy cập dữ liệu, có thể coi đây là mức độ nối kết dữ liệu.
+
+    Phương thức getAllMedia:
+        Phương thức này không được triển khai, nhưng nếu được triển khai trong tương lai, có thể nối kết với cơ sở dữ liệu.
+
+    Phương thức toString:
+        Phương thức này sử dụng tất cả các thuộc tính của DVD để tạo một chuỗi biểu diễn.
+        Phương thức này không tạo ra sự nối kết mạnh với các lớp khác.
+    - Media:
+          Thuộc tính và Phương thức:
+        Các thuộc tính như id, title, category, price, quantity, type, imageURL là các kiểu dữ liệu cơ bản, không tạo ra sự nối kết mạnh với các lớp khác.
+        Cung cấp các phương thức get và set cho từng thuộc tính, giúp kiểm soát việc truy cập và cập nhật dữ liệu.
+
+    Phương thức getQuantity:
+        Phương thức này sử dụng getMediaById để lấy thông tin quantity từ cơ sở dữ liệu. Có thể coi đây là mức độ nối kết dữ liệu.
+
+    Phương thức getMediaById:
+        Phương thức này thực hiện truy vấn SQL để lấy thông tin về Media từ cơ sở dữ liệu. Nó trả về một đối tượng Media, tạo ra mức độ nối kết dữ liệu.
+
+    Phương thức getAllMedia:
+        Phương thức này trả về một danh sách Media từ cơ sở dữ liệu, tạo ra mức độ nối kết dữ liệu.
+
+    Phương thức updateMediaFieldById:
+        Phương thức này cũng thực hiện truy vấn SQL để cập nhật trường cụ thể của một đối tượng Media trong cơ sở dữ liệu, tạo ra mức độ nối kết dữ liệu.
+
+  - Invoice:
+      Thuộc tính:
+        Có thuộc tính order là một đối tượng của lớp Order. Điều này chỉ ra sự phụ thuộc của lớp Invoice vào lớp Order, nhưng không có sự phụ thuộc đặc biệt vào chi tiết cơ sở dữ liệu.
+
+      Phương thức setAmount và getAmount:
+        Phương thức này đơn giản là thiết lập và trả về giá trị amount. Nó không tạo ra sự nối kết mạnh với các thành phần khác.
+
+      Phương thức saveInvoice:
+        Phương thức này hiện đang trống rỗng và không thể đánh giá được mức độ nối kết. Nếu bạn thêm logic để lưu thông tin hóa đơn vào cơ sở dữ liệu, nó có thể tạo ra sự phụ thuộc vào lớp xử lý cơ sở dữ liệu.
+
+  - Order:
+    - Order:
+          Thuộc tính lstOrderMedia:
+        Lớp này chứa một danh sách lstOrderMedia đại diện cho các mục trong đơn đặt hàng. Tuy nhiên, kiểu của danh sách này không được chỉ định (sử dụng raw type). Nên sử dụng generics để chỉ định kiểu của danh sách (ví dụ: List<OrderMedia>).
+
+      Phương thức addOrderMedia và removeOrderMedia:
+        Được sử dụng để thêm và xóa OrderMedia khỏi danh sách lstOrderMedia.
+
+      Phương thức getAmount:
+        Phương thức này tính toán và trả về tổng số tiền của đơn đặt hàng, bao gồm cả phí VAT. Tuy nhiên, nó không trả về một giá trị kiểu double, nhưng thay vào đó, nó ép kiểu về int. Điều này có thể dẫn đến mất mát chính xác nếu phép toán chia không chia hết. Nên xem xét việc sử dụng kiểu dữ liệu thích hợp.
+
+      Phương thức setDeliveryInfo và getDeliveryInfo:
+        Lớp này sử dụng một HashMap để lưu trữ thông tin giao hàng. Tuy nhiên, kiểu của HashMap cũng không được chỉ định (sử dụng raw type). Nên sử dụng generics để chỉ định kiểu của HashMap (ví dụ: HashMap<String, String>).
+    - OrderMedia:
+          Gói entity.order:
+          OrderMedia: Phụ thuộc vào Media.
+
+        Gói entity.media:
+          Media: Phụ thuộc vào OrderMedia.
+
+  - payment:
+    - CreditCard: không có
+    - PaymentTransaction: 
+    Lớp PaymentTransaction chứa một số thuộc tính như errorCode, card, transactionId, transactionContent, amount, và createdAt.
+    Lớp này có phụ thuộc vào lớp CreditCard để lưu trữ thông tin về thẻ thanh toán (CreditCard card).
+
+  - shipping: Shipment:
+  - user:
+  
 </details>
 
 
