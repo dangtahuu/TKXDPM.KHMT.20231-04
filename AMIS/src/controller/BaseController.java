@@ -17,6 +17,8 @@ public class BaseController {
      * @param media
      * @return CartMedia or null
      */
+
+     //BaseController phụ thuộc dữ liệu vào các lớp Media và Cart qua 2 class checkMediaInCart, getListCartMedia
     public CartMedia checkMediaInCart(Media media){
         return Cart.getCart().checkMediaInCart(media); 
     }

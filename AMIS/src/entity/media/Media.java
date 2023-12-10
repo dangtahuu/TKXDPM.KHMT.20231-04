@@ -43,6 +43,10 @@ public class Media {
         //stm = AIMSDB.getConnection().createStatement();
     }
 
+    /*
+     * Phương thức getQuantity:
+        Phương thức này sử dụng getMediaById để lấy thông tin quantity từ cơ sở dữ liệu. Có thể coi đây là mức độ nối kết dữ liệu.
+     */
     public int getQuantity() throws SQLException{
         int updated_quantity = getMediaById(id).quantity;
         this.quantity = updated_quantity;
@@ -85,6 +89,10 @@ public class Media {
         return medium;
     }
 
+    /*
+     *  Phương thức updateMediaFieldById:
+        Phương thức này cũng thực hiện truy vấn SQL để cập nhật trường cụ thể của một đối tượng Media trong cơ sở dữ liệu, tạo ra mức độ nối kết dữ liệu.
+     */
     public void updateMediaFieldById(String tbname, int id, String field, Object value) throws SQLException {
         Statement stm = AIMSDB.getConnection().createStatement(); 
         if (value instanceof String){

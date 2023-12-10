@@ -18,6 +18,8 @@ public class HomeController extends BaseController{
      * @return List[Media]
      * @throws SQLException
      */
+    
+     //HomeController phụ thuộc dữ liệu vào các lớp Media qua class getAllMedia
     public List getAllMedia() throws SQLException{
         return new Media().getAllMedia(); 
     }

@@ -103,6 +103,11 @@ public class Book extends Media {
         return this;
     }
 
+    /*
+     * Phương thức getMediaById:
+        Phương thức này thực hiện truy vấn SQL để lấy thông tin về Book từ cơ sở dữ liệu.
+        Phương thức này sử dụng ResultSet để truy cập dữ liệu, có thể coi đây là mức độ nối kết dữ liệu.
+     */
     @Override
     public Media getMediaById(int id) throws SQLException {
         String sql = "SELECT * FROM "+
@@ -138,12 +143,18 @@ public class Book extends Media {
 		}
     }
 
+    /*Phương thức getAllMedia:
+        Phương thức này không được triển khai, nhưng nếu được triển khai trong tương lai, có thể nối kết với cơ sở dữ liệu. */
     @Override
     public List getAllMedia() {
         return null;
     }
 
-
+/*
+ * Phương thức toString:
+        Phương thức này sử dụng tất cả các thuộc tính của Book để tạo một chuỗi biểu diễn.
+        Phương thức này không tạo ra sự nối kết mạnh với các lớp khác.
+ */
     @Override
     public String toString() {
         return "{" +

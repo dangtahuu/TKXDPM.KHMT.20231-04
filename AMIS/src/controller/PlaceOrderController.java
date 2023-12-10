@@ -30,6 +30,11 @@ public class PlaceOrderController extends BaseController{
      * This method checks the avalibility of product when user click PlaceOrder button
      * @throws SQLException
      */
+
+     /*
+      * Phương thức này gọi phương thức checkAvailabilityOfProduct của Cart để kiểm tra tính sẵn có của sản phẩm.
+        Phương thức này trực tiếp phụ thuộc vào cấu trúc dữ liệu của lớp Cart.
+      */
     public void placeOrder() throws SQLException{
         Cart.getCart().checkAvailabilityOfProduct(); 
     }
@@ -39,6 +44,11 @@ public class PlaceOrderController extends BaseController{
      * @return Order
      * @throws SQLException
      */
+
+     /*
+      *  Phương thức này tạo một đối tượng Order dựa trên thông tin trong Cart.
+        Phương thức này trực tiếp truy cập vào các thuộc tính và phương thức của Cart và CartMedia.
+      */
     public Order createOrder() throws SQLException{
         Order order = new Order();
         for (Object object : Cart.getCart().getListMedia()) {
@@ -56,6 +66,11 @@ public class PlaceOrderController extends BaseController{
      * @param order
      * @return Invoice
      */
+
+     /*
+      * Phương thức này tạo một đối tượng Invoice dựa trên thông tin trong Order.
+        Phương thức này trực tiếp truy cập vào các thuộc tính và phương thức của Order.
+      */
     public Invoice createInvoice(Order order) {
         return new Invoice(order); 
     }
@@ -66,6 +81,11 @@ public class PlaceOrderController extends BaseController{
      * @throws InterruptedException
      * @throws IOException
      */
+
+     /*
+      * Phương thức này xử lý thông tin vận chuyển từ người dùng và gọi phương thức validateDeliveryInfo.
+        Phương thức này trực tiếp phụ thuộc vào cấu trúc dữ liệu của LOGGER và gọi phương thức validateDeliveryInfo.
+      */
     public void processDeliveryInfo(HashMap info) throws InterruptedException, IOException{
         LOGGER.info("Process Delivery Info");
         LOGGER.info(info.toString());
@@ -78,6 +98,11 @@ public class PlaceOrderController extends BaseController{
    * @throws InterruptedException
    * @throws IOException
    */
+
+   /*
+    * Các phương thức này chịu trách nhiệm kiểm tra thông tin vận chuyển, như số điện thoại, tên, địa chỉ, nhưng hiện tại chưa có nội dung cụ thể.
+        Các phương thức này có thể cần được triển khai và sẽ có mức độ nối kết dữ liệu với các dữ liệu cụ thể cần kiểm tra.
+    */
     public void validateDeliveryInfo(HashMap<String, String> info) throws InterruptedException, IOException{
     	
     }
@@ -103,6 +128,11 @@ public class PlaceOrderController extends BaseController{
      * @param order
      * @return shippingFee
      */
+
+     /*
+      * Phương thức này tính phí vận chuyển dựa trên giá trị đơn hàng.
+        Phương thức này trực tiếp truy cập vào thuộc tính và phương thức của Order.
+      */
     public int calculateShippingFee(Order order){
         Random rand = new Random();
         int fees = (int)( ( (rand.nextFloat()*10)/100 ) * order.getAmount() );

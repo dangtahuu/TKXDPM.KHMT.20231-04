@@ -44,6 +44,10 @@ public class PaymentController extends BaseController {
 	 * @throws InvalidCardException - if the string does not represent a valid date
 	 *                              in the expected format
 	 */
+
+	/*  Phương thức này nhận một chuỗi date và trả về một chuỗi biểu diễn ngày hết hạn theo định dạng yêu cầu.
+        Phương thức này trực tiếp phụ thuộc vào cấu trúc dữ liệu của lớp CreditCard và thực hiện kiểm tra định dạng của ngày hết hạn. 
+		*/
 	private String getExpirationDate(String date) throws InvalidCardException {
 		String[] strs = date.split("/");
 		if (strs.length != 2) {
@@ -81,6 +85,16 @@ public class PaymentController extends BaseController {
 	 * @return {@link java.util.Map Map} represent the payment result with a
 	 *         message.
 	 */
+
+
+	/*
+	 * Phương thức này thực hiện thanh toán và trả về kết quả dưới dạng một Map.
+        Phương thức này tạo một đối tượng CreditCard và thực hiện thanh toán thông qua InterbankSubsystem.
+        Phương thức này trực tiếp phụ thuộc vào cấu trúc dữ liệu của lớp CreditCard, InterbankSubsystem, PaymentTransaction, và Cart.
+	 
+		 Thuộc tính card và interbank:
+        Hai thuộc tính này đại diện cho thẻ tín dụng và hệ thống ngân hàng, tạo ra một mức độ nối kết dữ liệu với các lớp liên quan.
+		*/
 	public Map<String, String> payOrder(int amount, String contents, String cardNumber, String cardHolderName,
 			String expirationDate, String securityCode) {
 		Map<String, String> result = new Hashtable<String, String>();
