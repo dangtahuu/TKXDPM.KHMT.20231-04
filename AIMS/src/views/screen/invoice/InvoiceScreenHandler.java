@@ -23,82 +23,89 @@ import views.screen.payment.PaymentScreenHandler;
 
 public class InvoiceScreenHandler extends BaseScreenHandler {
 
-	private static Logger LOGGER = Utils.getLogger(InvoiceScreenHandler.class.getName()); 
+    private static Logger LOGGER = Utils.getLogger(InvoiceScreenHandler.class.getName());
 
-	@FXML
-	private Label pageTitle;
+    // FXML Controls coupling
+	//Đây là mối quan hệ giữa các thành phần UI được định nghĩa trong file FXML và các biến được chú thích bằng @FXML trong mã điều khiển.
+    @FXML
+    private Label pageTitle;
 
-	@FXML
-	private Label name;
+    @FXML
+    private Label name;
 
-	@FXML
-	private Label phone;
+    @FXML
+    private Label phone;
 
-	@FXML
-	private Label province;
+    @FXML
+    private Label province;
 
-	@FXML
-	private Label address;
+    @FXML
+    private Label address;
 
-	@FXML
-	private Label instructions;
+    @FXML
+    private Label instructions;
 
-	@FXML
-	private Label subtotal;
+    @FXML
+    private Label subtotal;
 
-	@FXML
-	private Label shippingFees;
+    @FXML
+    private Label shippingFees;
 
-	@FXML
-	private Label total;
+    @FXML
+    private Label total;
 
-	@FXML
-	private VBox vboxItems;
+    @FXML
+    private VBox vboxItems;
 
-	private Invoice invoice;
+    private Invoice invoice; // Coupling between InvoiceScreenHandler and Invoice entity
 
-	public InvoiceScreenHandler(Stage stage, String screenPath, Invoice invoice) throws IOException {
-		super(stage, screenPath);
-		this.invoice = invoice;
-		setInvoiceInfo();
-	}
+    // Constructor coupling
+	//Mối quan hệ giữa lớp InvoiceScreenHandler và lớp Invoice thông qua việc truyền Invoice vào constructor.
+    public InvoiceScreenHandler(Stage stage, String screenPath, Invoice invoice) throws IOException {
+        super(stage, screenPath);
+        this.invoice = invoice;
+        setInvoiceInfo();
+    }
 
-	private void setInvoiceInfo(){
-		
-		HashMap<String, String> deliveryInfo = invoice.getOrder().getDeliveryInfo(); 
-		name.setText(deliveryInfo.get("name"));
-		province.setText(deliveryInfo.get("province"));
-		instructions.setText(deliveryInfo.get("instructions"));
-		address.setText(deliveryInfo.get("address"));
-		subtotal.setText(Utils.getCurrencyFormat(invoice.getOrder().getAmount()));
-		shippingFees.setText(Utils.getCurrencyFormat(invoice.getOrder().getShippingFees()));
-		int amount = invoice.getOrder().getAmount() + invoice.getOrder().getShippingFees();
-		total.setText(Utils.getCurrencyFormat(amount));
-		invoice.setAmount(amount);
-		invoice.getOrder().getlstOrderMedia().forEach(orderMedia -> {
-			try {
-				MediaInvoiceScreenHandler mis = new MediaInvoiceScreenHandler(Configs.INVOICE_MEDIA_SCREEN_PATH);
-				mis.setOrderMedia((OrderMedia) orderMedia);
-				vboxItems.getChildren().add(mis.getContent());
-			} catch (IOException | SQLException e) {
-				System.err.println("errors: " + e.getMessage());
-				throw new ProcessInvoiceException(e.getMessage());
-			}
-			
-		});
+    // Method coupling
+	//Sự phụ thuộc giữa các phương thức trong InvoiceScreenHandler và các thuộc tính/phương thức của đối tượng Invoice và Order.
+    private void setInvoiceInfo() {
+        HashMap<String, String> deliveryInfo = invoice.getOrder().getDeliveryInfo(); // Coupling between Invoice and Order
+        name.setText(deliveryInfo.get("name"));
+        province.setText(deliveryInfo.get("province"));
+        instructions.setText(deliveryInfo.get("instructions"));
+        address.setText(deliveryInfo.get("address"));
+        subtotal.setText(Utils.getCurrencyFormat(invoice.getOrder().getAmount())); // Coupling between Invoice and Order
+        shippingFees.setText(Utils.getCurrencyFormat(invoice.getOrder().getShippingFees())); // Coupling between Invoice and Order
+        int amount = invoice.getOrder().getAmount() + invoice.getOrder().getShippingFees(); // Coupling between Invoice and Order
+        total.setText(Utils.getCurrencyFormat(amount));
+        invoice.setAmount(amount);
+        invoice.getOrder().getlstOrderMedia().forEach(orderMedia -> {
+            try {
+                MediaInvoiceScreenHandler mis = new MediaInvoiceScreenHandler(Configs.INVOICE_MEDIA_SCREEN_PATH);
+                mis.setOrderMedia((OrderMedia) orderMedia);
+                vboxItems.getChildren().add(mis.getContent());
+            } catch (IOException | SQLException e) {
+                System.err.println("errors: " + e.getMessage());
+                throw new ProcessInvoiceException(e.getMessage());
+            }
 
-	}
+        });
+    }
 
-	@FXML
-	void confirmInvoice(MouseEvent event) throws IOException {
-		
-		BaseScreenHandler paymentScreen = new PaymentScreenHandler(this.stage, Configs.PAYMENT_SCREEN_PATH, invoice);
-		paymentScreen.setBController(new PaymentController());
-		paymentScreen.setPreviousScreen(this);
-		paymentScreen.setHomeScreenHandler(homeScreenHandler);
-		paymentScreen.setScreenTitle("Payment Screen");
-		paymentScreen.show();
-		LOGGER.info("Confirmed invoice");
-	}
+    // Event coupling
+	//Mối quan hệ giữa sự kiện (ví dụ: confirmInvoice) và các hành động thực hiện khi sự kiện đó xảy ra.
+    @FXML
+    void confirmInvoice(MouseEvent event) throws IOException {
+        BaseScreenHandler paymentScreen = new PaymentScreenHandler(this.stage, Configs.PAYMENT_SCREEN_PATH, invoice);
+        paymentScreen.setBController(new PaymentController());
+        paymentScreen.setPreviousScreen(this);
+        paymentScreen.setHomeScreenHandler(homeScreenHandler);
+        paymentScreen.setScreenTitle("Payment Screen");
+        paymentScreen.show();
+        LOGGER.info("Confirmed invoice"); 
+		// Coupling with logging
+		// Sự phụ thuộc vào việc sử dụng Logger để ghi log trong mã.
+    }
 
 }

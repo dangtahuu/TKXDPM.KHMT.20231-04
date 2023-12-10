@@ -26,6 +26,8 @@ import views.screen.popup.PopupScreen;
 
 public class ShippingScreenHandler extends BaseScreenHandler implements Initializable {
 
+	// FXML Controls coupling
+	//Đây là mối quan hệ giữa các thành phần UI được định nghĩa trong file FXML và các biến được chú thích bằng @FXML trong mã điều khiển.
 	@FXML
 	private Label screenTitle;
 
@@ -44,6 +46,8 @@ public class ShippingScreenHandler extends BaseScreenHandler implements Initiali
 	@FXML
 	private ComboBox<String> province;
 
+	// Coupling with Order entity
+	// Sự phụ thuộc vào lớp Order để lấy thông tin và hiển thị dữ liệu.
 	private Order order;
 
 	public ShippingScreenHandler(Stage stage, String screenPath, Order order) throws IOException {
@@ -60,6 +64,8 @@ public class ShippingScreenHandler extends BaseScreenHandler implements Initiali
                 firstTime.setValue(false); // Variable value changed for future references
             }
         });
+		// Coupling with Configs for province data
+		// Sự phụ thuộc vào Configs.PROVINCES để lấy danh sách tỉnh/thành phố.
 		this.province.getItems().addAll(Configs.PROVINCES);
 	}
 
@@ -75,20 +81,24 @@ public class ShippingScreenHandler extends BaseScreenHandler implements Initiali
 		messages.put("province", province.getValue());
 		try {
 			// process and validate delivery info
+			// Coupling with PlaceOrderController for processing delivery info
+			// Sự phụ thuộc vào PlaceOrderController để xử lý thông tin vận chuyển và tạo hóa đơn.
 			getBController().processDeliveryInfo(messages);
 		} catch (InvalidDeliveryInfoException e) {
+			// Coupling with InvalidDeliveryInfoException
+			// Sự phụ thuộc vào InvalidDeliveryInfoException khi xử lý thông tin giao hàng không hợp lệ.
 			throw new InvalidDeliveryInfoException(e.getMessage());
 		}
 	
 		// calculate shipping fees
-		
+		// Coupling with PlaceOrderController for shipping fee calculation
 		int shippingFees = getBController().calculateShippingFee(order);
 		order.setShippingFees(shippingFees);
 		order.setDeliveryInfo(messages);
 		
 		// create invoice screen
+		// Coupling with PlaceOrderController for creating invoice
 		Invoice invoice = getBController().createInvoice(order);
-		
 		BaseScreenHandler InvoiceScreenHandler = new InvoiceScreenHandler(this.stage, Configs.INVOICE_SCREEN_PATH, invoice);
 		InvoiceScreenHandler.setPreviousScreen(this);
 		InvoiceScreenHandler.setHomeScreenHandler(homeScreenHandler);
@@ -98,7 +108,8 @@ public class ShippingScreenHandler extends BaseScreenHandler implements Initiali
 	}
 
 	public PlaceOrderController getBController(){
-		return (PlaceOrderController) super.getBController(); 
+		// Coupling with PlaceOrderController
+		return (PlaceOrderController) super.getBController();
 	}
 
 	public void notifyError(){

@@ -16,6 +16,8 @@ import views.screen.FXMLScreenHandler;
 
 public class MediaInvoiceScreenHandler extends FXMLScreenHandler{
 
+     // FXML Controls coupling
+	//Đây là mối quan hệ giữa các thành phần UI được định nghĩa trong file FXML và các biến được chú thích bằng @FXML trong mã điều khiển.
     @FXML
     private HBox hboxMedia;
 
@@ -41,6 +43,8 @@ public class MediaInvoiceScreenHandler extends FXMLScreenHandler{
     private Label price;
 
     private OrderMedia orderMedia;
+    // Coupling with OrderMedia entity
+    // Sự phụ thuộc vào lớp OrderMedia để lấy thông tin và hiển thị dữ liệu.
 
     public MediaInvoiceScreenHandler(String screenPath) throws IOException{
         super(screenPath);
@@ -52,10 +56,12 @@ public class MediaInvoiceScreenHandler extends FXMLScreenHandler{
     }
 
     public void setMediaInfo() throws SQLException{
-        
+         // Coupling with OrderMedia and Media entities
         title.setText(orderMedia.getMedia().getTitle());
         price.setText(Utils.getCurrencyFormat(orderMedia.getPrice()));
         numOfProd.setText(String.valueOf(orderMedia.getQuantity()));
+        // Coupling with OrderMedia and Image handling
+        // Đoạn mã cũng có sự phụ thuộc vào việc xử lý hình ảnh thông qua ImageView và việc cài đặt hình ảnh từ đường dẫn URL của OrderMedia.
         setImage(image, orderMedia.getMedia().getImageURL());
 		image.setPreserveRatio(false);
 		image.setFitHeight(90);

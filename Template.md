@@ -193,22 +193,16 @@ This is a Capstone's source code for Software Design and Construction project
 
 ---
 <details>
-  <summary>W4: 01/10/2023~08/10/2023 </summary>
+  <summary>W2: 03/12/2023~10/12/2023 </summary>
 <br>
 <details>
-<summary>Team Member 1</summary>
+<summary>Ngô Hoàng Hải Đăng</summary>
 <br>
 
-- Assigned tasks:
-  - Task 1
-  - Task 2
-  - ...
+- Tìm các coupling trong folder views/shipping và views/invoice, file controlller/PlaceOrderController.java
 
 - Implementation details:
-  - Pull Request(s): [Attach links to your pull requests here. You can attach multiple pull requests]()
-  - Specific implementation details:
-    - Describe specific in detail what you did last week
-    - You can attach images if you want
+  - Đã thêm comment coupling và giải thích vào các folder và file nói ở trên
 
 </details>
 
