@@ -44,6 +44,17 @@ This is a Capstone's source code for Software Design and Construction project
   - Specific implementation details: Find Control coupling.
 </details>
 
+<details>
+<summary>Trần Văn Điền</summary>
+<br>
+
+- Assigned tasks:
+  - Find Data coupling: 
+
+- Implementation details:
+  - Pull Request(s): [https://github.com/dangtahuu/TKXDPM.KHMT.20231-04/tree/dien/]
+  - Specific implementation details: Find Data coupling.
+</details>
 </details>
 
 ---
