@@ -192,11 +192,41 @@ This is a Capstone's source code for Software Design and Construction project
 <br>
 
 - Assigned tasks:
-  - Find coupling trong views.screen.payment, entity.payment, paymentController
+  - Find coupling trong paymentController, entity.media
 
 - Implementation details:
-  - Pull Request(s): [https://github.com/dangtahuu/TKXDPM.KHMT.20231-04/tree/dien/]
+  - Pull Request(s): 
   - Specific implementation details:
+  1. PaymentController:
+      Common Coupling :
+        Class PaymentController có sử dụng các ngoại lệ như InvalidCardException, PaymentException, và UnrecognizedException từ package common.exception.
+
+      Content Coupling :
+        Phương thức getExpirationDate truy cập và xử lý nội dung của biến date.
+
+      Control Coupling :
+        Class PaymentController tương tác với InterbankSubsystem để thực hiện thanh toán thông qua gọi phương thức payOrder.
+
+      Stamp Coupling :
+        Class PaymentController sử dụng dữ liệu từ CreditCard và PaymentTransaction để thực hiện và xác nhận thanh toán.
+
+      Data Coupling :
+        Phương thức payOrder nhận dữ liệu từ các tham số như amount, contents, cardNumber, cardHolderName, expirationDate, và securityCode để thực hiện thanh toán.
+  2. entity.media
+      Common Coupling :
+        Class Media có sử dụng Logger từ package java.util.logging để ghi log.
+
+      Content Coupling:
+        Các phương thức của class Media truy cập và thao tác nội dung của các trường như id, title, category, price, quantity, type, và imageURL.
+
+      Control Coupling :
+        Class Media tương tác với cơ sở dữ liệu thông qua các phương thức như getMediaById, getAllMedia, và updateMediaFieldById. Các phương thức này thực hiện kiểm soát cơ sở dữ liệu để truy vấn, cập nhật và lấy dữ liệu về đối tượng Media.
+
+      Stamp Coupling :
+        Class Media sử dụng AIMSDB để kết nối và thực hiện các thao tác cơ sở dữ liệu, cũng như sử dụng Utils để có được một đối tượng Logger.
+
+      Data Coupling :
+        Phương thức updateMediaFieldById nhận dữ liệu từ các tham số như tbname, id, field, và value để cập nhật dữ liệu trong cơ sở dữ liệu.
 </details>
 
 <details>
@@ -477,8 +507,32 @@ This is a Capstone's source code for Software Design and Construction project
   - Find coupling trong views.screen.payment, entity.payment, paymentController
 
 - Implementation details:
-  - Pull Request(s): [https://github.com/dangtahuu/TKXDPM.KHMT.20231-04/tree/dien/]
+  - Pull Request(s): 
   - Specific implementation details:
+  1. PaymentController:
+      Functional Cohesion:
+        Các phương thức trong class tập trung vào chức năng cụ thể như getExpirationDate để xác thực và định dạng ngày hết hạn thẻ, và payOrder để thực hiện thanh toán.
+
+      Sequential Cohesion:
+        Các phương thức thường được gọi theo một thứ tự nhất định để thực hiện quy trình thanh toán, từ việc xác thực thông tin thẻ đến gọi dịch vụ thanh toán.
+
+      Communicational Cohesion :
+        Các thành viên của class tương tác để thực hiện một số chức năng cụ thể, như việc gửi thông tin thanh toán đến subsystem InterbankSubsystem.
+  2. entity.media
+      Functional Cohesion :
+        Các phương thức trong class thường tập trung vào một chức năng cụ thể như lấy dữ liệu từ cơ sở dữ liệu (getMediaById, getAllMedia), cập nhật dữ liệu trong cơ sở dữ liệu (updateMediaFieldById), và các phương thức getter và setter.
+
+      Sequential Cohesion:
+        Các phương thức thường được gọi theo một thứ tự nhất định để thực hiện các bước của quy trình, chẳng hạn như lấy dữ liệu từ cơ sở dữ liệu, xử lý dữ liệu và cập nhật dữ liệu.
+
+      Communicational Cohesion :
+        Các thành viên của class tương tác để thực hiện một số chức năng cụ thể, như trao đổi thông tin với cơ sở dữ liệu và thao tác với dữ liệu đối tượng Media.
+
+      Procedural Cohesion :
+        Các phương thức trong class thường thực hiện các bước liên tiếp để đạt được một mục tiêu chức năng nhất định.
+
+      Temporal Cohesion :
+        Các phương thức được gọi cùng một lúc để thực hiện một số chức năng trong khoảng thời gian ngắn, như khi lấy dữ liệu từ cơ sở dữ liệu và cập nhật thông tin trạng thái.
 </details>
 <details>
 <summary>Ngô Hoàng Hải Đăng</summary>
