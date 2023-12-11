@@ -198,6 +198,23 @@ This is a Capstone's source code for Software Design and Construction project
   - Pull Request(s): [https://github.com/dangtahuu/TKXDPM.KHMT.20231-04/tree/dien/]
   - Specific implementation details:
 </details>
+
+<details>
+<summary>Ngô Hoàng Hải Đăng</summary>
+<br>
+
+- Assigned tasks:
+  - Tìm control coupling trong file src
+
+- Implementation details:
+  - Pull Request(s): [Attach links to your pull requests here. You can attach multiple pull requests]()
+  - Specific implementation details:
+    ![Alt text](image.png)
+    ![Alt text](image-1.png)
+    ![Alt text](image-2.png)
+    ![Alt text](image-3.png)
+    ![Alt text](image-4.png)
+</details>
 </details>
 
 <details>
@@ -454,15 +471,12 @@ This is a Capstone's source code for Software Design and Construction project
 </details>
 
 <details>
-<summary>Trần Văn Điền</summary>
+<summary>Ngô Hoàng Hải Đăng</summary>
 <br>
 
 - Assigned tasks:
-  - Find cohesion trong views.screen.payment, entity.payment, paymentController
+  - Find cohesion và coupling trong views/screen/shippingpayment, views/screen/invoice
 
-- Implementation details:
-  - Pull Request(s): [https://github.com/dangtahuu/TKXDPM.KHMT.20231-04/tree/dien/]
-  - Specific implementation details:
 </details>
 
 </details>
