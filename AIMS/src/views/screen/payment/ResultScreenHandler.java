@@ -17,6 +17,14 @@ public class ResultScreenHandler extends BaseScreenHandler {
 	private String result;
 	private String message;
 
+	/*
+	 * Common Coupling 
+    Trong class ResultScreenHandler, có thể có kết nối thông thường với các tài nguyên (resource) chung khi sử dụng URL và ResourceBundle để khởi tạo controller
+	Content Coupling 
+    Class ResultScreenHandler nhận dữ liệu result và message từ constructor và sử dụng chúng để cập nhật nội dung của các thành phần UI như resultLabel và messageLabel. 
+	Data Coupling 
+    Class ResultScreenHandler nhận dữ liệu result và message từ constructor và sử dụng chúng để cập nhật nội dung UI.
+	*/
 	public ResultScreenHandler(Stage stage, String screenPath, String result, String message) throws IOException {
 		super(stage, screenPath);
 		resultLabel.setText(result);
@@ -36,6 +44,11 @@ public class ResultScreenHandler extends BaseScreenHandler {
 	private Label messageLabel;
 
 	@FXML
+
+	/*
+	 * Control Coupling 
+    Phương thức confirmPayment có kết nối kiểm soát với homeScreenHandler khi gọi show() để hiển thị màn hình chính.
+	 */
 	void confirmPayment(MouseEvent event) throws IOException {
 		homeScreenHandler.show();
 	}

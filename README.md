@@ -1,4 +1,4 @@
-# TKXDPM.VN.20231-01
+# TKXDPM.VN.20231-04
 
 This is a Capstone's source code for Software Design and Construction project
 
@@ -192,11 +192,11 @@ This is a Capstone's source code for Software Design and Construction project
 <br>
 
 - Assigned tasks:
-  - Find Data coupling: 
+  - Find coupling trong views.screen.payment, entity.payment, paymentController
 
 - Implementation details:
   - Pull Request(s): [https://github.com/dangtahuu/TKXDPM.KHMT.20231-04/tree/dien/]
-  - Specific implementation details: Find Data coupling.
+  - Specific implementation details:
 </details>
 </details>
 
@@ -415,6 +415,17 @@ This is a Capstone's source code for Software Design and Construction project
       
 </details>
 
+<details>
+<summary>Trần Văn Điền</summary>
+<br>
+
+- Assigned tasks:
+  - Find cohesion trong views.screen.payment, entity.payment, paymentController
+
+- Implementation details:
+  - Pull Request(s): [https://github.com/dangtahuu/TKXDPM.KHMT.20231-04/tree/dien/]
+  - Specific implementation details:
+</details>
 
 </details>
 
