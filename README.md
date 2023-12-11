@@ -206,8 +206,46 @@ This is a Capstone's source code for Software Design and Construction project
 <details>
 <summary>Tạ Hữu Đăng</summary>
 <br>
+- Assigned tasks:
+  - Find Cohesion trong InvoiceScreenHandler.java, MediaInvoiceScreenHandler.java, PaymentScreenHandler.java, ResultScreenHandler.java : 
+- Implementation details:
+  - Pull Request(s): [https://github.com/dangtahuu/TKXDPM.KHMT.20231-04/pull/5]()
+  - Specific implementation details: 
+    1. Trong InvoiceScreenHandler.java
+      - Functional Cohesion: setInvoiceInfo() thực hiện các thao tác liên quan đến việc thiết lập thông tin hóa đơn. Các phương thức khác thường liên quan đến việc hiển thị hóa đơn và xác nhận thanh toán.
 
+      - Communicational Cohesion: Có sự chia sẻ dữ liệu giữa InvoiceScreenHandler và đối tượng Invoice, cũng như giữa Invoice và Order.
 
+      - Procedural Cohesion: Phần xử lý sự kiện confirmInvoice liên quan đến xác nhận thanh toán và hiển thị màn hình thanh toán.
+
+      - Sequential Cohesion: Các dòng mã trong setInvoiceInfo() thực hiện các thao tác theo một thứ tự cụ thể để hiển thị thông tin hóa đơn.
+
+    2. Trong MediaInvoiceScreenHandler.java
+      - Functional Cohesion: Lớp này chủ yếu thực hiện các chức năng liên quan đến hiển thị thông tin về đối tượng OrderMedia trên màn hình hoá đơn.
+
+      - Sequential Cohesion: Phương thức setMediaInfo() thực hiện các bước liên tiếp để thiết lập thông tin hình ảnh, tiêu đề, giá cả và số lượng sản phẩm.
+
+      - Communicational Cohesion: Có sự chia sẻ dữ liệu giữa lớp MediaInvoiceScreenHandler và đối tượng OrderMedia để hiển thị thông tin chi tiết về sản phẩm trên hoá đơn.
+
+      - Procedural Cohesion: Tất cả các phương thức của lớp này đều liên quan đến việc hiển thị thông tin và hình ảnh về đối tượng OrderMedia.
+
+      3. Trong PaymentScreenHandler.java
+
+        - Functional Cohesion: Lớp này chủ yếu thực hiện các chức năng liên quan đến thanh toán, bao gồm cả việc hiển thị giao diện người dùng và xử lý thanh toán thực tế thông qua PaymentController.
+
+        - Sequential Cohesion: Các phương thức trong lớp được gọi theo một thứ tự nhất định để thực hiện quy trình thanh toán. Ví dụ, confirmToPayOrder gọi payOrder và sau đó tạo và hiển thị màn hình kết quả.
+
+        - Communicational Cohesion: Các thành viên của lớp tương tác chủ yếu để thực hiện chức năng thanh toán và hiển thị kết quả.
+
+      4. Trong ResultScreenHandler.java
+
+        - Functional Cohesion: Các phương thức trong class ResultScreenHandler liên quan chặt chẽ đến việc xử lý và hiển thị kết quả màn hình.
+
+        - Sequential Cohesion: Các phương thức và trình tự thực hiện các bước liên tục để xác nhận thanh toán và hiển thị kết quả.
+
+        - Communicational Cohesion: Các thành phần UI (resultLabel, messageLabel, okButton) được cập nhật và tương tác chủ yếu qua các dữ liệu như result và message.
+
+        - Temporal Cohesion: Các phương thức thường xuyên được gọi cùng nhau trong một chuỗi thời gian khi người dùng xác nhận thanh toán (confirmPayment gọi homeScreenHandler.show()).
 </details>
 
 <details>
