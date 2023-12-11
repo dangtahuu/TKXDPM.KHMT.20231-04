@@ -469,7 +469,17 @@ This is a Capstone's source code for Software Design and Construction project
 
       
 </details>
+<details>
+<summary>Trần Văn Điền</summary>
+<br>
 
+- Assigned tasks:
+  - Find coupling trong views.screen.payment, entity.payment, paymentController
+
+- Implementation details:
+  - Pull Request(s): [https://github.com/dangtahuu/TKXDPM.KHMT.20231-04/tree/dien/]
+  - Specific implementation details:
+</details>
 <details>
 <summary>Ngô Hoàng Hải Đăng</summary>
 <br>
