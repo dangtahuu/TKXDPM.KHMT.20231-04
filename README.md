@@ -256,7 +256,7 @@ This is a Capstone's source code for Software Design and Construction project
   - Find Cohesion trong CartScreenHandler.java, cart.MediaHandler.java, HomeScreenHandler.java, home.MediaHandler.java : 
 
 - Implementation details:
-  - Pull Request(s): [https://github.com/dangtahuu/TKXDPM.KHMT.20231-04/pull/5]()
+  - Pull Request(s): https://github.com/dangtahuu/TKXDPM.KHMT.20231-04/pull/5()
   - Specific implementation details: 
 
       1,Trong **cart.CartScreenHandler.java**:
