@@ -504,7 +504,7 @@ This is a Capstone's source code for Software Design and Construction project
 <br>
 
 - Assigned tasks:
-  - Find coupling trong views.screen.payment, entity.payment, paymentController
+  - Find coupling trong entity.media, paymentController
 
 - Implementation details:
   - Pull Request(s): 
