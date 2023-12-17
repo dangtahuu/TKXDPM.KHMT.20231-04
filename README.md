@@ -546,7 +546,7 @@ This is a Capstone's source code for Software Design and Construction project
 </details>
 
 <details>
-  <summary>W2: 03/12/2023~10/12/2023 </summary>
+  <summary>W3: 10/12/2023~17/12/2023 </summary>
 <br>
 <details>
 <summary>Ngô Hoàng Hải Đăng</summary>
