@@ -68,7 +68,7 @@ This is a Capstone's source code for Software Design and Construction project
 - Assigned tasks:
  - Tìm SOLID trong folder entity/order
  - Gồm 2 file Order.java và OrderMedia.java
-  1. Trong file Order.java: Trong đoạn mã này, chúng ta có một lớp OrderMedia đại diện cho việc đặt hàng cho các đơn vị của Media. Để xem xét việc áp dụng nguyên tắc SOLID ta thấy
+  1. Trong file Order.java: Trong đoạn mã này, chúng ta có một lớp OrderMedia đại diện cho việc đặt hàng cho các đơn vị của Media. Để xem xét việc áp dụng nguyên tắc SOLID
   - Single Responsibility Principle (Nguyên tắc Đơn trách nhiệm): Lớp OrderMedia có trách nhiệm quản lý thông tin đặt hàng, bao gồm Media, quantity, và price. Nó không có vẻ quá phức tạp và có thể coi là đang tuân theo nguyên tắc này.
   - Open/Closed Principle (Nguyên tắc Mở rộng đóng cửa): Lớp này có thể cần sự mở rộng trong tương lai nếu có yêu cầu mới liên quan đến đơn hàng của Media. Tuy nhiên, việc mở rộng có thể gây ra sửa đổi trong lớp hiện tại (ví dụ: thêm thuộc tính mới hoặc phương thức). Có thể cần xem xét cách để thiết kế sao cho lớp này không cần phải sửa đổi khi có yêu cầu mở rộng.
   - Liskov Substitution Principle (Nguyên tắc Thay thế Liskov): Lớp này không kế thừa từ lớp nào khác, vì vậy không có vấn đề về nguyên tắc này.
