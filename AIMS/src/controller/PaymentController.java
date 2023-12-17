@@ -12,14 +12,13 @@ import entity.payment.CreditCard;
 import entity.payment.PaymentTransaction;
 import subsystem.InterbankInterface;
 import subsystem.InterbankSubsystem;
-
-
-/**
- * This {@code PaymentController} class control the flow of the payment process
- * in our AIMS Software.
- * 
- * @author hieud
- *
+/*
+ * Common Coupling
+    Class PaymentController có sử dụng các ngoại lệ như InvalidCardException, PaymentException, và UnrecognizedException từ package common.exception.
+ * Control Coupling 
+    Class PaymentController tương tác với InterbankSubsystem để thực hiện thanh toán thông qua gọi phương thức payOrder.
+ * Stamp Coupling 
+    Class PaymentController sử dụng dữ liệu từ CreditCard và PaymentTransaction để thực hiện và xác nhận thanh toán.
  */
 public class PaymentController extends BaseController {
 
@@ -33,17 +32,19 @@ public class PaymentController extends BaseController {
 	 */
 	private InterbankInterface interbank;
 
-	/**
-	 * Validate the input date which should be in the format "mm/yy", and then
-	 * return a {@link java.lang.String String} representing the date in the
-	 * required format "mmyy" .
-	 * 
-	 * @param date - the {@link java.lang.String String} represents the input date
-	 * @return {@link java.lang.String String} - date representation of the required
-	 *         format
-	 * @throws InvalidCardException - if the string does not represent a valid date
-	 *                              in the expected format
+	/*
+	 * Content Coupling
+    Phương thức getExpirationDate truy cập và xử lý nội dung của biến date.
 	 */
+
+	 /*
+	  * Functional Cohesion
+    Các phương thức trong class tập trung vào chức năng cụ thể như getExpirationDate để xác thực và định dạng ngày hết hạn thẻ, và payOrder để thực hiện thanh toán.
+	Sequential Cohesion 
+    Các phương thức thường được gọi theo một thứ tự nhất định để thực hiện quy trình thanh toán, từ việc xác thực thông tin thẻ đến gọi dịch vụ thanh toán.
+	Communicational Cohesion
+    Các thành viên của class tương tác để thực hiện một số chức năng cụ thể, như việc gửi thông tin thanh toán đến subsystem InterbankSubsystem.
+	  */
 	private String getExpirationDate(String date) throws InvalidCardException {
 		String[] strs = date.split("/");
 		if (strs.length != 2) {
@@ -69,17 +70,9 @@ public class PaymentController extends BaseController {
 		return expirationDate;
 	}
 
-	/**
-	 * Pay order, and then return the result with a message.
-	 * 
-	 * @param amount         - the amount to pay
-	 * @param contents       - the transaction contents
-	 * @param cardNumber     - the card number
-	 * @param cardHolderName - the card holder name
-	 * @param expirationDate - the expiration date in the format "mm/yy"
-	 * @param securityCode   - the cvv/cvc code of the credit card
-	 * @return {@link java.util.Map Map} represent the payment result with a
-	 *         message.
+	/*
+	 * Data Coupling 
+    Phương thức payOrder nhận dữ liệu từ các tham số như amount, contents, cardNumber, cardHolderName, expirationDate, và securityCode để thực hiện thanh toán.
 	 */
 	public Map<String, String> payOrder(int amount, String contents, String cardNumber, String cardHolderName,
 			String expirationDate, String securityCode) {

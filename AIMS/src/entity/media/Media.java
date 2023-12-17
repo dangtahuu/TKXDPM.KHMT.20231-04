@@ -10,9 +10,30 @@ import java.util.logging.Logger;
 import entity.db.AIMSDB;
 import utils.Utils;
 
-/**
- * The general media class, for another media it can be done by inheriting this class
- * @author nguyenlm
+/*
+ * Common Coupling :
+        Class Media có sử dụng Logger từ package java.util.logging để ghi log.
+ */
+
+ /*
+  * Content Coupling:
+        Các phương thức của class Media truy cập và thao tác nội dung của các trường như id, title, category, price, quantity, type, và imageURL.
+        
+    Control Coupling :
+        Class Media tương tác với cơ sở dữ liệu thông qua các phương thức như getMediaById, getAllMedia, và updateMediaFieldById. Các phương thức này thực hiện kiểm soát cơ sở dữ liệu để truy vấn, cập nhật và lấy dữ liệu về đối tượng Media.
+      Stamp Coupling :
+        Class Media sử dụng AIMSDB để kết nối và thực hiện các thao tác cơ sở dữ liệu, cũng như sử dụng Utils để có được một đối tượng Logger.    
+        */
+
+/*
+ * Functional Cohesion :
+        Các phương thức trong class thường tập trung vào một chức năng cụ thể như lấy dữ liệu từ cơ sở dữ liệu (getMediaById, getAllMedia), cập nhật dữ liệu trong cơ sở dữ liệu (updateMediaFieldById), và các phương thức getter và setter.
+
+      Sequential Cohesion:
+        Các phương thức thường được gọi theo một thứ tự nhất định để thực hiện các bước của quy trình, chẳng hạn như lấy dữ liệu từ cơ sở dữ liệu, xử lý dữ liệu và cập nhật dữ liệu.
+
+      Communicational Cohesion :
+        Các thành viên của class tương tác để thực hiện một số chức năng cụ thể, như trao đổi thông tin với cơ sở dữ liệu và thao tác với dữ liệu đối tượng Media.
  */
 public class Media {
 
@@ -84,7 +105,10 @@ public class Media {
         }
         return medium;
     }
-
+  /*
+     *    Data Coupling :
+        Phương thức updateMediaFieldById nhận dữ liệu từ các tham số như tbname, id, field, và value để cập nhật dữ liệu trong cơ sở dữ liệu.
+     */
     public void updateMediaFieldById(String tbname, int id, String field, Object value) throws SQLException {
         Statement stm = AIMSDB.getConnection().createStatement(); 
         if (value instanceof String){
