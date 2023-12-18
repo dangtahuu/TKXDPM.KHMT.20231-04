@@ -548,6 +548,58 @@ This is a Capstone's source code for Software Design and Construction project
 <details>
   <summary>W3: 10/12/2023~17/12/2023 </summary>
 <br>
+
+<details>
+<summary>Tạ Hữu Đăng</summary>
+<br>
+
+- Assigned tasks:
+  - Tìm các nguyên tắc SOLID trong InvoiceScreenHandler.java, MediaInvoiceScreenHandler.java, PaymentScreenHandler.java, ResultScreenHandler.java :
+- Implementation details:
+  - Pull Request:
+  - Specific implementation details:
+
+    1. Trong InvoiceScreenHandler.java
+       - Single Responsibility Principle (SRP):
+          Lớp InvoiceScreenHandler có trách nhiệm hiển thị và xử lý sự kiện liên quan đến hóa đơn (invoice). Nó thực hiện các nhiệm vụ liên quan đến giao diện người dùng và xử lý sự kiện, không chia sẻ nhiều lý do để thay đổi.
+        - Open/Closed Principle (OCP):
+          Mã có thể mở rộng để hỗ trợ các chức năng mới mà không cần sửa đổi mã hiện tại, ví dụ như thêm các phương thức mới.
+        - Liskov Substitution Principle (LSP):
+          Không có biểu hiện rõ ràng của việc thay thế đối tượng của lớp con cho đối tượng của lớp cha trong đoạn mã.
+        - Interface Segregation Principle (ISP):
+          Trong đoạn mã này, không có sự áp dụng rõ ràng của ISP vì không có interface nào được triển khai.
+        -  Dependency Inversion Principle (DIP):
+          Mã sử dụng dependency injection trong constructor để tránh sự phụ thuộc cứng vào cụm từ new. Tuy nhiên, còn một số mối quan hệ chặt chẽ (coupling) với các lớp cụ thể như PaymentScreenHandler và PaymentController.
+
+    2. Trong MediaInvoiceScreenHandler.java
+        - Single Responsibility Principle (SRP):
+          Lớp MediaInvoiceScreenHandler chủ yếu tập trung vào hiển thị thông tin của một đối tượng OrderMedia và không thực hiện quá nhiều nhiệm vụ. Tuy nhiên, nếu việc hiển thị và việc xử lý hình ảnh có thể được chia thành các lớp riêng biệt, đó sẽ là một cải thiện.
+        - Open/Closed Principle (OCP):
+          Hiện tại, lớp không có mở rộng nhiều để hỗ trợ các chức năng mới, nhưng có thể mở rộng bằng cách thêm các phương thức mới hoặc tách các phương thức hiện tại thành các lớp riêng biệt nếu cần thiết.
+        - Liskov Substitution Principle (LSP):
+          Lớp MediaInvoiceScreenHandler không chứa sự thay thế đối tượng của lớp cha, nhưng nó là một ví dụ của việc sử dụng một đối tượng OrderMedia thay vì Media.
+        - Dependency Inversion Principle (DIP):
+          Lớp MediaInvoiceScreenHandler sử dụng abstraction thông qua OrderMedia, tuy nhiên, còn phụ thuộc chặt chẽ vào Image và các thành phần FXML.
+    3. Trong PaymentScreenHandler.java
+        - Single Responsibility Principle (SRP):
+          Lớp PaymentScreenHandler có trách nhiệm quản lý giao diện người dùng, xử lý sự kiện, và thực hiện thanh toán. Có thể cân nhắc chia thành các lớp riêng biệt để tăng tính phân loại.
+        - Open/Closed Principle (OCP):
+          Hiện tại, lớp không có đặc điểm rõ ràng của việc mở rộng hoặc đóng cửa.
+        - Liskov Substitution Principle (LSP):
+          Lớp PaymentScreenHandler sử dụng một đối tượng Invoice, thuộc lớp con của Cart. Các đối tượng có thể thay thế mà không làm thay đổi tính đúng đắn của chương trình.
+        - Dependency Inversion Principle (DIP):
+          Lớp PaymentScreenHandler sử dụng abstraction thông qua Invoice và PaymentController
+
+    4. Trong ResultScreenHandler.java
+        - Single Responsibility Principle (SRP):
+          Lớp ResultScreenHandler có nhiệm vụ chủ yếu là hiển thị kết quả và thông báo, không thực hiện nhiều nhiệm vụ khác. Tuy nhiên, có thể cần phân chia thành các lớp nhỏ hơn nếu có thêm chức năng được thêm vào.
+        - Open/Closed Principle (OCP):
+          Hiện tại, lớp không có đặc điểm rõ ràng của việc mở rộng hoặc đóng cửa.
+        - Liskov Substitution Principle (LSP):
+          Lớp ResultScreenHandler không có sự thay thế đối tượng của lớp cha, nhưng nó có thể hiển thị thông tin từ các lớp khác (đối với homeScreenHandler).
+        - Dependency Inversion Principle (DIP):
+          Lớp này không thể xác định mức độ tuân thủ DIP mà không biết về cách BaseScreenHandler, Stage, và homeScreenHandler được triển khai.
+</details>
 <details>
 <summary>Trịnh Quốc Đạt</summary>
 <br>
