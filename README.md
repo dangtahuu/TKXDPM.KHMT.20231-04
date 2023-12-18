@@ -556,7 +556,7 @@ This is a Capstone's source code for Software Design and Construction project
 - Assigned tasks:
   - Tìm các nguyên tắc SOLID trong InvoiceScreenHandler.java, MediaInvoiceScreenHandler.java, PaymentScreenHandler.java, ResultScreenHandler.java :
 - Implementation details:
-  - Pull Request:
+  - Pull Request: https://github.com/dangtahuu/TKXDPM.KHMT.20231-04/pull/9()
   - Specific implementation details:
 
     1. Trong InvoiceScreenHandler.java
