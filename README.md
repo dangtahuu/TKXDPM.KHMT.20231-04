@@ -406,5 +406,123 @@ This is a Capstone's source code for Software Design and Construction project
 
 
 </details>
+<details>
+  <summary>W3: 10/12/2023~17/12/2023 </summary>
+<br>
+<details>
+<summary>Tạ Hữu Đăng</summary>
+<br>
+
+
+</details>
+
+<details>
+<summary>Trịnh Quốc Đạt</summary>
+<br>
+
+- Assigned tasks:
+  - Tìm các nguyên tắc SOLID trong CartScreenHandler.java, cart.MediaHandler.java, HomeScreenHandler.java, home.MediaHandler.java : 
+
+- Implementation details:
+  - Pull Request(s): [https://github.com/dangtahuu/TKXDPM.KHMT.20231-04/pull/8]()
+  - Specific implementation details: 
+
+      1,Trong **cart.CartScreenHandler.java**:
+    
+      - Nguyên tắc Đơn Trách Nhiệm (Single Responsibility Principle - SRP):
+
+        -Class CartScreenHandler có trách nhiệm quản lý giao diện người dùng của màn hình giỏ hàng.
+
+        -Nó thực hiện các nhiệm vụ như hiển thị giỏ hàng, xử lý sự kiện nhấp chuột, và tương tác với các controller khác như PlaceOrderController và ViewCartController.
+
+      - Nguyên tắc Mở Rộng/Đóng Gói (Open/Closed Principle - OCP):
+
+        -Class này có thể được mở rộng để thêm các chức năng mới mà không cần sửa đổi mã nguồn hiện tại. Các phương thức như requestToPlaceOrder và updateCartAmount có thể được mở rộng bằng cách thêm mã nguồn mới mà không làm ảnh hưởng đến phần còn lại của lớp.
+
+      - Nguyên tắc Thay Thế Liskov (Liskov Substitution Principle - LSP):
+
+        -Class CartScreenHandler sử dụng một số controller khác nhau (PlaceOrderController, ViewCartController) mà không làm thay đổi đồng thời tính đúng đắn của chương trình.
+
+      - Nguyên tắc Phân Chia Giao Diện (Interface Segregation Principle - ISP):
+
+        -Class này không thực hiện giao diện nào, nhưng nếu có các giao diện liên quan, bạn nên chia thành các giao diện nhỏ hơn, chứa các phương thức cần thiết cho từng loại lớp sử dụng chúng.
+
+      - Nguyên tắc Đảo Ngược Phụ Thuộc (Dependency Inversion Principle - DIP):
+
+        -Class CartScreenHandler không trực tiếp tạo đối tượng PlaceOrderController. Thay vào đó, nó nhận một đối tượng đã được tạo từ bên ngoài và sử dụng nó.
+
+    2, Trong **cart.MediaHandler.java**:
+
+      - Nguyên tắc Đơn Trách Nhiệm (Single Responsibility Principle - SRP):
+
+        -Class MediaHandler có trách nhiệm hiển thị thông tin về một sản phẩm trên giao diện người dùng (setMediaInfo), quản lý sự kiện khi số lượng sản phẩm thay đổi (initializeSpinner), và xử lý sự kiện khi người dùng muốn xóa sản phẩm khỏi giỏ hàng (btnDelete.setOnMouseClicked).
+
+      - Nguyên tắc Mở Rộng/Đóng Gói (Open/Closed Principle - OCP):
+
+        -Class này có thể được mở rộng bằng cách thêm các chức năng mới mà không làm thay đổi mã nguồn hiện tại. Các phương thức như initializeSpinner có thể được mở rộng để thêm các tính năng mới liên quan đến việc quản lý số lượng sản phẩm.
+
+      - Nguyên tắc Thay Thế Liskov (Liskov Substitution Principle - LSP):
+
+        -Class này sử dụng một instance của CartScreenHandler mà không làm thay đổi tính đúng đắn của chương trình.
+
+      - Nguyên tắc Phân Chia Giao Diện (Interface Segregation Principle - ISP):
+
+        -Class này không thực hiện bất kỳ giao diện nào.
+
+      - Nguyên tắc Đảo Ngược Phụ Thuộc (Dependency Inversion Principle - DIP):
+
+        -Class này không tạo trực tiếp đối tượng nào mà sử dụng một đối tượng đã được tạo từ bên ngoài (CartScreenHandler).
+
+    3,Trong **home.HomeScreenHandler.java**:
+
+      - Nguyên tắc Đơn Trách Nhiệm (Single Responsibility Principle - SRP):
+
+        -Class này có trách nhiệm hiển thị giao diện người dùng cho màn hình chính (show, initialize, setImage, addMediaHome, addMenuItem). Nó cũng xử lý sự kiện khi người dùng nhấp chuột vào ảnh mục tiêu (aimsImage) và ảnh giỏ hàng (cartImage).
+
+        -Ngoài ra, nó cũng quản lý số lượng sản phẩm trong giỏ hàng (numMediaInCart).
+
+      - Nguyên tắc Mở Rộng/Đóng Gói (Open/Closed Principle - OCP):
+
+        -Class này có thể mở rộng bằng cách thêm các chức năng mới mà không làm thay đổi mã nguồn hiện tại. Các phương thức như addMediaHome có thể được mở rộng để hỗ trợ các tính năng mới liên quan đến hiển thị sản phẩm trên màn hình chính.
+
+      - Nguyên tắc Thay Thế Liskov (Liskov Substitution Principle - LSP):
+
+        -Class này sử dụng một instance của HomeController và ViewCartController mà không làm thay đổi tính đúng đắn của chương trình.
+
+      - Nguyên tắc Phân Chia Giao Diện (Interface Segregation Principle - ISP):
+
+        -Class này không thực hiện giao diện nào.
+
+      - Nguyên tắc Đảo Ngược Phụ Thuộc (Dependency Inversion Principle - DIP):
+
+        -Class này không trực tiếp tạo đối tượng của HomeController và ViewCartController, mà là sử dụng chúng thông qua setBController.
+
+    4,Trong **home.MediaHandle.java**:
+        
+      - Nguyên tắc Đơn Trách Nhiệm (Single Responsibility Principle - SRP):
+
+        -Class này có trách nhiệm hiển thị thông tin chi tiết về một sản phẩm truyền vào (media). Nó cũng xử lý sự kiện khi người dùng nhấp vào nút "Add to Cart" (addToCartBtn).
+
+
+      - Nguyên tắc Mở Rộng/Đóng Gói (Open/Closed Principle - OCP):
+
+        -Class này có thể được mở rộng để thêm các chức năng mới mà không cần sửa đổi mã nguồn hiện tại. Các phương thức như setMediaInfo có thể được mở rộng để hỗ trợ các loại phương tiện mới hoặc các thuộc tính mới của phương tiện.
+
+      - Nguyên tắc Thay Thế Liskov (Liskov Substitution Principle - LSP):
+
+        -Class này sử dụng HomeScreenHandler mà không làm thay đổi tính đúng đắn của chương trình.
+
+      - Nguyên tắc Phân Chia Giao Diện (Interface Segregation Principle - ISP):
+
+        -Class này không thực hiện bất kỳ giao diện nào.
+
+      - Nguyên tắc Đảo Ngược Phụ Thuộc (Dependency Inversion Principle - DIP):
+
+        -Class này không trực tiếp tạo đối tượng HomeController và ViewCartController, mà là sử dụng chúng thông qua home.
+
+</details>
+
+
+</details>
 
 ---
