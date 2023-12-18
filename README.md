@@ -654,6 +654,91 @@ This is a Capstone's source code for Software Design and Construction project
 
 </details>
 
+<details>
+<summary>Trần Văn Điền</summary>
+<br>
+
+- Assigned tasks:
+  - Tìm nguyên tắc SOLID trong entity.media, Book, CD, DVD, paymentController
+
+- Implementation details:
+  - Pull Request(s): 
+  - Specific implementation details:
+  1. PaymentController:
+      Single Responsibility Principle (SRP):
+        Class PaymentController tập trung vào việc quản lý thanh toán và tương tác với InterbankSubsystem. Tuy nhiên, có thể có một số phương thức như getExpirationDate thực hiện nhiệm vụ kiểm tra và xử lý ngày hết hạn thẻ, mà có thể được chuyển sang một lớp hoặc phương thức riêng.
+
+      Open/Closed Principle (OCP):
+        Không có dấu hiệu rõ ràng về việc mở rộng hoặc đóng gói trong đoạn mã. Điều này có thể được cải thiện bằng cách sử dụng các giao diện và thiết kế theo hướng có thể mở rộng.
+
+      Liskov Substitution Principle (LSP):
+        Không có vấn đề rõ ràng về nguyên tắc này trong đoạn mã.
+
+      Interface Segregation Principle (ISP):
+        Class này không triển khai giao diện nào, và với số lượng phương thức hiện tại, không có vấn đề lớn về ISP.
+
+      Dependency Inversion Principle (DIP):
+        Class sử dụng InterbankSubsystem thông qua việc tạo đối tượng, nhưng có thể được cải thiện bằng cách sử dụng dependency injection, chẳng hạn qua constructor.
+  2. entity.media
+      Single Responsibility Principle (SRP):
+        Class Media chịu trách nhiệm về việc tương tác với cơ sở dữ liệu (AIMSDB) và ghi log bằng cách sử dụng Logger. Tính năng này có vẻ không liên quan và có thể được tách thành các lớp riêng biệt.
+
+      Open/Closed Principle (OCP):
+        Không có dấu hiệu rõ ràng về việc mở rộng hoặc đóng gói trong đoạn mã. Điều này có thể được cải thiện bằng cách sử dụng các giao diện (interfaces) và thiết kế theo hướng có thể mở rộng.
+
+      Liskov Substitution Principle (LSP):
+        Không có vấn đề về nguyên tắc này trong đoạn mã.
+
+      Interface Segregation Principle (ISP):
+        Class Media không triển khai giao diện nào, nhưng nếu chia thành các phương thức có liên quan vào các giao diện nhỏ hơn có thể làm cho mã nguồn linh hoạt hơn.
+
+      Dependency Inversion Principle (DIP):
+        Có sử dụng AIMSDB và Utils thông qua việc tạo đối tượng, nhưng có thể được cải thiện bằng cách sử dụng dependency injection (cụ thể là qua constructor).
+  3. entity.Book
+      Single Responsibility Principle (SRP):
+        Class Book có vẻ tập trung vào quản lý thông tin của một cuốn sách, và nói chung, không có biểu hiện rõ ràng về việc vi phạm SRP. Tuy nhiên, có thể xem xét chia thành các lớp con chuyên biệt hơn cho việc quản lý dữ liệu từ các bảng khác nhau trong cơ sở dữ liệu.
+
+      Open/Closed Principle (OCP):
+        Class này mở rộng từ lớp Media, có nghĩa là có khả năng mở rộng và thêm các tính năng mới mà không cần sửa đổi mã nguồn của lớp cha.
+
+      Liskov Substitution Principle (LSP):
+        Class Book thực hiện phương thức getMediaById từ lớp cha Media và không có vấn đề rõ ràng về nguyên tắc này.
+
+      Interface Segregation Principle (ISP):
+        Class này không triển khai giao diện nào, và với số lượng phương thức hiện tại, không có vấn đề lớn về ISP.
+
+      Dependency Inversion Principle (DIP):
+        Class này sử dụng AIMSDB thông qua việc tạo đối tượng. Có thể cải thiện bằng cách sử dụng dependency injection để chuyển AIMSDB vào qua constructor.  
+  4. entity.CD
+      Single Responsibility Principle (SRP):
+        Class CD có vẻ tập trung vào quản lý thông tin của một đĩa CD và không có biểu hiện rõ ràng về việc vi phạm SRP. Tuy nhiên, có thể xem xét chia thành các lớp con chuyên biệt hơn cho việc quản lý dữ liệu từ các bảng khác nhau trong cơ sở dữ liệu.
+
+      Open/Closed Principle (OCP):
+        Class này mở rộng từ lớp Media, có nghĩa là có khả năng mở rộng và thêm các tính năng mới mà không cần sửa đổi mã nguồn của lớp cha.
+
+      Liskov Substitution Principle (LSP):
+        Class CD thực hiện phương thức getMediaById từ lớp cha Media và không có vấn đề rõ ràng về nguyên tắc này.
+
+      Interface Segregation Principle (ISP):
+        Class này không triển khai giao diện nào, và với số lượng phương thức hiện tại, không có vấn đề lớn về ISP.
+
+      Dependency Inversion Principle (DIP):
+        Class này không sử dụng trực tiếp các phụ thuộc cụ thể (ví dụ: database connection) mà thông qua lớp cha Media. Điều này làm tăng tính linh hoạt và giảm sự phụ thuộc vào chi tiết cụ thể.
+  5. entity.DVD
+      Single Responsibility Principle (SRP):
+        Class DVD tập trung vào quản lý thông tin của một đĩa DVD và không có biểu hiện rõ ràng về việc vi phạm SRP. Tuy nhiên, có thể xem xét chia thành các lớp con chuyên biệt hơn cho việc quản lý dữ liệu từ các bảng khác nhau trong cơ sở dữ liệu.
+      Open/Closed Principle (OCP):
+        Class này mở rộng từ lớp Media, có nghĩa là có khả năng mở rộng và thêm các tính năng mới mà không cần sửa đổi mã nguồn của lớp cha.
+
+      Liskov Substitution Principle (LSP):
+        Class DVD thực hiện phương thức getMediaById từ lớp cha Media và không có vấn đề rõ ràng về nguyên tắc này.
+
+      Interface Segregation Principle (ISP):
+        Class này không triển khai giao diện nào, và với số lượng phương thức hiện tại, không có vấn đề lớn về ISP.
+
+      Dependency Inversion Principle (DIP):
+        Class này không sử dụng trực tiếp các phụ thuộc cụ thể (ví dụ: database connection) mà thông qua lớp cha Media. Điều này làm tăng tính linh hoạt và giảm sự phụ thuộc vào chi tiết cụ thể
+</details>
 
 <details>
 <summary>Ngô Hoàng Hải Đăng</summary>
@@ -673,7 +758,7 @@ This is a Capstone's source code for Software Design and Construction project
   - Open/Closed Principle (Nguyên tắc Mở rộng đóng cửa): Lớp này có thể cần được mở rộng nếu có yêu cầu mới, ví dụ: thêm tính năng mới cho đơn hàng. Việc thêm mới có thể yêu cầu sửa đổi trong lớp này, không tuân theo nguyên tắc OCP.
   - Liskov Substitution Principle (Nguyên tắc Thay thế Liskov): Lớp này không kế thừa từ lớp nào khác, vì vậy không có vấn đề liên quan đến nguyên tắc này.
   - Interface Segregation Principle (Nguyên tắc Phân chia Giao diện): Lớp này không triển khai giao diện, vì vậy không có vấn đề liên quan đến nguyên tắc này.
-  - Dependency Inversion Principle (Nguyên tắc Đảo ngược phụ thuộc): Lớp này phụ thuộc trực tiếp vào OrderMedia, Configs và các kiểu dữ liệu cụ thể như List và HashMap, không sử dụng các abstraction hoặc interface. Điều này có thể làm cho việc thay đổi và bảo trì khó khăn khi có sự thay đổi trong các đối tượng phụ thuộc.
+  - ependency Inversion Principle (Nguyên tắc Đảo ngược phụ thuộc): Lớp này phụ thuộc trực tiếp vào OrderMedia, Configs và các kiểu dữ liệu cụ thể như List và HashMap, không sử dụng các abstraction hoặc interface. Điều này có thể làm cho việc thay đổi và bảo trì khó khăn khi có sự thay đổi trong các đối tượng phụ thuộc.
   
 ---
 ngohoanghaidang
