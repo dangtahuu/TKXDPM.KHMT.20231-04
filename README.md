@@ -556,7 +556,7 @@ This is a Capstone's source code for Software Design and Construction project
   - Tìm các nguyên tắc SOLID trong CartScreenHandler.java, cart.MediaHandler.java, HomeScreenHandler.java, home.MediaHandler.java : 
 
 - Implementation details:
-  - Pull Request(s): [https://github.com/dangtahuu/TKXDPM.KHMT.20231-04/pull/8]()
+  - Pull Request(s): https://github.com/dangtahuu/TKXDPM.KHMT.20231-04/pull/8()
   - Specific implementation details: 
 
       1,Trong **cart.CartScreenHandler.java**:
