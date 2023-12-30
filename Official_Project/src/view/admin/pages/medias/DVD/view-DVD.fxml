@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane prefHeight="800.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.admin.pages.medias.DVD.ViewDVDController">
+    <BorderPane layoutX="14.0" layoutY="14.0">
+        <center>
+            <GridPane fx:id="formViewMediaView" alignment="CENTER_RIGHT" prefHeight="332.0" prefWidth="712.0">
+                <columnConstraints>
+                    <ColumnConstraints hgrow="SOMETIMES" maxWidth="350.0" minWidth="10.0" prefWidth="148.0" />
+                    <ColumnConstraints hgrow="SOMETIMES" maxWidth="603.0" minWidth="10.0" prefWidth="279.0" />
+                    <ColumnConstraints hgrow="SOMETIMES" maxWidth="603.0" minWidth="10.0" prefWidth="140.0" />
+                    <ColumnConstraints hgrow="SOMETIMES" maxWidth="603.0" minWidth="10.0" prefWidth="146.0" />
+                    <ColumnConstraints hgrow="SOMETIMES" maxWidth="603.0" minWidth="10.0" prefWidth="215.0" />
+                </columnConstraints>
+                <rowConstraints>
+                    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                       <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+               <RowConstraints />
+                </rowConstraints>
+                 <TextField fx:id="fieldMediaId" disable="true" style="-fx-opacity: 1;" visible="false" GridPane.columnIndex="1" />
+             
+             <Label text="Media Name" />
+                    <TextField fx:id="fieldMediaTitle" disable="true" promptText="media name" style="-fx-opacity: 1;" GridPane.columnIndex="1" />
+                    <Label text="Media Price" GridPane.columnIndex="3" />
+                    <TextField fx:id="fieldMediaPrice" disable="true" promptText="0.0" style="-fx-opacity: 1;" GridPane.columnIndex="4" />
+                    <Label text="Media Stock" GridPane.rowIndex="1" />
+                    <TextField fx:id="fieldMediaQuantity" disable="true" promptText="0" style="-fx-opacity: 1;" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                    <Label text="Media Category" GridPane.columnIndex="3" GridPane.rowIndex="1" />
+                    <TextField fx:id="fieldMediaCategory" disable="true" style="-fx-opacity: 1;" GridPane.columnIndex="4" GridPane.rowIndex="1" />
+                   
+                    <Label text="Value" GridPane.rowIndex="2" />
+                    <TextField fx:id="fieldMediaValue" disable="true" promptText="0" style="-fx-opacity: 1;" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+
+      <TextField fx:id="fieldMediaImage" disable="true" style="-fx-opacity: 1;" visible="false" GridPane.columnIndex="3" />
+      <Label text="Image" GridPane.columnIndex="3" GridPane.rowIndex="2" />
+     <ImageView fx:id="imageView" fitHeight="100" fitWidth="100" preserveRatio="true" GridPane.columnIndex="4" GridPane.rowIndex="2" />
+   
+    
+    
+   <Label text="Disc Type" GridPane.rowIndex="3"/>
+                    <TextField disable="true" style="-fx-opacity: 1;" fx:id="fieldDiscType" promptText="Disc Type" GridPane.columnIndex="1" GridPane.rowIndex="3"/>
+                    <Label text="Director" GridPane.rowIndex="3" GridPane.columnIndex="3" />
+                    <TextField disable="true" style="-fx-opacity: 1;" fx:id="fieldDirector" promptText="Record label" GridPane.columnIndex="4" GridPane.rowIndex="3"/>
+                    
+                      <Label text="Studio" GridPane.rowIndex="4"/>
+                    <TextField disable="true" style="-fx-opacity: 1;" fx:id="fieldStudio" promptText="Studio" GridPane.columnIndex="1" GridPane.rowIndex="4"/>
+                    <Label text="Subtitle" GridPane.rowIndex="4" GridPane.columnIndex="3" />
+                    <TextField disable="true" style="-fx-opacity: 1;" fx:id="fieldSubtitle" promptText="Subtitle" GridPane.columnIndex="4" GridPane.rowIndex="4"/>
+    
+         <Label text="Runtime" GridPane.rowIndex="5"/>
+                    <TextField disable="true" style="-fx-opacity: 1;" fx:id="fieldRuntime" promptText="0.0" GridPane.columnIndex="1" GridPane.rowIndex="5"/>
+                    <Label text="Release Date" GridPane.rowIndex="5" GridPane.columnIndex="3" />
+                    <TextField disable="true" style="-fx-opacity: 1;" fx:id="fieldReleaseDate" promptText="Release Date" GridPane.columnIndex="4" GridPane.rowIndex="5"/>
+                    
+                    
+            </GridPane>
+        </center>
+        <top>
+            <Text fx:id="viewMediaName" strokeType="OUTSIDE" strokeWidth="0.0" text="View media data" BorderPane.alignment="CENTER_LEFT">
+                <font>
+                    <Font size="24.0" />
+                </font>
+            </Text>
+        </top>
+    </BorderPane>
+</AnchorPane>

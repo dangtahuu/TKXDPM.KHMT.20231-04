@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.stage.FileChooser?>
+<?import javafx.scene.control.DatePicker?>
+
+<AnchorPane prefHeight="800.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.admin.pages.medias.Book.EditBookController">
+    <children>
+        <BorderPane layoutX="14.0" layoutY="14.0">
+            <center>
+                <GridPane alignment="CENTER_RIGHT" prefHeight="600.0" prefWidth="1000">
+                    <columnConstraints>
+                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="350.0" minWidth="10.0" prefWidth="148.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="603.0" minWidth="10.0" prefWidth="279.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="603.0" minWidth="10.0" prefWidth="140.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="603.0" minWidth="10.0" prefWidth="146.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="603.0" minWidth="10.0" prefWidth="215.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="603.0" minWidth="10.0" prefWidth="215.0" />
+                    </columnConstraints>
+                    <rowConstraints>
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                         <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                    </rowConstraints>
+                     <TextField fx:id="fieldMediaId" visible="false" GridPane.columnIndex="1"/>
+                    <Label text="Media Name" />
+                    <TextField fx:id="fieldMediaTitle" promptText="media name" GridPane.columnIndex="1" />
+                    <Label text="Media Price" GridPane.columnIndex="3" />
+                    <TextField fx:id="fieldMediaPrice" promptText="0.0" GridPane.columnIndex="4" />
+                    <Label text="Media Stock" GridPane.rowIndex="1" />
+                    <TextField fx:id="fieldMediaQuantity" promptText="0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                    <Label text="Media Category" GridPane.columnIndex="3" GridPane.rowIndex="1" />
+                    <TextField fx:id="fieldMediaCategory" GridPane.columnIndex="4" GridPane.rowIndex="1"/>
+                   
+                    <Label text="Value" GridPane.rowIndex="2" />
+                    <TextField fx:id="fieldMediaValue" promptText="0" GridPane.columnIndex="1" GridPane.rowIndex="2"/>
+
+      <TextField fx:id="fieldMediaImage" visible="false" GridPane.columnIndex="3"/>
+      <Label text="Image" GridPane.rowIndex="2" GridPane.columnIndex="3"/>
+     <ImageView fx:id="imageView" fitHeight="100" fitWidth="100" preserveRatio="true" GridPane.columnIndex="4" GridPane.rowIndex="2" />
+    <Button text="Choose Image" onAction="#chooseBtnClick"  GridPane.columnIndex="5" GridPane.rowIndex="2"/>
+    
+    
+ <Label text="Cover Type" GridPane.rowIndex="3"/>
+                    <TextField fx:id="fieldCoverType" promptText="Cover Type" GridPane.columnIndex="1" GridPane.rowIndex="3"/>
+                    <Label text="Author" GridPane.rowIndex="3" GridPane.columnIndex="3" />
+                    <TextField fx:id="fieldAuthor" promptText="Record label" GridPane.columnIndex="4" GridPane.rowIndex="3"/>
+                    
+                      <Label text="Publisher" GridPane.rowIndex="4"/>
+                    <TextField fx:id="fieldPublisher" promptText="Studio" GridPane.columnIndex="1" GridPane.rowIndex="4"/>
+                    <Label text="Language" GridPane.rowIndex="4" GridPane.columnIndex="3" />
+                    <TextField fx:id="fieldLanguage" promptText="Subtitle" GridPane.columnIndex="4" GridPane.rowIndex="4"/>
+    
+         <Label text="Number of Pages" GridPane.rowIndex="5"/>
+                    <TextField fx:id="fieldNumberOfPages" promptText="0.0" GridPane.columnIndex="1" GridPane.rowIndex="5"/>
+                    <Label text="Publish Date" GridPane.rowIndex="5" GridPane.columnIndex="3" />
+                    <TextField visible="false" fx:id="fieldPublishDate" promptText="Release Date" GridPane.columnIndex="5" GridPane.rowIndex="5"/>
+                     <DatePicker fx:id="datePicker" GridPane.columnIndex="4" GridPane.rowIndex="5"/>
+    
+                    <Text fx:id="viewMediaResponse" strokeType="OUTSIDE" strokeWidth="0.0" text="Media added!" visible="false" BorderPane.alignment="CENTER_LEFT" GridPane.columnIndex="3" GridPane.rowIndex="6" />
+                     <Button mnemonicParsing="false" onAction="#btnEditMediaOnAction" styleClass="button, success" text="Add Media" GridPane.columnIndex="4" GridPane.halignment="RIGHT" GridPane.rowIndex="6" />
+                </GridPane>
+            </center>
+            <top>
+               <Text fx:id="viewMediaName" strokeType="OUTSIDE" strokeWidth="0.0" text="View media data" BorderPane.alignment="CENTER_LEFT">
+                <font>
+                    <Font size="24.0"/>
+                </font>
+            </Text>
+            </top>
+        </BorderPane>
+    </children>
+</AnchorPane>
