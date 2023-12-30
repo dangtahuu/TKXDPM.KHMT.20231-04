@@ -90,17 +90,10 @@ public class UserMediasController {
     }
     
     public void refresh() {
-
-        Task<ObservableList<Media>> getAllMediasTask = new Task<ObservableList<Media>>() {
-            @Override
-            protected ObservableList<Media> call() {
-                return FXCollections.observableArrayList(Datasource.getInstance().getAllMedias(Datasource.ORDER_BY_NONE));
-            }
-        };
-
-        tableMediasPage.itemsProperty().bind(getAllMediasTask.valueProperty());
-        new Thread(getAllMediasTask).start();
-
+    	removeColumnFromTable("Purchase Quantity");
+    	removeColumnFromTable("Actions");
+    	removeColumnFromTable("Image");
+    	listMedias();
     }
     @FXML
     private void addSpinnerColumnToTable() {
@@ -143,6 +136,24 @@ public class UserMediasController {
         tableMediasPage.getColumns().add(colMediaQuantity);
     }
 
+    @FXML
+    private void removeColumnFromTable(String name) {
+        // Find the column by name
+        TableColumn<Media, Integer> colToRemove = null;
+        for (TableColumn<Media, ?> column : tableMediasPage.getColumns()) {
+            if (name.equals(column.getText())) {
+                colToRemove = (TableColumn<Media, Integer>) column;
+                break;
+            }
+        }
+
+        // Remove the column if found
+        if (colToRemove != null) {
+            tableMediasPage.getColumns().remove(colToRemove);
+        }
+    }
+    
+    
     /**
      * This private method adds the action buttons to the table rows.
      * @since                   1.0.0
@@ -175,9 +186,9 @@ public class UserMediasController {
                                 System.out.println("Add Media to cart ");
                                 System.out.println("product id: " + productData.getId());
                                 System.out.println("product name: " + productData.getName());
-                            }                refresh();
-                        }
-                    	);
+                                refresh();
+                            }
+                        });
                     }
 
                     private final HBox buttonsPane = new HBox();
@@ -256,7 +267,7 @@ public class UserMediasController {
 
                 addMediaTask.setOnSucceeded(e -> {
                     if (addMediaTask.valueProperty().get()) {
-                        Datasource.getInstance().decreaseStock(product_id);
+                        Datasource.getInstance().decreaseStock(product_id, pu_quantity);
                         System.out.println("Order placed!");
                     }
                 });

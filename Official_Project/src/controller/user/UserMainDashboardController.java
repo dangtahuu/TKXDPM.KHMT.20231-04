@@ -70,7 +70,7 @@ public class UserMainDashboardController implements Initializable {
      * @param actionEvent       Accepts ActionEvent.
      * @since                   1.0.0
      */
-    public void btnMediasOnClick(ActionEvent actionEvent) {
+    public void btnMediasOnClick() {
         FXMLLoader fxmlLoader = loadFxmlPage("/view/user/pages/medias/medias.fxml");
         UserMediasController userController = fxmlLoader.getController();
         userController.listMedias();
