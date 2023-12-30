@@ -784,9 +784,9 @@ public class Datasource extends Media {
      * @param media_id    Media id.
      * @since                   1.0.0
      */
-    public void decreaseStock(int media_id) {
+    public void decreaseStock(int media_id, int quantity) {
 
-        String sql = "UPDATE " + TABLE_PRODUCTS + " SET " + COLUMN_PRODUCTS_QUANTITY + " = " + COLUMN_PRODUCTS_QUANTITY + " - 1 WHERE " + COLUMN_PRODUCTS_ID + " = ?";
+        String sql = "UPDATE " + TABLE_PRODUCTS + " SET " + COLUMN_PRODUCTS_QUANTITY + " = " + COLUMN_PRODUCTS_QUANTITY + " - " + quantity +" WHERE " + COLUMN_PRODUCTS_ID + " = ?";
 
         try (PreparedStatement statement = conn.prepareStatement(sql)) {
             statement.setInt(1, media_id);
