@@ -1,0 +1,247 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER">
+		<attributes>
+			<attribute name="module" value="true"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="src" path="AIMS/src"/>
+	<classpathentry kind="src" path="AIMS/test"/>
+	<classpathentry kind="src" path="Official_Project/src"/>
+	<classpathentry kind="lib" path="D:/Downloads/jetty-distribution-9.4.53.v20231009/jetty-distribution-9.4.53.v20231009/lib/infinispan-common-9.4.53.v20231009.jar">
+		<attributes>
+			<attribute name="module" value="true"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="lib" path="D:/Downloads/jetty-distribution-9.4.53.v20231009/jetty-distribution-9.4.53.v20231009/lib/infinispan-embedded-query-9.4.53.v20231009.jar">
+		<attributes>
+			<attribute name="module" value="true"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="lib" path="D:/Downloads/jetty-distribution-9.4.53.v20231009/jetty-distribution-9.4.53.v20231009/lib/infinispan-remote-query-9.4.53.v20231009.jar">
+		<attributes>
+			<attribute name="module" value="true"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="lib" path="D:/Downloads/jetty-distribution-9.4.53.v20231009/jetty-distribution-9.4.53.v20231009/lib/jetty-alpn-conscrypt-server-9.4.53.v20231009.jar">
+		<attributes>
+			<attribute name="module" value="true"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="lib" path="D:/Downloads/jetty-distribution-9.4.53.v20231009/jetty-distribution-9.4.53.v20231009/lib/jetty-alpn-java-server-9.4.53.v20231009.jar">
+		<attributes>
+			<attribute name="module" value="true"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="lib" path="D:/Downloads/jetty-distribution-9.4.53.v20231009/jetty-distribution-9.4.53.v20231009/lib/jetty-alpn-openjdk8-server-9.4.53.v20231009.jar">
+		<attributes>
+			<attribute name="module" value="true"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="lib" path="D:/Downloads/jetty-distribution-9.4.53.v20231009/jetty-distribution-9.4.53.v20231009/lib/jetty-alpn-server-9.4.53.v20231009.jar">
+		<attributes>
+			<attribute name="module" value="true"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="lib" path="D:/Downloads/jetty-distribution-9.4.53.v20231009/jetty-distribution-9.4.53.v20231009/lib/jetty-annotations-9.4.53.v20231009.jar">
+		<attributes>
+			<attribute name="module" value="true"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="lib" path="D:/Downloads/jetty-distribution-9.4.53.v20231009/jetty-distribution-9.4.53.v20231009/lib/jetty-cdi-9.4.53.v20231009.jar">
+		<attributes>
+			<attribute name="module" value="true"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="lib" path="D:/Downloads/jetty-distribution-9.4.53.v20231009/jetty-distribution-9.4.53.v20231009/lib/jetty-client-9.4.53.v20231009.jar">
+		<attributes>
+			<attribute name="module" value="true"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="lib" path="D:/Downloads/jetty-distribution-9.4.53.v20231009/jetty-distribution-9.4.53.v20231009/lib/jetty-continuation-9.4.53.v20231009.jar">
+		<attributes>
+			<attribute name="module" value="true"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="lib" path="D:/Downloads/jetty-distribution-9.4.53.v20231009/jetty-distribution-9.4.53.v20231009/lib/jetty-deploy-9.4.53.v20231009.jar">
+		<attributes>
+			<attribute name="module" value="true"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="lib" path="D:/Downloads/jetty-distribution-9.4.53.v20231009/jetty-distribution-9.4.53.v20231009/lib/jetty-gcloud-session-manager-9.4.53.v20231009.jar">
+		<attributes>
+			<attribute name="module" value="true"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="lib" path="D:/Downloads/jetty-distribution-9.4.53.v20231009/jetty-distribution-9.4.53.v20231009/lib/jetty-hazelcast-9.4.53.v20231009.jar">
+		<attributes>
+			<attribute name="module" value="true"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="lib" path="D:/Downloads/jetty-distribution-9.4.53.v20231009/jetty-distribution-9.4.53.v20231009/lib/jetty-http-9.4.53.v20231009.jar">
+		<attributes>
+			<attribute name="module" value="true"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="lib" path="D:/Downloads/jetty-distribution-9.4.53.v20231009/jetty-distribution-9.4.53.v20231009/lib/jetty-io-9.4.53.v20231009.jar">
+		<attributes>
+			<attribute name="module" value="true"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="lib" path="D:/Downloads/jetty-distribution-9.4.53.v20231009/jetty-distribution-9.4.53.v20231009/lib/jetty-jaas-9.4.53.v20231009.jar">
+		<attributes>
+			<attribute name="module" value="true"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="lib" path="D:/Downloads/jetty-distribution-9.4.53.v20231009/jetty-distribution-9.4.53.v20231009/lib/jetty-jaspi-9.4.53.v20231009.jar">
+		<attributes>
+			<attribute name="module" value="true"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="lib" path="D:/Downloads/jetty-distribution-9.4.53.v20231009/jetty-distribution-9.4.53.v20231009/lib/jetty-jmx-9.4.53.v20231009.jar">
+		<attributes>
+			<attribute name="module" value="true"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="lib" path="D:/Downloads/jetty-distribution-9.4.53.v20231009/jetty-distribution-9.4.53.v20231009/lib/jetty-jndi-9.4.53.v20231009.jar">
+		<attributes>
+			<attribute name="module" value="true"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="lib" path="D:/Downloads/jetty-distribution-9.4.53.v20231009/jetty-distribution-9.4.53.v20231009/lib/jetty-memcached-sessions-9.4.53.v20231009.jar">
+		<attributes>
+			<attribute name="module" value="true"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="lib" path="D:/Downloads/jetty-distribution-9.4.53.v20231009/jetty-distribution-9.4.53.v20231009/lib/jetty-nosql-9.4.53.v20231009.jar">
+		<attributes>
+			<attribute name="module" value="true"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="lib" path="D:/Downloads/jetty-distribution-9.4.53.v20231009/jetty-distribution-9.4.53.v20231009/lib/jetty-openid-9.4.53.v20231009.jar">
+		<attributes>
+			<attribute name="module" value="true"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="lib" path="D:/Downloads/jetty-distribution-9.4.53.v20231009/jetty-distribution-9.4.53.v20231009/lib/jetty-plus-9.4.53.v20231009.jar">
+		<attributes>
+			<attribute name="module" value="true"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="lib" path="D:/Downloads/jetty-distribution-9.4.53.v20231009/jetty-distribution-9.4.53.v20231009/lib/jetty-proxy-9.4.53.v20231009.jar">
+		<attributes>
+			<attribute name="module" value="true"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="lib" path="D:/Downloads/jetty-distribution-9.4.53.v20231009/jetty-distribution-9.4.53.v20231009/lib/jetty-quickstart-9.4.53.v20231009.jar">
+		<attributes>
+			<attribute name="module" value="true"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="lib" path="D:/Downloads/jetty-distribution-9.4.53.v20231009/jetty-distribution-9.4.53.v20231009/lib/jetty-rewrite-9.4.53.v20231009.jar">
+		<attributes>
+			<attribute name="module" value="true"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="lib" path="D:/Downloads/jetty-distribution-9.4.53.v20231009/jetty-distribution-9.4.53.v20231009/lib/jetty-schemas-3.1.jar">
+		<attributes>
+			<attribute name="module" value="true"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="lib" path="D:/Downloads/jetty-distribution-9.4.53.v20231009/jetty-distribution-9.4.53.v20231009/lib/jetty-security-9.4.53.v20231009.jar">
+		<attributes>
+			<attribute name="module" value="true"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="lib" path="D:/Downloads/jetty-distribution-9.4.53.v20231009/jetty-distribution-9.4.53.v20231009/lib/jetty-server-9.4.53.v20231009.jar">
+		<attributes>
+			<attribute name="module" value="true"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="lib" path="D:/Downloads/jetty-distribution-9.4.53.v20231009/jetty-distribution-9.4.53.v20231009/lib/jetty-servlet-9.4.53.v20231009.jar">
+		<attributes>
+			<attribute name="module" value="true"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="lib" path="D:/Downloads/jetty-distribution-9.4.53.v20231009/jetty-distribution-9.4.53.v20231009/lib/jetty-servlets-9.4.53.v20231009.jar">
+		<attributes>
+			<attribute name="module" value="true"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="lib" path="D:/Downloads/jetty-distribution-9.4.53.v20231009/jetty-distribution-9.4.53.v20231009/lib/jetty-unixsocket-9.4.53.v20231009.jar">
+		<attributes>
+			<attribute name="module" value="true"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="lib" path="D:/Downloads/jetty-distribution-9.4.53.v20231009/jetty-distribution-9.4.53.v20231009/lib/jetty-util-9.4.53.v20231009.jar">
+		<attributes>
+			<attribute name="module" value="true"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="lib" path="D:/Downloads/jetty-distribution-9.4.53.v20231009/jetty-distribution-9.4.53.v20231009/lib/jetty-util-ajax-9.4.53.v20231009.jar">
+		<attributes>
+			<attribute name="module" value="true"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="lib" path="D:/Downloads/jetty-distribution-9.4.53.v20231009/jetty-distribution-9.4.53.v20231009/lib/jetty-webapp-9.4.53.v20231009.jar">
+		<attributes>
+			<attribute name="module" value="true"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="lib" path="D:/Downloads/jetty-distribution-9.4.53.v20231009/jetty-distribution-9.4.53.v20231009/lib/jetty-xml-9.4.53.v20231009.jar">
+		<attributes>
+			<attribute name="module" value="true"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="lib" path="D:/Downloads/jetty-distribution-9.4.53.v20231009/jetty-distribution-9.4.53.v20231009/lib/servlet-api-3.1.jar">
+		<attributes>
+			<attribute name="module" value="true"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="lib" path="D:/Downloads/AIMS-Student-master/AIMS-Student-master/lib/sqlite-jdbc-3.7.2.jar">
+		<attributes>
+			<attribute name="module" value="true"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="lib" path="D:/Downloads/AIMS-Student-master/AIMS-Student-master/lib/win/javafx-sdk-15/lib/javafx.base.jar">
+		<attributes>
+			<attribute name="module" value="true"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="lib" path="D:/Downloads/AIMS-Student-master/AIMS-Student-master/lib/win/javafx-sdk-15/lib/javafx.controls.jar">
+		<attributes>
+			<attribute name="module" value="true"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="lib" path="D:/Downloads/AIMS-Student-master/AIMS-Student-master/lib/win/javafx-sdk-15/lib/javafx.fxml.jar">
+		<attributes>
+			<attribute name="module" value="true"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="lib" path="D:/Downloads/AIMS-Student-master/AIMS-Student-master/lib/win/javafx-sdk-15/lib/javafx.graphics.jar">
+		<attributes>
+			<attribute name="module" value="true"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="lib" path="D:/Downloads/AIMS-Student-master/AIMS-Student-master/lib/win/javafx-sdk-15/lib/javafx.media.jar">
+		<attributes>
+			<attribute name="module" value="true"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="lib" path="D:/Downloads/AIMS-Student-master/AIMS-Student-master/lib/win/javafx-sdk-15/lib/javafx.swing.jar">
+		<attributes>
+			<attribute name="module" value="true"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="lib" path="D:/Downloads/AIMS-Student-master/AIMS-Student-master/lib/win/javafx-sdk-15/lib/javafx.web.jar">
+		<attributes>
+			<attribute name="module" value="true"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="lib" path="D:/Downloads/AIMS-Student-master/AIMS-Student-master/lib/win/javafx-sdk-15/lib/javafx-swt.jar">
+		<attributes>
+			<attribute name="module" value="true"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="output" path="AIMS/bin"/>
+</classpath>

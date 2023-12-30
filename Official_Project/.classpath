@@ -1,17 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <classpath>
-	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
 	<classpathentry kind="src" path="src"/>
-	<classpathentry kind="lib" path="D:/Downloads/sqlite-jdbc-3.44.1.0.jar"/>
-	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/JavaFx"/>
-	<classpathentry kind="lib" path="C:/javafx-sdk-21.0.1/lib/javafx.base.jar"/>
-	<classpathentry kind="lib" path="C:/javafx-sdk-21.0.1/lib/javafx.controls.jar"/>
-	<classpathentry kind="lib" path="C:/javafx-sdk-21.0.1/lib/javafx.fxml.jar"/>
-	<classpathentry kind="lib" path="C:/javafx-sdk-21.0.1/lib/javafx.graphics.jar"/>
-	<classpathentry kind="lib" path="C:/javafx-sdk-21.0.1/lib/javafx.media.jar"/>
-	<classpathentry kind="lib" path="C:/javafx-sdk-21.0.1/lib/javafx.swing.jar"/>
-	<classpathentry kind="lib" path="C:/javafx-sdk-21.0.1/lib/javafx.web.jar"/>
-	<classpathentry kind="lib" path="C:/javafx-sdk-21.0.1/lib/javafx-swt.jar"/>
 	<classpathentry kind="lib" path="D:/Downloads/log4j-1.2.17/apache-log4j-1.2.17/log4j-1.2.17.jar"/>
 	<classpathentry kind="lib" path="D:/Downloads/slf4j-api-2.0.9.jar"/>
 	<classpathentry kind="lib" path="D:/Downloads/jetty-distribution-9.4.53.v20231009/jetty-distribution-9.4.53.v20231009/lib/infinispan-common-9.4.53.v20231009.jar"/>
@@ -52,5 +41,15 @@
 	<classpathentry kind="lib" path="D:/Downloads/jetty-distribution-9.4.53.v20231009/jetty-distribution-9.4.53.v20231009/lib/jetty-webapp-9.4.53.v20231009.jar"/>
 	<classpathentry kind="lib" path="D:/Downloads/jetty-distribution-9.4.53.v20231009/jetty-distribution-9.4.53.v20231009/lib/jetty-xml-9.4.53.v20231009.jar"/>
 	<classpathentry kind="lib" path="D:/Downloads/jetty-distribution-9.4.53.v20231009/jetty-distribution-9.4.53.v20231009/lib/servlet-api-3.1.jar"/>
+	<classpathentry kind="lib" path="D:/Downloads/AIMS-Student-master/AIMS-Student-master/lib/sqlite-jdbc-3.7.2.jar"/>
+	<classpathentry kind="lib" path="D:/Downloads/AIMS-Student-master/AIMS-Student-master/lib/win/javafx-sdk-15/lib/javafx.base.jar"/>
+	<classpathentry kind="lib" path="D:/Downloads/AIMS-Student-master/AIMS-Student-master/lib/win/javafx-sdk-15/lib/javafx.controls.jar"/>
+	<classpathentry kind="lib" path="D:/Downloads/AIMS-Student-master/AIMS-Student-master/lib/win/javafx-sdk-15/lib/javafx.fxml.jar"/>
+	<classpathentry kind="lib" path="D:/Downloads/AIMS-Student-master/AIMS-Student-master/lib/win/javafx-sdk-15/lib/javafx.graphics.jar"/>
+	<classpathentry kind="lib" path="D:/Downloads/AIMS-Student-master/AIMS-Student-master/lib/win/javafx-sdk-15/lib/javafx.media.jar"/>
+	<classpathentry kind="lib" path="D:/Downloads/AIMS-Student-master/AIMS-Student-master/lib/win/javafx-sdk-15/lib/javafx.swing.jar"/>
+	<classpathentry kind="lib" path="D:/Downloads/AIMS-Student-master/AIMS-Student-master/lib/win/javafx-sdk-15/lib/javafx.web.jar"/>
+	<classpathentry kind="lib" path="D:/Downloads/AIMS-Student-master/AIMS-Student-master/lib/win/javafx-sdk-15/lib/javafx-swt.jar"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/jdk1.8.0_392"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
