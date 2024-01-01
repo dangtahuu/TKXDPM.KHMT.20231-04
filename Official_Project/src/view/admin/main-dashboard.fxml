@@ -17,7 +17,7 @@
                         <Button fx:id="btnMedias" contentDisplay="TOP" layoutY="104.0" mnemonicParsing="false" onAction="#btnMediasOnClick" prefHeight="78.0" prefWidth="127.0" styleClass="menuButton" text="Medias" />
                         <Button fx:id="btnCustomers" contentDisplay="TOP" layoutY="287.0" mnemonicParsing="false" onAction="#btnCustomersOnClick" prefHeight="78.0" prefWidth="127.0" styleClass="menuButton" text="Customers" />
                         <Button fx:id="btnOrders" contentDisplay="TOP" layoutY="196.0" mnemonicParsing="false" onAction="#btnOrdersOnClick" prefHeight="78.0" prefWidth="127.0" styleClass="menuButton" text="Orders" />
-                        <Button fx:id="btnSettings" contentDisplay="TOP" layoutY="376.0" mnemonicParsing="false" onAction="#btnSettingsOnClick" prefHeight="78.0" prefWidth="127.0" styleClass="menuButton" text="Settings" />
+                        
                     </AnchorPane>
                 </AnchorPane>
             </left>

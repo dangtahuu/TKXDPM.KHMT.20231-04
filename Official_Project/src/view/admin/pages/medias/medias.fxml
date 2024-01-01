@@ -35,7 +35,7 @@
                           <Insets top="20.0" />
                       </BorderPane.margin>
                       <AnchorPane prefHeight="200.0" prefWidth="200.0">
-                          <TextField fx:id="fieldMediasSearch" layoutX="1.0" layoutY="2.0" prefHeight="25.0" prefWidth="291.0" promptText="search by media name or description" />
+                          <TextField fx:id="fieldMediasSearch" layoutX="1.0" layoutY="2.0" prefHeight="25.0" prefWidth="291.0" promptText="Search media" />
                           <Button layoutX="300.0" layoutY="2.0" mnemonicParsing="false" onAction="#btnMediasSearchOnAction" prefHeight="26.0" styleClass="button, info, sm" text="Search" />
                       </AnchorPane>
                       <AnchorPane GridPane.columnIndex="1">
