@@ -85,7 +85,7 @@ public class MainDashboardController implements Initializable {
         OrdersController orders = fxmlLoader.getController();
         orders.listOrders();
     }
-
+   
     /**
      * This method customers the Home button click.
      * It loads the customers page and it's contents.

@@ -1,6 +1,8 @@
 package controller.user.pages;
 
 import java.io.IOException;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
 import controller.UserSessionController;
 import javafx.collections.FXCollections;
@@ -14,6 +16,8 @@ import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
+import javafx.scene.text.Text;
+import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.stage.Stage;
 import model.Datasource;
@@ -46,9 +50,17 @@ public class UserInvoiceController {
     @FXML
     private Label vat;
     @FXML
+    private Button confirmButton;
+    
+    @FXML
+    private Button backHome;
+    @FXML
+    private Text resultText;
+    @FXML
 	private ObservableList<CartMedia> ordersData;
     public double price;
     public double totalAll;
+    private double fee;
 	@FXML
 	public void handleBackButtonClick(ActionEvent event1) throws IOException {
 		Stage dialogStage = (Stage) ((Node) event1.getSource()).getScene().getWindow();
@@ -113,14 +125,79 @@ public class UserInvoiceController {
 		subtotal.setText(String.format("%.2f VND",price));
 		vat.setText(String.format("%.3f VND",price*0.1));
 		shippingFees.setText(String.format("%.2f VND",getShippingFee(ship_type, province, calculateTotalQuantity( ordersData))));
+		fee = getShippingFee(ship_type, province, calculateTotalQuantity( ordersData));
 		totalAll = price*1.1+getShippingFee(ship_type, province, calculateTotalQuantity( ordersData));
 		total.setText(String.format("%.3f VND", totalAll));
     }
 	
+	  public void handleSuccessInvoice(int order_id) throws IOException {
+		  int user_id = UserSessionController.getUserId();
+		  Datasource.getInstance().createOrderMedia(order_id, user_id);
+		  Datasource.getInstance().updateOrder("PAID",order_id);
+          Datasource.getInstance().emptyCart(user_id);     
+       
+    }
+	  
+	
 	@FXML
-	public void handleConfirmOrder() throws IOException {
+	public void handleConfirmOrder(ActionEvent event) throws IOException {
+		  LocalDate currentDate = LocalDate.now();
+
+	        // Define the desired date format
+	        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+
+	        // Format the current date as a string
+	        String date = currentDate.format(formatter);
+	        
+  	  int user_id = UserSessionController.getUserId();
+		  String city = ivprovince.getText();
+		  String address = ivaddress.getText();
+		  String phone = ivphone.getText();
+		
+		  String instructions = ivinstructions.getText();
+		  String type = order_type.getText();
+		  
+  	  int order_id = Datasource.getInstance().insertNewOrder(city, address, phone, fee, date, user_id, instructions, type, price);
+  	  
 		Interbank interbank = new Interbank();
-		interbank.openPay(totalAll);
+		Stage dialogStage;
+        Node node = (Node) event.getSource();
+        dialogStage = (Stage) node.getScene().getWindow();
+        dialogStage.close();
+        Scene scene = new Scene(FXMLLoader.load(getClass().getResource("/view/user/main-dashboard.fxml")));
+        dialogStage.setScene(scene);
+        dialogStage.show();
+    	interbank.openPay(totalAll, order_id);
 	}
+	
+//	public void create(ActionEvent event) throws IOException {
+//		Interbank interbank = new Interbank();
+//		Stage dialogStage;
+//        Node node = (Node) event.getSource();
+//        dialogStage = (Stage) node.getScene().getWindow();
+//        dialogStage.close();
+//        Scene scene = new Scene(FXMLLoader.load(getClass().getResource("/view/user/main-dashboard.fxml")));
+//        dialogStage.setScene(scene);
+//        dialogStage.show();
+//    	interbank.openPay(totalAll);
+//	}
+	
+//	@FXML
+//	public void handleSuccessInvoice() throws IOException {
+//		confirmButton.setVisible(false);
+//		emptyCart();
+//		resultText.setVisible(false);
+//		resultText.setText("Payment success");
+//		backHome.setVisible(true);
+//	}
+//	
+//	@FXML
+//	public void handleFailedInvoice() throws IOException {
+//		confirmButton.setVisible(false);
+//		resultText.setVisible(false);
+//		resultText.setText("Payment failed");
+//		backHome.setVisible(true);
+//	}
+
 
 }

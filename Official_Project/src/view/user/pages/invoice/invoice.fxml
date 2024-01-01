@@ -13,6 +13,7 @@
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.text.Font?>
+<?import javafx.scene.text.*?>
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.user.pages.UserInvoiceController">
    <children>
@@ -222,10 +223,11 @@
              </columnResizePolicy>
          </TableView>
 
-      <Button onAction="#handleConfirmOrder" alignment="CENTER" contentDisplay="CENTER" layoutX="544.0" layoutY="515.0" mnemonicParsing="false" prefHeight="46.0" prefWidth="300.0" style="-fx-background-color: #5091e6; -fx-cursor: hand;" text="Confirm order" textFill="WHITE">
+      <Button fx:id="confirmButton" onAction="#handleConfirmOrder" alignment="CENTER" contentDisplay="CENTER" layoutX="544.0" layoutY="515.0" mnemonicParsing="false" prefHeight="46.0" prefWidth="300.0" style="-fx-background-color: #5091e6; -fx-cursor: hand;" text="Confirm order" textFill="WHITE">
          <font>
             <Font name="Segoe UI Bold" size="20.0" />
          </font>
       </Button>
+     
    </children>
 </AnchorPane>

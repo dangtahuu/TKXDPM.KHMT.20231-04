@@ -4,6 +4,7 @@ import controller.UserSessionController;
 import controller.user.pages.UserHomeController;
 import controller.user.pages.UserCartController;
 import controller.user.pages.UserMediasController;
+import controller.user.pages.UserOrdersController;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -74,6 +75,18 @@ public class UserMainDashboardController implements Initializable {
         FXMLLoader fxmlLoader = loadFxmlPage("/view/user/pages/medias/medias.fxml");
         UserMediasController userController = fxmlLoader.getController();
         userController.listMedias();
+    }
+    
+    /**
+     * This method handles the Orders button click.
+     * It loads the Orders page and it's contents.
+     * @param actionEvent       Accepts ActionEvent.
+     * @since                   1.0.0
+     */
+    public void btnOrdersOnClick(ActionEvent actionEvent) {
+        FXMLLoader fxmlLoader = loadFxmlPage("/view/user/pages/orders/orders.fxml");
+        UserOrdersController ordersController = fxmlLoader.getController();
+        ordersController.listOrders();
     }
 
     /**

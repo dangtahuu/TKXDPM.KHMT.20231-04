@@ -3,6 +3,15 @@ package subsystem;
 import org.eclipse.jetty.server.Server;
 import org.eclipse.jetty.server.handler.AbstractHandler;
 
+import controller.UserSessionController;
+import controller.user.pages.UserInvoiceController;
+import javafx.concurrent.Task;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.stage.Stage;
+import model.Datasource;
 import subsystem.config.Config;
 
 import javax.servlet.ServletException;
@@ -69,13 +78,17 @@ public class Interbank {
 	            response.getWriter().write("Hello, this is the server response for a GET request at /vnpay!");
 	        }
 	        
-	        private void handleVnPayReturn(HttpServletRequest request, HttpServletResponse response, org.eclipse.jetty.server.Request baseRequest) throws IOException {
+	        private boolean handleVnPayReturn(HttpServletRequest request, HttpServletResponse response, org.eclipse.jetty.server.Request baseRequest) throws IOException {
 	        	  Map fields = new HashMap();
+	        	  int order_id = 0;
 	        	    for (Enumeration params = request.getParameterNames(); params.hasMoreElements();) {
 	        	    String fieldName = (String) params.nextElement();
 	        	    String fieldValue = request.getParameter(fieldName);
+	        	   
 	        	    if ((fieldValue != null) && (fieldValue.length() > 0)) {
 	        	        fields.put(fieldName, fieldValue);
+	        	        if(fieldName.equals("vnp_TransactionNo"))
+	        	        		order_id=Integer.parseInt(fieldValue);
 	        	    }
 	        	    }
 	        	    
@@ -96,6 +109,15 @@ public class Interbank {
 	        	    	 response.setStatus(HttpServletResponse.SC_OK);
 	     	            baseRequest.setHandled(true);
 	     	            response.getWriter().write("Pay successfully!");
+	     	           
+	     	            UserInvoiceController userInvoiceController = new UserInvoiceController();
+						userInvoiceController.handleSuccessInvoice(order_id);
+						
+					
+		    	        
+						return true;
+	     	           
+	     	           
 	        	    } 
 	        	    	
 	        	    
@@ -105,16 +127,21 @@ public class Interbank {
 	        		 response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
 	     	            baseRequest.setHandled(true);
 	     	            response.getWriter().write("Something went wrong");
+//	     	           UserInvoiceController userInvoiceController = new UserInvoiceController();
+//						userInvoiceController.handleFailedInvoice();
 	        	}
 	            // Your custom handling logic for /vnpay GET requests goes here
-	          
+	        	   
+	        	    return false;
 	           
 	        }
+	       
 	    }
 	    
+	  
 	 
 	    
-	    public void openPay(double fee) throws IOException {
+	    public void openPay(double fee, int order_id) throws IOException {
 	        
 	        try {
 				String vnp_Version = "2.1.0";

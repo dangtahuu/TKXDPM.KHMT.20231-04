@@ -66,11 +66,30 @@ public class Datasource extends Media {
     public static final String COLUMN_BOOK_LANGUAGE = "language";
    
     
+    public static final String TABLE_ORDER = "OrderData";
+    public static final String COLUMN_ORDER_ID = "id";
+    public static final String COLUMN_ORDER_USER = "userId";
+    public static final String COLUMN_ORDER_CITY = "city";
+    public static final String COLUMN_ORDER_ADDRESS = "address";
+    public static final String COLUMN_ORDER_PHONE = "phone";
+    public static final String COLUMN_ORDER_FEE = "shippingFee";
+    public static final String COLUMN_ORDER_DATE = "createdAt";
+    public static final String COLUMN_ORDER_INSTRUCTIONS = "instructions";
+    public static final String COLUMN_ORDER_TYPE = "type";
+    public static final String COLUMN_ORDER_TOTAL = "totalPrice";
+    public static final String COLUMN_ORDER_STATUS = "status";
+    
     public static final String TABLE_CART = "CartMedia";
     public static final String COLUMN_CART_ID = "id";
     public static final String COLUMN_CART_PRODUCT_ID = "mediaId";
     public static final String COLUMN_CART_USER_ID = "userId";
     public static final String COLUMN_CART_PU_QUANTITY = "quantity";
+    
+    public static final String TABLE_ORDER_MEDIA = "OrderMedia";
+    public static final String COLUMN_ORDER_MEDIA_ID = "id";
+    public static final String COLUMN_ORDER_MEDIA_PRODUCT_ID = "mediaId";
+    public static final String COLUMN_ORDER_MEDIA_ORDER_ID = "userId";
+    public static final String COLUMN_ORDER_MEDIA_QUANTITY = "quantity";
 
     public static final String TABLE_USERS = "User";
     public static final String COLUMN_USERS_ID = "id";
@@ -1125,30 +1144,20 @@ public class Datasource extends Media {
      * @return List         Returns Order array list.
      * @since                   1.0.0
      */
-    public List<CartMedia> getAllOrders(int sortOrder) {
+    public List<Order> getUserOrders(int sortOrder, int user_id) {
 
         StringBuilder queryOrders = new StringBuilder("SELECT " +
-                TABLE_CART + "." + COLUMN_CART_ID + ", " +
-                TABLE_CART + "." + COLUMN_CART_PRODUCT_ID + ", " +
-                TABLE_CART + "." + COLUMN_CART_USER_ID + ", " +
-                TABLE_USERS + "." + COLUMN_USERS_FULLNAME + ", " +
-                TABLE_PRODUCTS + "." + COLUMN_PRODUCTS_NAME + ", " +
-                TABLE_PRODUCTS + "." + COLUMN_PRODUCTS_PRICE +
-                " FROM " + TABLE_CART
+                TABLE_ORDER + "." + COLUMN_ORDER_ID + ", " +
+                TABLE_ORDER + "." + COLUMN_ORDER_DATE + ", " +
+                TABLE_ORDER + "." + COLUMN_ORDER_TYPE + ", " +
+                TABLE_ORDER + "." + COLUMN_ORDER_TOTAL + ", " +
+                TABLE_ORDER + "." + COLUMN_ORDER_STATUS + 
+                " FROM " + TABLE_ORDER  + " WHERE " + TABLE_ORDER + "." + COLUMN_ORDER_USER + " = " + user_id
         );
-
-        queryOrders.append("" +
-                " LEFT JOIN " + TABLE_PRODUCTS +
-                " ON " + TABLE_CART + "." + COLUMN_CART_PRODUCT_ID +
-                " = " + TABLE_PRODUCTS + "." + COLUMN_PRODUCTS_ID);
-        queryOrders.append("" +
-                " LEFT JOIN " + TABLE_USERS +
-                " ON " + TABLE_CART + "." + COLUMN_CART_USER_ID +
-                " = " + TABLE_USERS + "." + COLUMN_USERS_ID);
 
         if (sortOrder != ORDER_BY_NONE) {
             queryOrders.append(" ORDER BY ");
-            queryOrders.append(COLUMN_USERS_FULLNAME);
+            queryOrders.append(COLUMN_ORDER_ID);
             if (sortOrder == ORDER_BY_DESC) {
                 queryOrders.append(" DESC");
             } else {
@@ -1159,14 +1168,14 @@ public class Datasource extends Media {
         try (Statement statement = conn.createStatement();
              ResultSet results = statement.executeQuery(queryOrders.toString())) {
 
-            List<CartMedia> orders = new ArrayList<>();
+            List<Order> orders = new ArrayList<>();
             while (results.next()) {
-                CartMedia order = new CartMedia();
+            	Order order = new Order();
                 order.setId(results.getInt(1));
-                order.setMedia_id(results.getInt(2));
-                order.setUser_id(results.getInt(3));
-                order.setUser_full_name(results.getString(4));
-                order.setMedia_name(results.getString(7));
+                order.setCreatedAt(results.getString(2));
+                order.setType(results.getString(3));
+                order.setTotalPrice(results.getDouble(4));
+                order.setStatus(results.getString(5));
 //                order.setOrder_price(results.getDouble(8));
                 orders.add(order);
             }
@@ -1178,6 +1187,49 @@ public class Datasource extends Media {
         }
     }
 
+    
+    public List<Order> getAllOrders(int sortOrder) {
+
+        StringBuilder queryOrders = new StringBuilder("SELECT " +
+                TABLE_ORDER + "." + COLUMN_ORDER_ID + ", " +
+                TABLE_ORDER + "." + COLUMN_ORDER_DATE + ", " +
+                TABLE_ORDER + "." + COLUMN_ORDER_TYPE + ", " +
+                TABLE_ORDER + "." + COLUMN_ORDER_TOTAL + ", " +
+                TABLE_ORDER + "." + COLUMN_ORDER_STATUS + 
+                " FROM " + TABLE_ORDER
+        );
+
+        if (sortOrder != ORDER_BY_NONE) {
+            queryOrders.append(" ORDER BY ");
+            queryOrders.append(COLUMN_ORDER_ID);
+            if (sortOrder == ORDER_BY_DESC) {
+                queryOrders.append(" DESC");
+            } else {
+                queryOrders.append(" ASC");
+            }
+        }
+
+        try (Statement statement = conn.createStatement();
+             ResultSet results = statement.executeQuery(queryOrders.toString())) {
+
+            List<Order> orders = new ArrayList<>();
+            while (results.next()) {
+            	Order order = new Order();
+                order.setId(results.getInt(1));
+                order.setCreatedAt(results.getString(2));
+                order.setType(results.getString(3));
+                order.setTotalPrice(results.getDouble(4));
+                order.setStatus(results.getString(5));
+//                order.setOrder_price(results.getDouble(8));
+                orders.add(order);
+            }
+            return orders;
+
+        } catch (SQLException e) {
+            System.out.println("Query failed: " + e.getMessage());
+            return null;
+        }
+    }
     /**
      * This method gets all orders of the simple user from the database.
      * @param sortOrder     Results sort order.
@@ -1185,7 +1237,7 @@ public class Datasource extends Media {
      * @return List         Returns Order array list.
      * @since                   1.0.0
      */
-    public List<CartMedia> getAllUserCartMedias(int sortOrder, int user_id) {
+    public List<CartMedia> getUserCartMedias(int sortOrder, int user_id) {
 
         StringBuilder queryOrders = new StringBuilder("SELECT " +
                 TABLE_CART + "." + COLUMN_CART_ID + ", " +
@@ -1242,6 +1294,132 @@ public class Datasource extends Media {
             return null;
         }
     }
+    
+    public int insertNewOrder(String city, String address, String phone, double fee, String date, int user_id, String instructions, String type, double total_price) {
+    	  ResultSet resultSet = null;
+        String sql = "INSERT INTO "+ TABLE_ORDER  + " ("
+                + COLUMN_ORDER_CITY + ", "
+                + COLUMN_ORDER_ADDRESS + ", "
+                + COLUMN_ORDER_PHONE + ", "
+                + COLUMN_ORDER_FEE + ", "
+                + COLUMN_ORDER_DATE + ", "
+                + COLUMN_ORDER_USER + ", " 
+                 + COLUMN_ORDER_INSTRUCTIONS + ", "
+                 + COLUMN_ORDER_TYPE + ", "
+                   + COLUMN_ORDER_TOTAL +
+                ") VALUES (?, ?, ?, ?, ?, ?, ?,?,?)";
+
+        System.out.println(sql);
+        try (PreparedStatement statement = conn.prepareStatement(sql)) {
+            statement.setString(1, city);
+            statement.setString(2, address);
+            statement.setString(3, phone);
+            statement.setDouble(4, fee);
+            statement.setString(5, date);
+
+            statement.setInt(6, user_id);
+            statement.setString(7, instructions);
+            statement.setString(8, type);
+            statement.setDouble(9, total_price);
+            
+            int affectedRows = statement.executeUpdate();
+          
+      
+           // Check if the record was inserted successfully
+           if (affectedRows > 0) {
+               // Retrieve the last inserted ID
+               resultSet = statement.getGeneratedKeys();
+               if (resultSet.next()) {
+                   int lastInsertedId = resultSet.getInt(1);
+                   System.out.println("Last inserted ID: " + lastInsertedId);
+                   return lastInsertedId;
+               }
+           } else {
+               System.out.println("No rows were affected.");
+              
+           }
+           
+        } catch (SQLException e) {
+            System.out.println("Query failed: " + e.getMessage());
+           
+        }
+		return -1;
+    }
+    
+    
+    public boolean updateOrder (String status, int order_id) {
+
+    	String sqlUpdate = "UPDATE `OrderData` SET status = ? WHERE id = ?;";
+
+
+    	try (PreparedStatement updateStatement = conn.prepareStatement(sqlUpdate)) {
+
+    		 updateStatement.setString(1, status);
+    		    updateStatement.setInt(2, order_id);
+    	
+    		
+    		    return true;
+    		} catch (SQLException e) {
+            System.out.println("Query failed: " + e.getMessage());
+            return false;
+        }
+    }
+    
+  
+    
+    
+    public List<CartMedia> createOrderMedia(int order_id, int user_id) {
+
+        StringBuilder queryMedias = new StringBuilder("SELECT " +
+                TABLE_CART + "." + COLUMN_CART_ID + ", " +
+                TABLE_CART + "." + COLUMN_CART_PRODUCT_ID + ", " +
+                TABLE_CART + "." + COLUMN_CART_USER_ID + ", " +
+                TABLE_USERS + "." + COLUMN_USERS_FULLNAME + ", " +
+                TABLE_PRODUCTS + "." + COLUMN_PRODUCTS_NAME + ", " +
+                TABLE_PRODUCTS + "." + COLUMN_PRODUCTS_PRICE +", "+
+                TABLE_CART + "." + COLUMN_CART_PU_QUANTITY + 
+                " FROM " + TABLE_CART
+        );
+
+        queryMedias.append("" +
+                " LEFT JOIN " + TABLE_PRODUCTS +
+                " ON " + TABLE_CART + "." + COLUMN_CART_PRODUCT_ID +
+                " = " + TABLE_PRODUCTS + "." + COLUMN_PRODUCTS_ID);
+        queryMedias.append("" +
+                " LEFT JOIN " + TABLE_USERS +
+                " ON " + TABLE_CART + "." + COLUMN_CART_USER_ID +
+                " = " + TABLE_USERS + "." + COLUMN_USERS_ID);
+        
+        queryMedias.append(" WHERE " + TABLE_CART + "." + COLUMN_CART_USER_ID + " = ").append(user_id);
+
+        String sqlInsert = "INSERT INTO OrderMedia (orderId, mediaId, price, quantity) VALUES (?, ?, ?, ?);";
+       
+
+        try (Statement statement = conn.createStatement();
+             ResultSet results = statement.executeQuery(queryMedias.toString())) {
+
+            List<CartMedia> orders = new ArrayList<>();
+            while (results.next()) {
+            	 PreparedStatement insertStatement = conn.prepareStatement(sqlInsert);
+            	 System.out.println(results.getInt(2));
+            	 System.out.println(results.getInt(6));
+            	 System.out.println(results.getInt(7));
+            	 insertStatement.setInt(1, order_id);
+                insertStatement.setInt(2, results.getInt(2));
+		        insertStatement.setInt(3, results.getInt(6));
+		        insertStatement.setInt(4, results.getInt(7));
+		
+		        insertStatement.executeUpdate();
+    		 
+            }
+            
+            return orders;
+           
+        } catch (SQLException e) {
+            System.out.println("Query failed: " + e.getMessage());
+            return null;
+        }
+    }
 
     /**
      * This method insert one order to the database.
@@ -1276,6 +1454,20 @@ public class Datasource extends Media {
     		    }
     		    return true;
     		} catch (SQLException e) {
+            System.out.println("Query failed: " + e.getMessage());
+            return false;
+        }
+    }
+    
+    public boolean emptyCart(int id) {
+        String sql = "DELETE FROM " + TABLE_CART + " WHERE " + COLUMN_CART_USER_ID + " = ?";
+
+        try (PreparedStatement statement = conn.prepareStatement(sql)) {
+            statement.setInt(1, id);
+            int rows = statement.executeUpdate();
+            System.out.println(rows + " record(s) deleted.");
+            return true;
+        } catch (SQLException e) {
             System.out.println("Query failed: " + e.getMessage());
             return false;
         }

@@ -50,7 +50,7 @@ public class UserCartController {
         Task<ObservableList<CartMedia>> getAllCartMedias = new Task<ObservableList<CartMedia>>() {
             @Override
             protected ObservableList<CartMedia> call() {
-                return FXCollections.observableArrayList(Datasource.getInstance().getAllUserCartMedias(Datasource.ORDER_BY_NONE, UserSessionController.getUserId()));
+                return FXCollections.observableArrayList(Datasource.getInstance().getUserCartMedias(Datasource.ORDER_BY_NONE, UserSessionController.getUserId()));
             }
         };
 
@@ -73,7 +73,7 @@ public class UserCartController {
         Task<ObservableList<CartMedia>> getAllCartMedias = new Task<ObservableList<CartMedia>>() {
             @Override
             protected ObservableList<CartMedia> call() {
-                return FXCollections.observableArrayList(Datasource.getInstance().getAllUserCartMedias(Datasource.ORDER_BY_NONE, UserSessionController.getUserId()));
+                return FXCollections.observableArrayList(Datasource.getInstance().getUserCartMedias(Datasource.ORDER_BY_NONE, UserSessionController.getUserId()));
             }
         };
         getAllCartMedias.setOnSucceeded(event -> {
@@ -141,9 +141,7 @@ public class UserCartController {
                             Optional<ButtonType> deleteConfirmation = alert.showAndWait();
 
                             if (deleteConfirmation.get() == ButtonType.OK) {
-                                System.out.println("Delete Customer");
-                                System.out.println("customer id: " + mediaData.getId());
-                                System.out.println("customer name: " + mediaData.getMedia_name());
+                  
                                 if (Datasource.getInstance().deleteCartMedia(mediaData.getId())) {
                                     refresh();
                                 }
