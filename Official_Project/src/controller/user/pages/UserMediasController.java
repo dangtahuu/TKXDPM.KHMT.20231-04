@@ -93,6 +93,7 @@ public class UserMediasController {
     	removeColumnFromTable("Purchase Quantity");
     	removeColumnFromTable("Actions");
     	removeColumnFromTable("Image");
+        pu_quantity =1;
     	listMedias();
     }
     @FXML
