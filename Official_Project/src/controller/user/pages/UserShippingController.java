@@ -103,7 +103,7 @@ public class UserShippingController {
 		            HelperMethods.alertBox("Please fill in a valid phone!", null, "Invalid!");
 		        }
 				else {
-			        if (ship_address.isEmpty() || !ship_address.matches("[\\p{L}0-9 ]+")) {
+			        if (ship_address.isEmpty() || !ship_address.matches("[\\p{L}0-9., ]+")) {
 			            System.out.println("Địa chỉ không hợp lệ");
 			            HelperMethods.alertBox("Please fill in a valid address!", null, "Invalid!");
 			        }
@@ -123,19 +123,26 @@ public class UserShippingController {
 					                HelperMethods.alertBox("You can only choose rush order when the address is in Hanoi", null, "Invalid!");
 				        		}
 			        			else {
-			        				
-			        				Stage dialogStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-					    	        FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/user/pages/invoice/invoice.fxml"));
-					    	        Parent root = loader.load();
-
-					    	        UserInvoiceController invoiceController = loader.getController();
-
-					    	        invoiceController.setData(ship_name, ship_phone,ship_address, ship_instructions,ship_province, totalPrice, ordersData, ship_type);
-					    	        invoiceController.listOrders();
-					    	        Scene scene = new Scene(root);
-					    	        dialogStage.setScene(scene);
-					    	        dialogStage.show();
+			        				if (ship_type.equals("Rush") && !checkRush( ordersData)) {
+					        			System.out.println("Vui lòng chọn tỉnh/thành phố");
+						                HelperMethods.alertBox("There are some medias that do not support express delivery", null, "Invalid!");
+					        		}
+			        				else {
+				        				
+				        				Stage dialogStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+						    	        FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/user/pages/invoice/invoice.fxml"));
+						    	        Parent root = loader.load();
+						    	        int user_id = UserSessionController.getUserId();
+						    	        UserInvoiceController invoiceController = loader.getController();
+						    	        Datasource.getInstance().updateOneUser(ship_name,ship_address, ship_phone, ship_province, user_id);
+						    	        invoiceController.setData(ship_name, ship_phone,ship_address, ship_instructions,ship_province, totalPrice, ordersData, ship_type);
+						    	        invoiceController.listOrders();
+						    	        Scene scene = new Scene(root);
+						    	        dialogStage.setScene(scene);
+						    	        dialogStage.show();
+				        			}
 			        			}
+			        			
 			        			
 			        		}
 			        		
@@ -157,6 +164,13 @@ public class UserShippingController {
 		this.ordersData = ordersData;
 		
     }
+	
+	public boolean checkRush(ObservableList<CartMedia> ordersData) {
+		for (CartMedia cartmedia : ordersData) {
+            if(!cartmedia.getRushSupport()) return false;
+        }
+		return true;
+	}
 
 
 }

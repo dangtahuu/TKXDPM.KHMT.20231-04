@@ -38,6 +38,7 @@ public class Datasource extends Media {
     public static final String COLUMN_PRODUCTS_CATEGORY = "category";
     public static final String COLUMN_PRODUCTS_VALUE = "value";
     public static final String COLUMN_PRODUCTS_TYPE = "type";
+    public static final String COLUMN_PRODUCTS_RUSHSUPPORT = "rushSupport";
 
     
     public static final String TABLE_CD = "CD";
@@ -100,6 +101,9 @@ public class Datasource extends Media {
     public static final String COLUMN_USERS_ADMIN = "admin";
     public static final String COLUMN_USERS_STATUS = "status";
     public static final String COLUMN_USERS_SALT = "salt";
+    public static final String COLUMN_USERS_ADDRESS = "address";
+    public static final String COLUMN_USERS_PHONE = "phone";
+    public static final String COLUMN_USERS_CITY = "city";
 
 
     public static final int ORDER_BY_NONE = 1;
@@ -214,6 +218,7 @@ public class Datasource extends Media {
                 media.setCategory(results.getString(6));
                 media.setValue(results.getInt(7));
                 media.setType(results.getString(8));
+                media.setrushSupport(results.getBoolean(9));
 //                media.setNr_sales(results.getInt(7));
                 medias.add(media);
             }
@@ -511,7 +516,8 @@ public class Datasource extends Media {
                 TABLE_PRODUCTS + "." + COLUMN_PRODUCTS_QUANTITY + ", " +
                 TABLE_PRODUCTS + "." + COLUMN_PRODUCTS_CATEGORY + ", " +
                 TABLE_PRODUCTS + "." + COLUMN_PRODUCTS_VALUE  + ", " +
-                TABLE_PRODUCTS + "." + COLUMN_PRODUCTS_TYPE  +
+                TABLE_PRODUCTS + "." + COLUMN_PRODUCTS_TYPE  + ", " +
+                TABLE_PRODUCTS + "." + COLUMN_PRODUCTS_RUSHSUPPORT  +
                 " FROM " + TABLE_PRODUCTS
         );
     }
@@ -815,7 +821,17 @@ public class Datasource extends Media {
         }
     }
     // END PRODUCTS QUERIES
+    public void increaseStock(int media_id, int quantity) {
 
+        String sql = "UPDATE " + TABLE_PRODUCTS + " SET " + COLUMN_PRODUCTS_QUANTITY + " = " + COLUMN_PRODUCTS_QUANTITY + " + " + quantity +" WHERE " + COLUMN_PRODUCTS_ID + " = ?";
+
+        try (PreparedStatement statement = conn.prepareStatement(sql)) {
+            statement.setInt(1, media_id);
+            statement.executeUpdate();
+        } catch (SQLException e) {
+            System.out.println("Query failed: " + e.getMessage());
+        }
+    }
     // BEGIN CATEGORIES QUERIES
 
     /**
@@ -1246,7 +1262,8 @@ public class Datasource extends Media {
                 TABLE_USERS + "." + COLUMN_USERS_FULLNAME + ", " +
                 TABLE_PRODUCTS + "." + COLUMN_PRODUCTS_NAME + ", " +
                 TABLE_PRODUCTS + "." + COLUMN_PRODUCTS_PRICE +", "+
-                TABLE_CART + "." + COLUMN_CART_PU_QUANTITY + 
+                TABLE_CART + "." + COLUMN_CART_PU_QUANTITY + ", "+
+                TABLE_PRODUCTS + "." + COLUMN_PRODUCTS_RUSHSUPPORT +
                 " FROM " + TABLE_CART
         );
 
@@ -1284,6 +1301,7 @@ public class Datasource extends Media {
                 order.setMedia_price(results.getDouble(6));          
                 order.setPrice(results.getInt(7) * results.getDouble(6));
                 order.setQuantity(results.getInt(7));
+                order.setRushSupport(results.getBoolean(8));
                 orders.add(order);
             }
             System.out.println(orders.get(0).getMedia_price());
@@ -1551,20 +1569,56 @@ public class Datasource extends Media {
             return 0;
         }
     }
+    public boolean updateOneUser(String fullname, String address, String phone, String city, int id) {
+
+    	  String sql = "UPDATE " + TABLE_USERS + " SET "
+                  + COLUMN_USERS_FULLNAME + " = ?" + ", "
+                  + COLUMN_USERS_ADDRESS + " = ?" + ", "
+                  + COLUMN_USERS_PHONE + " = ?" + ", "
+                  + COLUMN_USERS_CITY + " = ?" + 
+                  " WHERE " + COLUMN_USERS_ID + " = ?";
+
+        try (PreparedStatement statement = conn.prepareStatement(sql)) {
+            statement.setString(1, fullname);
+            statement.setString(2, address);
+            statement.setString(3, phone);
+            statement.setString(4, city);
+            statement.setInt(5, id);
+          
+            statement.executeUpdate();
+            return true;
+        } catch (SQLException e) {
+        	System.out.println("bug");
+            System.out.println("Query failed: " + e.getMessage());
+            return false;
+        }
+    }
+      public User getUserByID(int id) throws SQLException {
+
+          PreparedStatement preparedStatement = conn.prepareStatement("SELECT * FROM " + TABLE_USERS + " WHERE " + COLUMN_USERS_ID + " = ?");
+          preparedStatement.setInt(1, id);
+          ResultSet results = preparedStatement.executeQuery();
+
+          User user = new User();
+          if (results.next()) {
+
+              user.setId(results.getInt("id"));
+              user.setFullname(results.getString("fullname"));
+              user.setUsername(results.getString("username"));
+              user.setEmail(results.getString("email"));
+              user.setPassword(results.getString("password"));
+              user.setSalt(results.getString("salt"));
+              user.setAdmin(results.getInt("admin"));
+              user.setStatus(results.getString("status"));
+              user.setPhone(results.getString("phone"));
+              user.setAddress(results.getString("address"));
+              user.setCity(results.getString("city"));
+          }
+
+          return user;
+      }
 
 }
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 

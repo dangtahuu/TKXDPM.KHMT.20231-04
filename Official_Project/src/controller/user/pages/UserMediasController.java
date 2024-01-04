@@ -186,6 +186,7 @@ public class UserMediasController {
                                 System.out.println("Add Media to cart ");
                                 System.out.println("product id: " + productData.getId());
                                 System.out.println("product name: " + productData.getName());
+                                Datasource.getInstance().decreaseStock(productData.getId(), pu_quantity);
                                 refresh();
                             }
                         });
@@ -267,7 +268,6 @@ public class UserMediasController {
 
                 addMediaTask.setOnSucceeded(e -> {
                     if (addMediaTask.valueProperty().get()) {
-                        Datasource.getInstance().decreaseStock(product_id, pu_quantity);
                         System.out.println("Order placed!");
                     }
                 });

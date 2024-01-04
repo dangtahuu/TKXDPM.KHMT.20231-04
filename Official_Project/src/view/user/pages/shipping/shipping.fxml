@@ -172,6 +172,11 @@
                    <PropertyValueFactory property="price" />
                </cellValueFactory>
            </TableColumn>
+           <TableColumn prefWidth="75.0" text="Rush Support">
+               <cellValueFactory>
+                   <PropertyValueFactory property="rushSupport" />
+               </cellValueFactory>
+           </TableColumn>
        </columns>
        <columnResizePolicy>
            <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />

@@ -21,6 +21,7 @@ import javafx.util.Callback;
 import model.media.Media;
 
 import java.io.IOException;
+import java.sql.SQLException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Optional;
@@ -39,6 +40,7 @@ public class UserCartController {
     @FXML
     public Label SumTotalPrice;
     public double price;
+    int user_id = UserSessionController.getUserId();
     /**
      * This method lists all the orders to the view table.
      * It starts a new Task, gets all the products from the database then bind the results to the view.
@@ -104,6 +106,16 @@ public class UserCartController {
 
         shippingController.setTotalPrice(price);;
 
+			User user;
+			try {
+				user = Datasource.getInstance().getUserByID(user_id);
+				shippingController.setData(user.getFullname(), user.getPhone(), user.getAddress(), " ", user.getCity(), tableMedias.getItems(), "Normal");
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
+
 
         Scene scene = new Scene(root);
         dialogStage.setScene(scene);
@@ -140,9 +152,9 @@ public class UserCartController {
                             alert.setTitle("Delete " + mediaData.getMedia_name() + " ?");
                             Optional<ButtonType> deleteConfirmation = alert.showAndWait();
 
-                            if (deleteConfirmation.get() == ButtonType.OK) {
-                  
+                            if (deleteConfirmation.get() == ButtonType.OK) {                    
                                 if (Datasource.getInstance().deleteCartMedia(mediaData.getId())) {
+                                	Datasource.getInstance().increaseStock(mediaData.getMedia_id(), mediaData.getQuantity());
                                     refresh();
                                 }
                             }

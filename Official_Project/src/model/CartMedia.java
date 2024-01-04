@@ -11,6 +11,8 @@ public class CartMedia {
     private String user_full_name;
     private double price;
     private int quantity;
+    private boolean rushSupport;
+    
 
     public int getId() {
         return id;
@@ -75,4 +77,13 @@ public class CartMedia {
     public void setQuantity(int quantity) {
         this.quantity = quantity;
     }
+    
+    public boolean getRushSupport() {
+        return rushSupport;
+    }
+    public void setRushSupport(boolean rushSupport) {
+        this.rushSupport = rushSupport;
+    }
+
+
 }
