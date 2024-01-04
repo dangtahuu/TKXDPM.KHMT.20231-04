@@ -11,7 +11,8 @@ public class Media {
     private int nr_sales;
     private int value;
     private String type;
-
+    private boolean rushSupport;
+    
     public int getId() {
         return id;
     }
@@ -83,5 +84,13 @@ public class Media {
 
     public void setNr_sales(int nr_sales) {
         this.nr_sales = nr_sales;
+    }
+    
+    public boolean getrushSupport()  {
+        return rushSupport;
+    }
+
+    public void setrushSupport(boolean rushSupporth ) {
+        this.rushSupport = rushSupport;
     }
 }

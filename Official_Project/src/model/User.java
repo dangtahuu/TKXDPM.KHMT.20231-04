@@ -10,6 +10,9 @@ public class User {
     private String salt;
     private int admin;
     private String status;
+    private String address;
+    private String phone;
+    private String city;
 
     public String getFullname() {
         return fullname;
@@ -83,6 +86,27 @@ public class User {
 
     public void setStatus(String status) {
         this.status = status;
+    }
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
+    public String getPhone() {
+        return phone;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
+    }
+    public String getCity() {
+        return city;
+    }
+
+    public void setCity(String city) {
+        this.city = city;
     }
 
 }
