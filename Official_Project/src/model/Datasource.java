@@ -1726,7 +1726,7 @@ public class Datasource extends Media {
                 }
             }
         } catch (SQLException e) {
-            System.out.println("Truy vấn thất bại: " + e.getMessage());
+            System.out.println("Truy váº¥n tháº¥t báº¡i: " + e.getMessage());
             return "";
         }
     }
@@ -1755,7 +1755,7 @@ public class Datasource extends Media {
                 }
             }
         } catch (SQLException e) {
-            System.out.println("Truy vấn thất bại: " + e.getMessage());
+            System.out.println("Truy váº¥n tháº¥t báº¡i: " + e.getMessage());
             return "";
         }
     }
@@ -1795,6 +1795,28 @@ public class Datasource extends Media {
             System.out.println("Query failed: " + e.getMessage());
             return false;
         }
+    }
+    public Media getMediaByID(int id) throws SQLException {
+
+        PreparedStatement preparedStatement = conn.prepareStatement("SELECT * FROM " + TABLE_PRODUCTS + " WHERE " + COLUMN_PRODUCTS_ID + " = ?");
+        preparedStatement.setInt(1, id);
+        ResultSet results = preparedStatement.executeQuery();
+
+        Media media = new Media();
+        if (results.next()) {
+
+        	media.setId(results.getInt("id"));
+        	media.setType(results.getString("type"));
+        	media.setCategory(results.getString("category"));
+        	media.setName(results.getString("title"));
+        	media.setImageUrl(results.getString("imageUrl"));
+        	media.setRushSupport(results.getBoolean("rushSupport"));
+        	media.setPrice(results.getInt("price"));
+        	media.setQuantity(results.getInt("quantity"));
+            
+        }
+
+        return media;
     }
 }
 

@@ -187,7 +187,7 @@ public class UserMediasController {
                                 System.out.println("Add Media to cart ");
                                 System.out.println("product id: " + productData.getId());
                                 System.out.println("product name: " + productData.getName());
-                                Datasource.getInstance().decreaseStock(productData.getId(), pu_quantity);
+                                // Datasource.getInstance().decreaseStock(productData.getId(), pu_quantity);
                                 refresh();
                             }
                         });

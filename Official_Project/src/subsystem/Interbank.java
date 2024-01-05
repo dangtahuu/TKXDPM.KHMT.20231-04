@@ -5,12 +5,14 @@ import org.eclipse.jetty.server.handler.AbstractHandler;
 
 import controller.UserSessionController;
 import controller.user.pages.UserInvoiceController;
+import javafx.collections.ObservableList;
 import javafx.concurrent.Task;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import model.CartMedia;
 import model.Datasource;
 import subsystem.config.Config;
 
@@ -37,7 +39,7 @@ import java.util.Map;
 import java.util.TimeZone;
 
 public class Interbank {
-
+	static ObservableList<CartMedia> ordersData;
 	 public static void main(String[] args) throws Exception {
 	        // Create a Jetty server on port 8080
 	        Server server = new Server(8080);
@@ -100,7 +102,7 @@ public class Interbank {
 	     	            response.getWriter().write("Pay successfully!");
 	     	           
 	     	            UserInvoiceController userInvoiceController = new UserInvoiceController();
-						userInvoiceController.handleSuccessInvoice(order_id);
+						userInvoiceController.handleSuccessInvoice(order_id, ordersData);
 						
 					
 		    	        
@@ -130,7 +132,7 @@ public class Interbank {
 	  
 	 
 	    
-	    public void openPay(double fee, int order_id) throws IOException {
+	    public void openPay(double fee, int order_id, ObservableList<CartMedia> ordersData) throws IOException {
 	        
 	        try {
 				String vnp_Version = "2.1.0";
@@ -194,7 +196,7 @@ public class Interbank {
 				queryUrl += "&vnp_SecureHash=" + vnp_SecureHash;
 				String paymentUrl = Config.vnp_PayUrl + "?" + queryUrl;
 				System.out.println(vnp_SecureHash);
-				
+				this.ordersData =  ordersData;
 				URI uri = new URI(paymentUrl);
 
 				// Check if the Desktop is supported (available on desktop environments)

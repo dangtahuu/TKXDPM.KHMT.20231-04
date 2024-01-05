@@ -135,6 +135,11 @@ public class UserInvoiceController {
 			 Datasource.getInstance().insertNewOrderMedia(order.getMedia_id(), order_id, order.getPrice(), order.getQuantity());
 		 }
 	 }
+	 private void decreaseStock(ObservableList<CartMedia> orders) {
+		 for (CartMedia order : orders) {
+			 Datasource.getInstance().decreaseStock(order.getMedia_id(), order.getQuantity());
+		 }
+	 }
 	@FXML
 	public void setData(String name, String phone, String address, String instructions, String province, double price, ObservableList<CartMedia> ordersData,String ship_type) {
 		ivname.setText(name);
@@ -152,10 +157,11 @@ public class UserInvoiceController {
 		total.setText(String.format("%.3f VND", totalAll));
     }
 	
-	  public void handleSuccessInvoice(int order_id) throws IOException {
+	  public void handleSuccessInvoice(int order_id, ObservableList<CartMedia> ordersData) throws IOException {
 		  int user_id = UserSessionController.getUserId();
 		  Datasource.getInstance().createOrderMedia(order_id, user_id);
 		  Datasource.getInstance().updateOrder("SUCCESSFUL",order_id);
+		  decreaseStock(ordersData);
           Datasource.getInstance().emptyCart(user_id);     
        
     }
@@ -189,7 +195,7 @@ public class UserInvoiceController {
         Scene scene = new Scene(FXMLLoader.load(getClass().getResource("/view/user/main-dashboard.fxml")));
         dialogStage.setScene(scene);
         dialogStage.show();
-    	interbank.openPay(totalAll, order_id);
+    	interbank.openPay(totalAll, order_id,  ordersData);
 	}
 	
 //	public void create(ActionEvent event) throws IOException {

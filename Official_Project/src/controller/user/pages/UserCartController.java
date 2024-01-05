@@ -154,7 +154,7 @@ public class UserCartController {
 
                             if (deleteConfirmation.get() == ButtonType.OK) {                    
                                 if (Datasource.getInstance().deleteCartMedia(mediaData.getId())) {
-                                	Datasource.getInstance().increaseStock(mediaData.getMedia_id(), mediaData.getQuantity());
+                                	// Datasource.getInstance().increaseStock(mediaData.getMedia_id(), mediaData.getQuantity());
                                     refresh();
                                 }
                             }

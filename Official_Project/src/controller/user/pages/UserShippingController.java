@@ -1,6 +1,7 @@
 package controller.user.pages;
 
 import java.io.IOException;
+import java.sql.SQLException;
 
 import controller.UserSessionController;
 import app.utils.HelperMethods;
@@ -53,14 +54,14 @@ public class UserShippingController {
 		this.totalPrice = price;
 	}
 	public static String[] PROVINCES = {
-		    "Bắc Giang", "Bắc Cạn", "Cao Bằng", "Hà Giang", "Lạng Sơn", "Phú Thọ",
-		    "Quảng Ninh", "Thái Nguyên", "Tuyên Quang", "Yên Bái", "Điện Biên", "Hòa Bình", "Lai Châu", "Sơn La",
-		    "Bắc Ninh", "Hà Nam", "Hải Dương", "Hưng Yên", "Nam Định", "Ninh Bình", "Thái Bình", "Vĩnh Phúc", "Hà Nội",
-		    "Hải Phòng", "Hà Tĩnh", "Nghệ An", "Quảng Bình", "Quảng Trị", "Thanh Hóa", "Thừa Thiên-Huế", "Đắk Lắk",
-		    "Đắk Nông", "Gia Lai", "Kon Tum", "Lâm Đồng", "Bình Định", "Bình Thuận", "Khánh Hòa", "Ninh Thuận",
-		    "Phú Yên", "Quảng Nam", "Quảng Ngãi", "Đà Nẵng", "Bà Rịa-Vũng Tàu", "Bình Dương", "Bình Phước", "Đồng Nai",
-		    "Tây Ninh", "Hồ Chí Minh", "An Giang", "Bạc Liêu", "Bến Tre", "Cà Mau", "Đồng Tháp", "Hậu Giang",
-		    "Kiên Giang", "Long An", "Sóc Trăng", "Tiền Giang", "Trà Vinh", "Vĩnh Long", "Cần Thơ"
+		    "Báº¯c Giang", "Báº¯c Cáº¡n", "Cao Báº±ng", "HÃ  Giang", "Láº¡ng SÆ¡n", "PhÃº Thá»�",
+		    "Quáº£ng Ninh", "ThÃ¡i NguyÃªn", "TuyÃªn Quang", "YÃªn BÃ¡i", "Ä�iá»‡n BiÃªn", "HÃ²a BÃ¬nh", "Lai ChÃ¢u", "SÆ¡n La",
+		    "Báº¯c Ninh", "HÃ  Nam", "Háº£i DÆ°Æ¡ng", "HÆ°ng YÃªn", "Nam Ä�á»‹nh", "Ninh BÃ¬nh", "ThÃ¡i BÃ¬nh", "VÄ©nh PhÃºc", "HÃ  Ná»™i",
+		    "Háº£i PhÃ²ng", "HÃ  TÄ©nh", "Nghá»‡ An", "Quáº£ng BÃ¬nh", "Quáº£ng Trá»‹", "Thanh HÃ³a", "Thá»«a ThiÃªn-Huáº¿", "Ä�áº¯k Láº¯k",
+		    "Ä�áº¯k NÃ´ng", "Gia Lai", "Kon Tum", "LÃ¢m Ä�á»“ng", "BÃ¬nh Ä�á»‹nh", "BÃ¬nh Thuáº­n", "KhÃ¡nh HÃ²a", "Ninh Thuáº­n",
+		    "PhÃº YÃªn", "Quáº£ng Nam", "Quáº£ng NgÃ£i", "Ä�Ã  Náºµng", "BÃ  Rá»‹a-VÅ©ng TÃ u", "BÃ¬nh DÆ°Æ¡ng", "BÃ¬nh PhÆ°á»›c", "Ä�á»“ng Nai",
+		    "TÃ¢y Ninh", "Há»“ ChÃ­ Minh", "An Giang", "Báº¡c LiÃªu", "Báº¿n Tre", "CÃ  Mau", "Ä�á»“ng ThÃ¡p", "Háº­u Giang",
+		    "KiÃªn Giang", "Long An", "SÃ³c TrÄƒng", "Tiá»�n Giang", "TrÃ  Vinh", "VÄ©nh Long", "Cáº§n ThÆ¡"
 		};
 	
 	@FXML
@@ -86,7 +87,7 @@ public class UserShippingController {
         });
     }
 	@FXML
-	public void handleDeliveryButtonClick(ActionEvent event) throws IOException {
+	public void handleDeliveryButtonClick(ActionEvent event) throws IOException, SQLException {
 			String ship_name = spname.getText();
 			String ship_phone = spphone.getText();
 			String ship_address = spaddress.getText();
@@ -94,52 +95,59 @@ public class UserShippingController {
 			String ship_province = spprovinceComboBox.getValue();
 			String ship_type = type_order.getValue();
 			if (ship_name.isEmpty() || !ship_name.matches("[\\p{L} ]+")) {
-	            System.out.println("Tên không hợp lệ");
+	            System.out.println("TÃªn khÃ´ng há»£p lá»‡");
 	            HelperMethods.alertBox("Please fill in a valid name!", null, "Invalid!");
 	        }
 			else {
 				if (ship_phone.isEmpty() || !ship_phone.matches("[0-9]+") || (ship_phone.length() != 10 && ship_phone.length() != 11 && ship_phone.length() != 9)) {
-		            System.out.println("Số điện thoại không hợp lệ");
+		            System.out.println("Sá»‘ Ä‘iá»‡n thoáº¡i khÃ´ng há»£p lá»‡");
 		            HelperMethods.alertBox("Please fill in a valid phone!", null, "Invalid!");
 		        }
 				else {
 			        if (ship_address.isEmpty() || !ship_address.matches("[\\p{L}0-9., ]+")) {
-			            System.out.println("Địa chỉ không hợp lệ");
+			            System.out.println("Ä�á»‹a chá»‰ khÃ´ng há»£p lá»‡");
 			            HelperMethods.alertBox("Please fill in a valid address!", null, "Invalid!");
 			        }
 			        else {
 			        	if (ship_province == null || ship_province.isEmpty()) {
-			                System.out.println("Vui lòng chọn tỉnh/thành phố");
+			                System.out.println("Vui lÃ²ng chá»�n tá»‰nh/thÃ nh phá»‘");
 			                HelperMethods.alertBox("Please choose a province!", null, "Invalid!");
 			        }
 			        	else {
 			        		if (ship_type == null || ship_type.isEmpty()) {
-			        			System.out.println("Vui lòng chọn tỉnh/thành phố");
+			        			System.out.println("Vui lÃ²ng chá»�n tá»‰nh/thÃ nh phá»‘");
 				                HelperMethods.alertBox("Please choose order type!", null, "Invalid!");
 			        		}
 			        		else {
-			        			if (ship_type.equals("Rush") && !ship_province.equals("Hà Nội")) {
-				        			System.out.println("Vui lòng chọn tỉnh/thành phố");
+			        			if (ship_type.equals("Rush") && !ship_province.equals("HÃ  Ná»™i")) {
+				        			System.out.println("Vui lÃ²ng chá»�n tá»‰nh/thÃ nh phá»‘");
 					                HelperMethods.alertBox("You can only choose rush order when the address is in Hanoi", null, "Invalid!");
 				        		}
 			        			else {
 			        				if (ship_type.equals("Rush") && !checkRush( ordersData)) {
-					        			System.out.println("Vui lòng chọn tỉnh/thành phố");
+					        			System.out.println("Vui lÃ²ng chá»�n tá»‰nh/thÃ nh phá»‘");
 						                HelperMethods.alertBox("There are some medias that do not support express delivery", null, "Invalid!");
 					        		}
 			        				else {
+			        					if (checkQuantity(ordersData)>0) {
+						        			System.out.println("Vui lÃ²ng chá»�n tá»‰nh/thÃ nh phá»‘");
+							                HelperMethods.alertBox(Datasource.getInstance().getMediaByID(checkQuantity(ordersData)).getName()+" is not enough in stock!!", null, "Invalid!");
+						        		}
+			        					else {
+
+					        				Stage dialogStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+							    	        FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/user/pages/invoice/invoice.fxml"));
+							    	        Parent root = loader.load();
+							    	        int user_id = UserSessionController.getUserId();
+							    	        UserInvoiceController invoiceController = loader.getController();
+							    	        Datasource.getInstance().updateOneUser(ship_name,ship_address, ship_phone, ship_province, user_id);
+							    	        invoiceController.setData(ship_name, ship_phone,ship_address, ship_instructions,ship_province, totalPrice, ordersData, ship_type);
+							    	        invoiceController.listOrders();
+							    	        Scene scene = new Scene(root);
+							    	        dialogStage.setScene(scene);
+							    	        dialogStage.show();
+			        					}
 				        				
-				        				Stage dialogStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-						    	        FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/user/pages/invoice/invoice.fxml"));
-						    	        Parent root = loader.load();
-						    	        int user_id = UserSessionController.getUserId();
-						    	        UserInvoiceController invoiceController = loader.getController();
-						    	        Datasource.getInstance().updateOneUser(ship_name,ship_address, ship_phone, ship_province, user_id);
-						    	        invoiceController.setData(ship_name, ship_phone,ship_address, ship_instructions,ship_province, totalPrice, ordersData, ship_type);
-						    	        invoiceController.listOrders();
-						    	        Scene scene = new Scene(root);
-						    	        dialogStage.setScene(scene);
-						    	        dialogStage.show();
 				        			}
 			        			}
 			        			
@@ -170,6 +178,12 @@ public class UserShippingController {
             if(!cartmedia.getRushSupport()) return false;
         }
 		return true;
+	}
+	public int checkQuantity(ObservableList<CartMedia> ordersData) throws SQLException {
+		for (CartMedia cartmedia : ordersData) {
+            if(cartmedia.getQuantity()>Datasource.getInstance().getMediaByID(cartmedia.getMedia_id()).getQuantity()) return Datasource.getInstance().getMediaByID(cartmedia.getMedia_id()).getId();
+        }
+		return 0;
 	}
 
 
