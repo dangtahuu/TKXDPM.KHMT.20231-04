@@ -13,6 +13,7 @@ public class User {
     private String address;
     private String phone;
     private String city;
+    private int orders;
 
     public String getFullname() {
         return fullname;
@@ -107,6 +108,14 @@ public class User {
 
     public void setCity(String city) {
         this.city = city;
+    }
+    
+    public int getOrders() {
+        return orders;
+    }
+
+    public void setOrders(int orders) {
+        this.orders = orders;
     }
 
 }

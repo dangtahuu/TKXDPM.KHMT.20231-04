@@ -372,7 +372,7 @@ public class Datasource extends Media {
 
 
   public boolean insertNewBook(String coverType,String author, String language, String publisher, int numberOfPages, String publishDate, int id) {
-
+System.out.println(id);
         String sql = "INSERT INTO " + TABLE_BOOK + " ("
                 + COLUMN_BOOK_COVERTYPE + ", "
                 + COLUMN_BOOK_AUTHOR + ", "
@@ -380,7 +380,7 @@ public class Datasource extends Media {
                 + COLUMN_BOOK_PUBLISHER + ", "
                 + COLUMN_BOOK_PAGES + ", "
                 + COLUMN_BOOK_PUBLISH + ", " 
-                + COLUMN_CD_ID  +
+                + COLUMN_BOOK_ID  +
                 ") VALUES (?, ?, ?, ?, ?, ?, ?)";
 
         try (PreparedStatement statement = conn.prepareStatement(sql)) {
@@ -465,8 +465,9 @@ public class Datasource extends Media {
      * @since                   1.0.0
      */
     public List<Media> searchMedias(String searchString, int sortOrder) {
+    	System.out.println("zzzzzzzzzzzzz");
         StringBuilder queryMedias = queryMedias();
-        queryMedias.append(" WHERE (" + TABLE_PRODUCTS + "." + COLUMN_PRODUCTS_NAME + " LIKE ? OR " + TABLE_PRODUCTS + "." + COLUMN_PRODUCTS_IMAGE + " LIKE ?)");
+        queryMedias.append(" WHERE (" + TABLE_PRODUCTS + "." + COLUMN_PRODUCTS_NAME + " LIKE ?)");
 
         if (sortOrder != ORDER_BY_NONE) {
             queryMedias.append(" ORDER BY ");
@@ -480,7 +481,6 @@ public class Datasource extends Media {
 
         try (PreparedStatement statement = conn.prepareStatement(queryMedias.toString())) {
             statement.setString(1, "%" + searchString + "%");
-            statement.setString(2, "%" + searchString + "%");
             ResultSet results = statement.executeQuery();
 
             List<Media> medias = new ArrayList<>();
@@ -492,9 +492,14 @@ public class Datasource extends Media {
                 media.setPrice(results.getDouble(4));
                 media.setQuantity(results.getInt(5));
                 media.setCategory(results.getString(6));
-                media.setNr_sales(results.getInt(7));
+                media.setRushSupport(results.getBoolean(7));
+                media.setType(results.getString(8));
+                
                 medias.add(media);
             }
+            System.out.println("aaaaaa");
+            System.out.println(medias.get(0).getName());
+            
             return medias;
 
         } catch (SQLException e) {
@@ -645,6 +650,7 @@ public class Datasource extends Media {
           
            List<Media> medias = getOneMediaByName(name);
            
+           System.out.println(medias.get(0).getId());
            return medias.get(0).getId();
            
            
@@ -889,6 +895,8 @@ public class Datasource extends Media {
 
         StringBuilder queryCustomers = queryUsers();
 
+        
+        
         if (sortOrder != ORDER_BY_NONE) {
             queryCustomers.append(" ORDER BY ");
             queryCustomers.append(COLUMN_USERS_FULLNAME);
@@ -909,8 +917,8 @@ public class Datasource extends Media {
                 customer.setFullname(results.getString(2));
                 customer.setEmail(results.getString(3));
                 customer.setUsername(results.getString(4));
-//                customer.setOrders(results.getInt(5));
-                customer.setStatus(results.getString(5));
+                customer.setOrders(results.getInt(5));
+                customer.setStatus(results.getString(6));
                 customers.add(customer);
             }
             return customers;
@@ -941,8 +949,8 @@ public class Datasource extends Media {
                 customer.setFullname(results.getString(2));
                 customer.setEmail(results.getString(3));
                 customer.setUsername(results.getString(4));
-//                customer.setOrders(results.getInt(5));
-                customer.setStatus(results.getString(5));
+                customer.setOrders(results.getInt(5));
+                customer.setStatus(results.getString(6));
                 customers.add(customer);
             }
             return customers;
@@ -988,8 +996,8 @@ public class Datasource extends Media {
                 customer.setFullname(results.getString(2));
                 customer.setEmail(results.getString(3));
                 customer.setUsername(results.getString(4));
-//                customer.setOrders(results.getInt(5));
-                customer.setStatus(results.getString(5));
+                customer.setOrders(results.getInt(5));
+                customer.setStatus(results.getString(6));
                 customers.add(customer);
             }
             return customers;
@@ -1011,7 +1019,7 @@ public class Datasource extends Media {
                 TABLE_USERS + "." + COLUMN_USERS_FULLNAME + ", " +
                 TABLE_USERS + "." + COLUMN_USERS_EMAIL + ", " +
                 TABLE_USERS + "." + COLUMN_USERS_USERNAME + ", " +
-//                " (SELECT COUNT(*) FROM " + TABLE_CART + " WHERE " + TABLE_CART + "." + COLUMN_CART_USER_ID + " = " + TABLE_USERS + "." + COLUMN_USERS_ID + ") AS orders" + ", " +
+                " (SELECT COUNT(*) FROM " + TABLE_ORDER + " WHERE " + TABLE_ORDER + "." + COLUMN_ORDER_USER + " = " + TABLE_USERS + "." + COLUMN_USERS_ID + ") AS orders" + ", " +
                 TABLE_USERS + "." + COLUMN_USERS_STATUS +
                 " FROM " + TABLE_USERS +
                 " WHERE " + TABLE_USERS + "." + COLUMN_USERS_ADMIN + " = 0"
@@ -1024,26 +1032,15 @@ public class Datasource extends Media {
      * @return boolean      Returns true or false.
      * @since                   1.0.0
      */
-    public boolean deleteSingleCustomer(int customerId) {
-        String sql = "UPDATE " + TABLE_USERS + " SET " + COLUMN_USERS_STATUS + " = 'blocked'" + " WHERE " + COLUMN_USERS_ID + " = ?";
+    public boolean EditStatusSingleCustomer(int customerId, String status) {
+        String sql = "UPDATE " + TABLE_USERS + " SET " + COLUMN_USERS_STATUS + " = ?" + " WHERE " + COLUMN_USERS_ID + " = ?";
 
         try (PreparedStatement statement = conn.prepareStatement(sql)) {
-            statement.setInt(1, customerId);
+        	statement.setString(1, status);
+        	statement.setInt(2, customerId);
             int rows = statement.executeUpdate();
-            System.out.println(rows + " " + TABLE_USERS + " record(s) deleted.");
+           
 
-//
-//            String sql2 = "DELETE FROM " + TABLE_CART + " WHERE " + COLUMN_CART_USER_ID + " = ?";
-//
-//            try (PreparedStatement statement2 = conn.prepareStatement(sql2)) {
-//                statement2.setInt(1, customerId);
-//                int rows2 = statement2.executeUpdate();
-//                System.out.println(rows2 + " " + TABLE_CART + " record(s) deleted.");
-//                return true;
-//            } catch (SQLException e) {
-//                System.out.println("Query failed: " + e.getMessage());
-//                return false;
-//            }
             return true;
 
         } catch (SQLException e) {
@@ -1297,7 +1294,11 @@ public class Datasource extends Media {
                 TABLE_USERS + "." + COLUMN_USERS_FULLNAME + ", " +
                 TABLE_PRODUCTS + "." + COLUMN_PRODUCTS_NAME + ", " +
                 TABLE_PRODUCTS + "." + COLUMN_PRODUCTS_PRICE +", "+
+<<<<<<< Updated upstream
                 TABLE_CART + "." + COLUMN_CART_PU_QUANTITY + ", "+
+=======
+                TABLE_CART + "." + COLUMN_CART_PU_QUANTITY + ", " +
+>>>>>>> Stashed changes
                 TABLE_PRODUCTS + "." + COLUMN_PRODUCTS_RUSH +
                 
                 " FROM " + TABLE_CART
@@ -1586,6 +1587,20 @@ public class Datasource extends Media {
         }
     }
 
+    public Integer countAllOrders() {
+        try (Statement statement = conn.createStatement();
+             ResultSet results = statement.executeQuery("SELECT COUNT(*) FROM " + TABLE_ORDER)) {
+            if (results.next()) {
+                return results.getInt(1);
+            } else {
+                return 0;
+            }
+        } catch (SQLException e) {
+            System.out.println("Query failed: " + e.getMessage());
+            return 0;
+        }
+    }
+    
     /**
      * This method counts all the orders on the database.
      * @param user_id       Provided user id.

@@ -5,7 +5,7 @@
 <?import javafx.scene.control.cell.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane prefHeight="800.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.user.pages.UserMediasController">
+<AnchorPane prefHeight="800.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.user.pages.medias.UserMediasController">
    <StackPane fx:id="mediasContent" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
       <children>
       
@@ -32,6 +32,7 @@
                   </GridPane>
               </top>
               <center>
+              <Pagination fx:id="pagination" />
                   <TableView fx:id="tableMediasPage" editable="true" prefHeight="663.0" prefWidth="1220.0">
                       <columns>
                       

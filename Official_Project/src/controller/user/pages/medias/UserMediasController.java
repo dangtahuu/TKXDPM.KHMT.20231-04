@@ -1,24 +1,31 @@
-package controller.user.pages;
+package controller.user.pages.medias;
 
 import app.utils.HelperMethods;
 
 import controller.UserSessionController;
+import controller.user.pages.medias.ViewBookController;
+import controller.user.pages.medias.ViewCDController;
+import controller.user.pages.medias.ViewDVDController;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.concurrent.Task;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.StackPane;
 import javafx.util.Callback;
 import model.Datasource;
 import model.media.Media;
 import model.media.Media;
 
 import java.io.File;
+import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Optional;
@@ -29,7 +36,9 @@ import java.util.Optional;
  */
 public class UserMediasController {
 
-
+	 @FXML
+	    private StackPane mediasContent;
+	 
     @FXML
     public TextField fieldMediasSearch;
 
@@ -192,12 +201,25 @@ public class UserMediasController {
                             }
                         });
                     }
+                    
+                    private final Button viewButton = new Button("View");
+
+                    {
+                        viewButton.getStyleClass().add("button");
+                        viewButton.getStyleClass().add("xs");
+                        viewButton.getStyleClass().add("info");
+                        viewButton.setOnAction((ActionEvent event) -> {
+                            Media mediaData = getTableView().getItems().get(getIndex());
+                            btnViewMedia(mediaData.getId(),mediaData.getType());
+                        });
+                    }
 
                     private final HBox buttonsPane = new HBox();
 
                     {
                         buttonsPane.setSpacing(10);
                         buttonsPane.getChildren().add(ATCButton);
+                        buttonsPane.getChildren().add(viewButton);
                     }
 
                     @Override
@@ -239,6 +261,44 @@ public class UserMediasController {
         new Thread(searchMediasTask).start();
     }
 
+    @FXML
+    private void btnViewMedia(int media_id, String media_type) {
+        FXMLLoader fxmlLoader = new FXMLLoader();
+        try {
+        	if(media_type.equals("cd")) {
+        		 fxmlLoader.load(getClass().getResource("/view/user/pages/medias/view-CD.fxml").openStream());
+
+        	        AnchorPane root = fxmlLoader.getRoot();
+        	        mediasContent.getChildren().clear();
+        	        mediasContent.getChildren().add(root);
+
+        	        ViewDVDController controller = fxmlLoader.getController();
+        	        controller.fillViewingMediaFields(media_id);
+        	        
+        	} else if (media_type.equals("dvd")) {
+        		 fxmlLoader.load(getClass().getResource("/view/user/pages/medias/view-DVD.fxml").openStream());
+        		   AnchorPane root = fxmlLoader.getRoot();
+       	        mediasContent.getChildren().clear();
+       	        mediasContent.getChildren().add(root);
+
+       	        ViewDVDController controller = fxmlLoader.getController();
+       	        controller.fillViewingMediaFields(media_id);
+        	}
+        	else if (media_type.equals("book")) {
+       		 fxmlLoader.load(getClass().getResource("/view/user/pages/medias/view-Book.fxml").openStream());
+       		   AnchorPane root = fxmlLoader.getRoot();
+      	        mediasContent.getChildren().clear();
+      	        mediasContent.getChildren().add(root);
+
+      	        ViewBookController controller = fxmlLoader.getController();
+      	        controller.fillViewingMediaFields(media_id);
+       	}
+        		
+           
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 
     /**
      * This private method handles the buy media functionality.

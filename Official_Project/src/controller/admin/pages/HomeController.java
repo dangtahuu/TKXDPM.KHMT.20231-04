@@ -15,6 +15,8 @@ public class HomeController {
     public Label mediasCount;
     @FXML
     public Label customersCount;
+    @FXML
+    public Label ordersCount;
 
     /**
      * This method gets the medias count for the admin dashboard and sets it to the mediasCount label.
@@ -54,7 +56,18 @@ public class HomeController {
         new Thread(getDashCostCount).start();
     }
 
-    // TODO
-    //  Add best sellers
-    //  Add latest sold medias
+    public void getDashboardOrderCount() {
+        Task<Integer> getDashOrderCount = new Task<Integer>() {
+            @Override
+            protected Integer call() {
+                return Datasource.getInstance().countAllOrders();
+            }
+        };
+
+        getDashOrderCount.setOnSucceeded(e -> {
+            ordersCount.setText(String.valueOf(getDashOrderCount.valueProperty().getValue()));
+        });
+
+        new Thread(getDashOrderCount).start();
+    }
 }
