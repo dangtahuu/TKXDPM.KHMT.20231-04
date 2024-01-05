@@ -51,6 +51,7 @@ public class UserMainDashboardController implements Initializable {
         UserHomeController homeController = fxmlLoader.getController();
         homeController.getDashboardProdCount();
         homeController.getDashboardOrdersCount();
+        homeController.getDashboardCartCount();
     }
 
     /**
@@ -146,5 +147,6 @@ public class UserMainDashboardController implements Initializable {
         UserHomeController homeController = fxmlLoader.getController();
         homeController.getDashboardProdCount();
         homeController.getDashboardOrdersCount();
+        homeController.getDashboardCartCount();
     }
 }
