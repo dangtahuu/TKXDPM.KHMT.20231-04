@@ -72,7 +72,7 @@
             </GridPane>
         </center>
         <top>
-            <Text fx:id="viewMediaName" strokeType="OUTSIDE" strokeWidth="0.0" text="View media data" BorderPane.alignment="CENTER_LEFT">
+            <Text fx:id="viewMediaName" strokeType="OUTSIDE" strokeWidth="0.0" text="View DVD" BorderPane.alignment="CENTER_LEFT">
                 <font>
                     <Font size="24.0" />
                 </font>

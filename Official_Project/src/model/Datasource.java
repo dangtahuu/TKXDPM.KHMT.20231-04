@@ -1294,11 +1294,7 @@ System.out.println(id);
                 TABLE_USERS + "." + COLUMN_USERS_FULLNAME + ", " +
                 TABLE_PRODUCTS + "." + COLUMN_PRODUCTS_NAME + ", " +
                 TABLE_PRODUCTS + "." + COLUMN_PRODUCTS_PRICE +", "+
-<<<<<<< Updated upstream
                 TABLE_CART + "." + COLUMN_CART_PU_QUANTITY + ", "+
-=======
-                TABLE_CART + "." + COLUMN_CART_PU_QUANTITY + ", " +
->>>>>>> Stashed changes
                 TABLE_PRODUCTS + "." + COLUMN_PRODUCTS_RUSH +
                 
                 " FROM " + TABLE_CART
