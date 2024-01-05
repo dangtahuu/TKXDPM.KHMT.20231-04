@@ -13,6 +13,7 @@ public class UserHomeController {
 
     public Label mediasCount;
     public Label ordersCount;
+    public Label cartCount;
 
     /**
      * This method gets the medias count for the user dashboard and sets it to the mediasCount label.
@@ -37,11 +38,25 @@ public class UserHomeController {
      * This method gets the orders count for the user dashboard and sets it to the ordersCount label.
      * @since                   1.0.0
      */
-    public void getDashboardOrdersCount() {
+    public void getDashboardCartCount() {
         Task<Integer> getDashOrderCount = new Task<Integer>() {
             @Override
             protected Integer call() {
                 return Datasource.getInstance().countUserOrders(UserSessionController.getUserId());
+            }
+        };
+
+        getDashOrderCount.setOnSucceeded(e -> {
+            cartCount.setText(String.valueOf(getDashOrderCount.valueProperty().getValue()));
+        });
+
+        new Thread(getDashOrderCount).start();
+    }
+    public void getDashboardOrdersCount() {
+        Task<Integer> getDashOrderCount = new Task<Integer>() {
+            @Override
+            protected Integer call() {
+                return Datasource.getInstance().countOrders(UserSessionController.getUserId());
             }
         };
 
