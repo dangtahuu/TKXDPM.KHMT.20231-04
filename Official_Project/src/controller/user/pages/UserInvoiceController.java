@@ -5,6 +5,7 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
 import controller.UserSessionController;
+import controller.user.UserMainDashboardController;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.concurrent.Task;
@@ -78,6 +79,19 @@ public class UserInvoiceController {
         dialogStage.setScene(scene);
         dialogStage.show();
     }
+	@FXML
+	public void handleBacktoOrder(ActionEvent event) throws IOException {
+	    Stage dialogStage;
+	    Node node = (Node) event.getSource();
+	    dialogStage = (Stage) node.getScene().getWindow();
+	    dialogStage.close();
+
+
+	    Scene scene = new Scene(FXMLLoader.load(getClass().getResource("/view/user/main-dashboard.fxml")));
+	    System.out.print("home");
+	    dialogStage.setScene(scene);
+	    dialogStage.show();
+	}
 	 @FXML
 	    public void listOrders() {
 	            tableOrdersPage.setItems(ordersData); 
@@ -107,12 +121,20 @@ public class UserInvoiceController {
 	    }
 	 private int calculateTotalQuantity(ObservableList<CartMedia> orders) {
 	        int totalQuantity=0;
+	        if(orders == null) {return 0;}
+	        else {
+	        
 	        for (CartMedia order : orders) {
 	        	totalQuantity += order.getQuantity();
 	        }
+	        }
 	        return totalQuantity;
 	    }
-	
+	 private void insertNewMediaOrder(ObservableList<CartMedia> orders, int order_id) {
+		 for (CartMedia order : orders) {
+			 Datasource.getInstance().insertNewOrderMedia(order.getMedia_id(), order_id, order.getPrice(), order.getQuantity());
+		 }
+	 }
 	@FXML
 	public void setData(String name, String phone, String address, String instructions, String province, double price, ObservableList<CartMedia> ordersData,String ship_type) {
 		ivname.setText(name);
@@ -157,8 +179,8 @@ public class UserInvoiceController {
 		  String instructions = ivinstructions.getText();
 		  String type = order_type.getText();
 		  
-  	  int order_id = Datasource.getInstance().insertNewOrder(city, address, phone, fee, date, user_id, instructions, type, price);
-  	  
+  	  int order_id = Datasource.getInstance().insertNewOrder(city, address, phone, fee, date, user_id, instructions, type, totalAll);
+  	  	insertNewMediaOrder(ordersData, order_id);
 		Interbank interbank = new Interbank();
 		Stage dialogStage;
         Node node = (Node) event.getSource();

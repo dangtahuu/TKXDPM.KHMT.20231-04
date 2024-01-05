@@ -89,8 +89,9 @@ public class Datasource extends Media {
     public static final String TABLE_ORDER_MEDIA = "OrderMedia";
     public static final String COLUMN_ORDER_MEDIA_ID = "id";
     public static final String COLUMN_ORDER_MEDIA_PRODUCT_ID = "mediaId";
-    public static final String COLUMN_ORDER_MEDIA_ORDER_ID = "userId";
+    public static final String COLUMN_ORDER_MEDIA_ORDER_ID = "orderId";
     public static final String COLUMN_ORDER_MEDIA_QUANTITY = "quantity";
+    public static final String COLUMN_ORDER_MEDIA_PRICE = "price";
 
     public static final String TABLE_USERS = "User";
     public static final String COLUMN_USERS_ID = "id";
@@ -1296,7 +1297,8 @@ public class Datasource extends Media {
                 TABLE_USERS + "." + COLUMN_USERS_FULLNAME + ", " +
                 TABLE_PRODUCTS + "." + COLUMN_PRODUCTS_NAME + ", " +
                 TABLE_PRODUCTS + "." + COLUMN_PRODUCTS_PRICE +", "+
-                TABLE_CART + "." + COLUMN_CART_PU_QUANTITY + 
+                TABLE_CART + "." + COLUMN_CART_PU_QUANTITY + ", "+
+                TABLE_PRODUCTS + "." + COLUMN_PRODUCTS_RUSH +
                 
                 " FROM " + TABLE_CART
         );
@@ -1654,7 +1656,146 @@ public class Datasource extends Media {
 
           return user;
       }
+      public List<CartMedia> getOrderCartMedias(int sortOrder, int order_id) {
 
+        StringBuilder queryOrders = new StringBuilder("SELECT " +
+        		TABLE_ORDER_MEDIA + "." + COLUMN_ORDER_MEDIA_PRODUCT_ID + ", " +
+        		TABLE_ORDER_MEDIA + "." + COLUMN_ORDER_MEDIA_ORDER_ID + ", " +
+//        		TABLE_ORDER_MEDIA + "." + COLUMN_ORDER_MEDIA_PRICE + ", " +
+//                TABLE_USERS + "." + COLUMN_USERS_FULLNAME + ", " +
+                TABLE_PRODUCTS + "." + COLUMN_PRODUCTS_NAME + ", " +
+                TABLE_PRODUCTS + "." + COLUMN_PRODUCTS_PRICE + ", " +
+                TABLE_ORDER_MEDIA + "." + COLUMN_ORDER_MEDIA_QUANTITY + ", " +
+                TABLE_PRODUCTS + "." + COLUMN_PRODUCTS_RUSH +
+                " FROM " + TABLE_ORDER_MEDIA);
+
+        queryOrders.append("" +
+                " LEFT JOIN " + TABLE_PRODUCTS +
+                " ON " + TABLE_ORDER_MEDIA + "." + COLUMN_ORDER_MEDIA_PRODUCT_ID +
+                " = " + TABLE_PRODUCTS + "." + COLUMN_PRODUCTS_ID);
+//        queryOrders.append("" +
+//                " LEFT JOIN " + TABLE_USERS +
+//                " ON " + TABLE_ORDER_MEDIA + "." + COLUMN_CART_USER_ID +
+//                " = " + TABLE_USERS + "." + COLUMN_USERS_ID);
+        queryOrders.append(" WHERE " + TABLE_ORDER_MEDIA + "." + COLUMN_ORDER_MEDIA_ORDER_ID + " = ").append(order_id);
+
+        if (sortOrder != ORDER_BY_NONE) {
+            queryOrders.append(" ORDER BY ");
+            queryOrders.append(COLUMN_USERS_FULLNAME);
+            if (sortOrder == ORDER_BY_DESC) {
+                queryOrders.append(" DESC");
+            } else {
+                queryOrders.append(" ASC");
+            }
+        }
+
+        try (Statement statement = conn.createStatement();
+                ResultSet results = statement.executeQuery(queryOrders.toString())) {
+
+            List<CartMedia> orders = new ArrayList<>();
+            while (results.next()) {
+                CartMedia order = new CartMedia();
+//                order.setId(results.getInt(1));
+                order.setMedia_id(results.getInt(1));
+//                order.setUser_id(results.getInt(3));
+//                order.setUser_full_name(results.getString(4));
+                order.setMedia_name(results.getString(3));
+                order.setMedia_price(results.getDouble(4));
+                order.setPrice(results.getInt(5) * results.getDouble(4));
+                order.setQuantity(results.getInt(5));
+                order.setRushSupport(results.getBoolean(6));
+                orders.add(order);
+            }
+            System.out.println(orders.get(0).getMedia_price());
+            return orders;
+
+        } catch (SQLException e) {
+            System.out.println("Query failed: " + e.getMessage());
+            return null;
+        }
+    }
+    public String getAddressByOrderId(int order_id) {
+        String query = "SELECT address FROM OrderData WHERE id = ?";
+        try (PreparedStatement preparedStatement = conn.prepareStatement(query)) {
+            preparedStatement.setInt(1, order_id);
+            try (ResultSet results = preparedStatement.executeQuery()) {
+                if (results.next()) {
+                    return results.getString("address");
+                } else {
+                    return "";
+                }
+            }
+        } catch (SQLException e) {
+            System.out.println("Truy vấn thất bại: " + e.getMessage());
+            return "";
+        }
+    }
+    public String getPhonebyOrderId(int order_id) {
+        try (Statement statement = conn.createStatement();
+                ResultSet results = statement.executeQuery("SELECT phone FROM  OrderData WHERE id =" + order_id)) {
+            if (results.next()) {
+                return results.getString(1);
+            } else {
+                return "";
+            }
+        } catch (SQLException e) {
+            System.out.println("Query failed: " + e.getMessage());
+            return "";
+        }
+    }
+    public String getInstructionsByOrderId(int order_id) {
+        String query = "SELECT instructions FROM OrderData WHERE id = ?";
+        try (PreparedStatement preparedStatement = conn.prepareStatement(query)) {
+            preparedStatement.setInt(1, order_id);
+            try (ResultSet results = preparedStatement.executeQuery()) {
+                if (results.next()) {
+                    return results.getString("instructions");
+                } else {
+                    return "";
+                }
+            }
+        } catch (SQLException e) {
+            System.out.println("Truy vấn thất bại: " + e.getMessage());
+            return "";
+        }
+    }
+    public String getCitybyOrderId(int order_id) {
+        try (Statement statement = conn.createStatement();
+                ResultSet results = statement.executeQuery("SELECT city FROM  OrderData WHERE id =" + order_id)) {
+            if (results.next()) {
+                return results.getString(1);
+            } else {
+                return "";
+            }
+        } catch (SQLException e) {
+            System.out.println("Query failed: " + e.getMessage());
+            return "";
+        }
+    }
+    public boolean insertNewOrderMedia(int media_id, int order_id, double price,int quantity) {
+
+        String sql = "INSERT INTO " + TABLE_ORDER_MEDIA + " ("
+                + COLUMN_ORDER_MEDIA_PRODUCT_ID + ", "
+                + COLUMN_ORDER_MEDIA_ORDER_ID + ", "
+                + COLUMN_ORDER_MEDIA_PRICE + ", "
+                + COLUMN_ORDER_MEDIA_QUANTITY + 
+                
+                ") VALUES (?, ?, ?, ?)";
+
+        try (PreparedStatement statement = conn.prepareStatement(sql)) {
+
+        	statement.setInt(1, media_id);
+        	statement.setInt(2, order_id);
+        	statement.setDouble(3, price);
+        	statement.setInt(4, quantity);
+            statement.executeUpdate();
+            return true;
+        } catch (SQLException e) {
+            System.out.println("bug");
+            System.out.println("Query failed: " + e.getMessage());
+            return false;
+        }
+    }
 }
 
 

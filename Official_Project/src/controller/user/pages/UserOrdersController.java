@@ -18,6 +18,10 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
+import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.stage.Stage;
 import javafx.util.Callback;
 import model.CartMedia;
 import model.Datasource;
@@ -80,8 +84,42 @@ public class UserOrdersController {
                         viewButton.getStyleClass().add("xs");
                         viewButton.getStyleClass().add("info");
                         viewButton.setOnAction((ActionEvent event) -> {
+                        	
                         	Order orderData = getTableView().getItems().get(getIndex());
-//                            btnViewOrder(orderData.getId());
+                        	
+                            Task<ObservableList<CartMedia>> getAllOrderMedias = new Task<ObservableList<CartMedia>>() {
+                                @Override
+                                protected ObservableList<CartMedia> call() {
+                                	
+                                    return FXCollections.observableArrayList(Datasource.getInstance().getOrderCartMedias(Datasource.ORDER_BY_NONE, orderData.getId() ));
+                                    
+                                }
+                            };
+                            getAllOrderMedias.setOnSucceeded(event1 -> {
+                            	System.out.print("1245");
+                            	ObservableList<CartMedia> listOrderMedias = getAllOrderMedias.getValue();                                                            
+                                double totalPrice = calculateTotalPrice(listOrderMedias);
+                                Stage dialogStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+				    	        FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/user/pages/orders/orderview.fxml"));
+				    	        Parent root;
+								try {
+									root = loader.load();
+
+				    	        int user_id = UserSessionController.getUserId();
+				    	        int order_id = orderData.getId();
+				    	        UserInvoiceController invoiceController = loader.getController();				    	        
+				    	        invoiceController.setData(UserSessionController.getUserFullName(), Datasource.getInstance().getPhonebyOrderId(order_id),Datasource.getInstance().getAddressByOrderId(order_id), Datasource.getInstance().getInstructionsByOrderId(order_id),Datasource.getInstance().getCitybyOrderId(order_id), calculateTotalPrice( listOrderMedias),listOrderMedias, orderData.getType());
+				    	        invoiceController.listOrders();
+				    	        Scene scene = new Scene(root);
+				    	        dialogStage.setScene(scene);
+				    	        dialogStage.show();
+								} catch (IOException e) {
+									// TODO Auto-generated catch block
+									System.out.print("1245");
+									e.printStackTrace();
+								}
+                            });
+                            new Thread(getAllOrderMedias).start();
                         });
                     }
 
@@ -111,6 +149,16 @@ public class UserOrdersController {
 
         tableOrdersPage.getColumns().add(colBtnView);
 
+    }
+    private double calculateTotalPrice(ObservableList<CartMedia> listOrderMedias) {
+        double totalPrice = 0.0;
+        if(listOrderMedias == null) {return 0;}
+        else {
+        for (CartMedia media : listOrderMedias) {
+            totalPrice += media.getPrice();
+        }
+        }
+        return totalPrice;
     }
     
 
