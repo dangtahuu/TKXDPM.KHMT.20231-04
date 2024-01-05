@@ -1560,7 +1560,21 @@ System.out.println(id);
             return 0;
         }
     }
+    public Integer countOrders(int user_id) {
+        try (PreparedStatement statement = conn.prepareStatement(String.valueOf("SELECT COUNT(*) FROM " + TABLE_ORDER + " WHERE " + COLUMN_ORDER_USER + "= ?"))) {
+            statement.setInt(1, user_id);
+            ResultSet results = statement.executeQuery();
 
+            if (results.next()) {
+                return results.getInt(1);
+            } else {
+                return 0;
+            }
+        } catch (SQLException e) {
+            System.out.println("Query failed: " + e.getMessage());
+            return 0;
+        }
+    }
     /**
      * This method counts all the simple users on the database.
      * @return int      Returns count of the simple users.
@@ -1605,7 +1619,7 @@ System.out.println(id);
      */
     public Integer countUserOrders(int user_id) {
 
-        try (PreparedStatement statement = conn.prepareStatement(String.valueOf("SELECT COUNT(*) FROM " + TABLE_CART + " WHERE " + COLUMN_CART_USER_ID + "= ?"))) {
+        try (PreparedStatement statement = conn.prepareStatement(String.valueOf("SELECT SUM(quantity) FROM " + TABLE_CART + " WHERE " + COLUMN_CART_USER_ID + "= ?"))) {
             statement.setInt(1, user_id);
             ResultSet results = statement.executeQuery();
 
