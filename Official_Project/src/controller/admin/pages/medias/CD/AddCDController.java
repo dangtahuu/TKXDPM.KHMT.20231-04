@@ -40,7 +40,7 @@ public class AddCDController extends MediasController {
     public TextField fieldMediaQuantity;
 	
 	@FXML
-    public TextField fieldMediaValue;
+    public ComboBox<String> fieldMediaRushSupport;
 	
 	@FXML
     public TextField fieldMediaCategory;
@@ -68,7 +68,7 @@ public class AddCDController extends MediasController {
 
     @FXML
     private void initialize() {
-    	
+    	fieldMediaRushSupport.setItems(FXCollections.observableArrayList("True", "False"));
     	 datePicker.valueProperty().addListener((observable, oldValue, newValue) -> {
              // Update the TextField with the selected date
     		 fieldReleaseDate.setText(newValue.toString());
@@ -79,7 +79,7 @@ public class AddCDController extends MediasController {
         
         fieldMediaPrice.setTextFormatter(new TextFormatter<>(textFormatterDouble.getValueConverter(), textFormatterDouble.getValue()));
         fieldMediaQuantity.setTextFormatter(new TextFormatter<>(textFormatterInt.getValueConverter(), textFormatterInt.getValue()));
-        fieldMediaValue.setTextFormatter(new TextFormatter<>(textFormatterInt.getValueConverter(), textFormatterInt.getValue()));
+        
     }
 
     /**
@@ -100,13 +100,13 @@ public class AddCDController extends MediasController {
         	System.out.println(fieldMediaTitle.getText());
         
         if (areCDInputsValid(fieldMediaTitle.getText()
-        		,fieldMediaImage.getText(), fieldMediaValue.getText(), fieldMediaPrice.getText(), fieldMediaQuantity.getText(), fieldMediaCategory.getText(),fieldArtist.getText(),fieldRecordLabel.getText(),fieldTracklist.getText(),fieldReleaseDate.getText())) {
+        		,fieldMediaImage.getText(), fieldMediaRushSupport.getValue(), fieldMediaPrice.getText(), fieldMediaQuantity.getText(), fieldMediaCategory.getText(),fieldArtist.getText(),fieldRecordLabel.getText(),fieldTracklist.getText(),fieldReleaseDate.getText())) {
         	
         	submitImage(imageView, fieldMediaImage);
         	
             String mediaTitle = fieldMediaTitle.getText();
             String mediaImage = fieldMediaImage.getText();
-            int mediaValue = Integer.parseInt(fieldMediaValue.getText());
+            boolean mediaRushSupport = Boolean.parseBoolean(fieldMediaRushSupport.getValue());
             String mediaCategory = fieldMediaCategory.getText();
             double mediaPrice = Double.parseDouble(fieldMediaPrice.getText());
             int mediaQuantity = Integer.parseInt(fieldMediaQuantity.getText());
@@ -118,7 +118,7 @@ public class AddCDController extends MediasController {
             Task<Boolean> addMediaTask = new Task<Boolean>() {
                 @Override
                 protected Boolean call() {
-                	int id =  Datasource.getInstance().insertNewMedia(mediaTitle, mediaImage, mediaValue, mediaPrice, mediaQuantity, mediaCategory, "cd");
+                	int id =  Datasource.getInstance().insertNewMedia(mediaTitle, mediaImage, mediaRushSupport, mediaPrice, mediaQuantity, mediaCategory, "cd");
                 	return Datasource.getInstance().insertNewCD(artist, recordLabel, tracklist, releaseDate, id);
 //                    return Datasource.getInstance().insertNewMedia(mediaName, mediaDescription, mediaPrice, mediaQuantity, mediaCategoryId);
                 }

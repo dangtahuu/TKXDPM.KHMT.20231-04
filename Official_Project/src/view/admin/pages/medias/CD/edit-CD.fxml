@@ -8,6 +8,7 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.stage.FileChooser?>
 <?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.ComboBox?>
 
 <AnchorPane prefHeight="800.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.admin.pages.medias.CD.EditCDController">
     <children>
@@ -40,8 +41,8 @@
                     <Label text="Media Category" GridPane.columnIndex="3" GridPane.rowIndex="1" />
                     <TextField fx:id="fieldMediaCategory" GridPane.columnIndex="4" GridPane.rowIndex="1"/>
                    
-                    <Label text="Value" GridPane.rowIndex="2" />
-                    <TextField fx:id="fieldMediaValue" promptText="0" GridPane.columnIndex="1" GridPane.rowIndex="2"/>
+                    <Label text="Rush Support" GridPane.rowIndex="2" />
+                    <ComboBox fx:id="fieldMediaRushSupport" promptText="Select an option" GridPane.columnIndex="1" GridPane.rowIndex="2"/>
 
       <TextField fx:id="fieldMediaImage" visible="false" GridPane.columnIndex="3"/>
       <Label text="Image" GridPane.rowIndex="2" GridPane.columnIndex="3"/>

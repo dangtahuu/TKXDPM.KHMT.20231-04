@@ -9,7 +9,6 @@ public class Media {
     private int quantity;
     private String category;
     private int nr_sales;
-    private int value;
     private String type;
     private boolean rushSupport;
     
@@ -61,15 +60,6 @@ public class Media {
         this.category = category;
     }
 
-    public int getValue() {
-        return value;
-    }
-
-    public void setValue(int value) {
-        this.value = value;
-    }
-    
-
     public String getType() {
         return type;
     }
@@ -86,11 +76,11 @@ public class Media {
         this.nr_sales = nr_sales;
     }
     
-    public boolean getrushSupport()  {
+    public boolean getRushSupport()  {
         return rushSupport;
     }
 
-    public void setrushSupport(boolean rushSupporth ) {
+    public void setRushSupport(boolean rushSupport ) {
         this.rushSupport = rushSupport;
     }
 }

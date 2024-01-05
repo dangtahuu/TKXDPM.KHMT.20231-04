@@ -8,16 +8,10 @@ import java.util.function.UnaryOperator;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-/**
-     * This class provides various helper methods which will me used
-     * throughout the entire application.
-     * @author      Sajmir Doko
-    */
 public class HelperMethods {
 
     /**
      * This method is used to validate a string if it is an Full Name or not.
-     * {@link}              https://stackoverflow.com/a/35458020
      * @param fullName      Accepts an string to validate as email address.
      * @return boolean      Returns true or false.
      * @since               1.0.0

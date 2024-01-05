@@ -18,9 +18,11 @@ import model.Datasource;
 import model.Order;
 import model.User;
 import model.media.Media;
+import subsystem.Interbank;
 import model.media.Media;
 
 import java.io.File;
+import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Optional;
@@ -84,28 +86,57 @@ public class OrdersController {
 //                        });
 //                    }
 
-                
-                    private final Button acceptBtn = new Button("Accept");
-
-                    {
-                    	acceptBtn.getStyleClass().add("button");
-                    	acceptBtn.getStyleClass().add("xs");
-                    	acceptBtn.getStyleClass().add("success");
-                    	acceptBtn.setOnAction((ActionEvent event) -> {
-                            Order orderData = getTableView().getItems().get(getIndex());
-                            if (Datasource.getInstance().updateOrder("ACCEPTED",orderData.getId())) {
-                                int rowIndex = getIndex();
-                                     Order customer = getTableView().getItems().get(rowIndex);
-
-                                     // Modify the field you want to change
-                                     customer.setStatus("ACCEPTED");
-
-                                     // Optionally refresh the TableView if not bound to the data
-                                     getTableView().refresh();
-                                 }
-                      
-                        });
-                    }
+//                
+//                    private final Button acceptBtn = new Button("Accept");
+//
+//                    {
+//                    	acceptBtn.getStyleClass().add("button");
+//                    	acceptBtn.getStyleClass().add("xs");
+//                    	acceptBtn.getStyleClass().add("success");
+//                    	acceptBtn.setOnAction((ActionEvent event) -> {
+//                            Order orderData = getTableView().getItems().get(getIndex());
+//                            if (Datasource.getInstance().updateOrder("ACCEPTED",orderData.getId())) {
+//                                int rowIndex = getIndex();
+//                                     Order order = getTableView().getItems().get(rowIndex);
+//
+//                                     // Modify the field you want to change
+//                                     order.setStatus("ACCEPTED");
+//
+//                                     // Optionally refresh the TableView if not bound to the data
+//                                     getTableView().refresh();
+//                                 }
+//                      
+//                        });
+//                    }
+//                    
+//                    private final Button declineBtn = new Button("Decline");
+//
+//                    {
+//                    	declineBtn.getStyleClass().add("button");
+//                    	declineBtn.getStyleClass().add("xs");
+//                    	declineBtn.getStyleClass().add("success");
+//                    	declineBtn.setOnAction((ActionEvent event) -> {
+//                            Order orderData = getTableView().getItems().get(getIndex());
+//                            Interbank interbank = new Interbank();
+//                            try {
+//								interbank.refund(orderData.getId(), orderData.getTotalPrice());
+//							} catch (IOException e) {
+//								// TODO Auto-generated catch block
+//								e.printStackTrace();
+//							}
+////                            if (Datasource.getInstance().updateOrder("ACCEPTED",orderData.getId())) {
+////                                int rowIndex = getIndex();
+////                                     Order order = getTableView().getItems().get(rowIndex);
+////
+////                                     // Modify the field you want to change
+////                                     order.setStatus("ACCEPTED");
+////
+////                                     // Optionally refresh the TableView if not bound to the data
+////                                     getTableView().refresh();
+////                                 }
+//                      
+//                        });
+//                    }
 
                     private final HBox buttonsPane = new HBox();
 
@@ -113,7 +144,8 @@ public class OrdersController {
                         buttonsPane.setSpacing(10);
 //                        buttonsPane.getChildren().add(viewButton);
 //                        buttonsPane.getChildren().add(editButton);
-                        buttonsPane.getChildren().add(acceptBtn);
+//                        buttonsPane.getChildren().add(acceptBtn);
+//                        buttonsPane.getChildren().add(declineBtn);
                     }
 
                     @Override

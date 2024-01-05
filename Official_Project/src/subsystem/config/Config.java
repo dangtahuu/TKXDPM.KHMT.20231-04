@@ -2,6 +2,7 @@
 package subsystem.config;
 
 import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
@@ -22,6 +23,7 @@ import javax.servlet.http.HttpServletRequest;
 public class Config {
 
     public static String vnp_PayUrl = "https://sandbox.vnpayment.vn/paymentv2/vpcpay.html";
+    public static String vnp_RefundUrl = "https://sandbox.vnpayment.vn/merchant_webapi/api/transaction";
     public static String vnp_ReturnUrl = "http://localhost:8080/vnpay_return";
     public static String vnp_TmnCode = "6QVMVCN8";
     public static String secretKey = "APIHWRUEZSEVRBLQGMRRHQCBEFUUZKLZ";
@@ -64,7 +66,7 @@ public class Config {
     }
 
     //Util for VNPAY
-    public static String hashAllFields(Map fields) {
+    public static String hashAllFields(Map fields) throws UnsupportedEncodingException {
         List fieldNames = new ArrayList(fields.keySet());
         Collections.sort(fieldNames);
         StringBuilder sb = new StringBuilder();
@@ -75,12 +77,13 @@ public class Config {
             if ((fieldValue != null) && (fieldValue.length() > 0)) {
                 sb.append(fieldName);
                 sb.append("=");
-                sb.append(fieldValue);
+                sb.append(URLEncoder.encode(fieldValue, StandardCharsets.US_ASCII.toString()));
             }
             if (itr.hasNext()) {
                 sb.append("&");
             }
         }
+        System.out.println(sb);
         return hmacSHA512(secretKey,sb.toString());
     }
     
