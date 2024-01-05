@@ -64,7 +64,7 @@
                 </GridPane>
             </center>
             <top>
-                <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Add new media" BorderPane.alignment="CENTER_LEFT">
+                <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Add new CD" BorderPane.alignment="CENTER_LEFT">
                     <font>
                         <Font size="24.0" />
                     </font>
