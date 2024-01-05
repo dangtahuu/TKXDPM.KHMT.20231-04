@@ -40,7 +40,7 @@ public class AddBookController extends MediasController {
     public TextField fieldMediaQuantity;
 	
 	@FXML
-    public TextField fieldMediaValue;
+    public ComboBox<String> fieldMediaRushSupport;
 	
 	@FXML
     public TextField fieldMediaCategory;
@@ -81,6 +81,8 @@ public class AddBookController extends MediasController {
     @FXML
     private void initialize() {
 
+    	fieldMediaRushSupport.setItems(FXCollections.observableArrayList("True", "False"));
+    	 
 		datePicker.valueProperty().addListener((observable, oldValue, newValue) -> {
              // Update the TextField with the selected date
     		 fieldPublishDate.setText(newValue.toString());
@@ -91,7 +93,7 @@ public class AddBookController extends MediasController {
         
         fieldMediaPrice.setTextFormatter(new TextFormatter<>(textFormatterDouble.getValueConverter(), textFormatterDouble.getValue()));
         fieldMediaQuantity.setTextFormatter(new TextFormatter<>(textFormatterInt.getValueConverter(), textFormatterInt.getValue()));
-        fieldMediaValue.setTextFormatter(new TextFormatter<>(textFormatterInt.getValueConverter(), textFormatterInt.getValue()));
+        
         
         fieldNumberOfPages.setTextFormatter(new TextFormatter<>(textFormatterInt.getValueConverter(), textFormatterInt.getValue()));
     }
@@ -106,13 +108,13 @@ public class AddBookController extends MediasController {
     private void btnAddMediaOnAction() {
         
         if (areDVDInputsValid(fieldMediaTitle.getText()
-        		,fieldMediaImage.getText(), fieldMediaValue.getText(), fieldMediaPrice.getText(), fieldMediaQuantity.getText(), fieldMediaCategory.getText(), fieldCoverType.getText(), fieldAuthor.getText(), fieldNumberOfPages.getText(), fieldPublisher.getText(), fieldLanguage.getText(),fieldPublishDate.getText())) {
+        		,fieldMediaImage.getText(), fieldMediaRushSupport.getValue(), fieldMediaPrice.getText(), fieldMediaQuantity.getText(), fieldMediaCategory.getText(), fieldCoverType.getText(), fieldAuthor.getText(), fieldNumberOfPages.getText(), fieldPublisher.getText(), fieldLanguage.getText(),fieldPublishDate.getText())) {
         	
         	submitImage(imageView, fieldMediaImage);
         	
             String mediaTitle = fieldMediaTitle.getText();
             String mediaImage = fieldMediaImage.getText();
-            int mediaValue = Integer.parseInt(fieldMediaValue.getText());
+            boolean mediaRushSupport = Boolean.parseBoolean(fieldMediaRushSupport.getValue());
             String mediaCategory = fieldMediaCategory.getText();
             double mediaPrice = Double.parseDouble(fieldMediaPrice.getText());
             int mediaQuantity = Integer.parseInt(fieldMediaQuantity.getText());
@@ -126,7 +128,7 @@ public class AddBookController extends MediasController {
             Task<Boolean> addMediaTask = new Task<Boolean>() {
                 @Override
                 protected Boolean call() {
-                	int id =  Datasource.getInstance().insertNewMedia(mediaTitle, mediaImage, mediaValue, mediaPrice, mediaQuantity, mediaCategory, "book");
+                	int id =  Datasource.getInstance().insertNewMedia(mediaTitle, mediaImage, mediaRushSupport, mediaPrice, mediaQuantity, mediaCategory, "book");
                 	return Datasource.getInstance().insertNewBook(coverType,author, language, publisher, numberOfPages, publishDate, id);
 //                    return Datasource.getInstance().insertNewMedia(mediaName, mediaDescription, mediaPrice, mediaQuantity, mediaCategoryId);
                 }

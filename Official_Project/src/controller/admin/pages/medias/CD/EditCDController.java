@@ -44,7 +44,7 @@ public class EditCDController extends MediasController {
     public TextField fieldMediaQuantity;
 	
 	@FXML
-    public TextField fieldMediaValue;
+    public ComboBox<String> fieldMediaRushSupport;
 	
 	@FXML
     public TextField fieldMediaCategory;
@@ -77,7 +77,7 @@ public class EditCDController extends MediasController {
 
     @FXML
     private void initialize() {
-    	
+    	fieldMediaRushSupport.setItems(FXCollections.observableArrayList("True", "False"));
     	 datePicker.valueProperty().addListener((observable, oldValue, newValue) -> {
              // Update the TextField with the selected date
     		 fieldReleaseDate.setText(newValue.toString());
@@ -88,7 +88,7 @@ public class EditCDController extends MediasController {
          
          fieldMediaPrice.setTextFormatter(new TextFormatter<>(textFormatterDouble.getValueConverter(), textFormatterDouble.getValue()));
          fieldMediaQuantity.setTextFormatter(new TextFormatter<>(textFormatterInt.getValueConverter(), textFormatterInt.getValue()));
-         fieldMediaValue.setTextFormatter(new TextFormatter<>(textFormatterInt.getValueConverter(), textFormatterInt.getValue()));
+         
          
     }
 
@@ -100,7 +100,7 @@ public class EditCDController extends MediasController {
     @FXML
     private void btnEditMediaOnAction() {
     	 if (areCDInputsValid(fieldMediaTitle.getText()
-         		,fieldMediaImage.getText(), fieldMediaValue.getText(), fieldMediaPrice.getText(), fieldMediaQuantity.getText(), fieldMediaCategory.getText(),fieldArtist.getText(),fieldRecordLabel.getText(),fieldTracklist.getText(),fieldReleaseDate.getText()))  {
+         		,fieldMediaImage.getText(), fieldMediaRushSupport.getValue(), fieldMediaPrice.getText(), fieldMediaQuantity.getText(), fieldMediaCategory.getText(),fieldArtist.getText(),fieldRecordLabel.getText(),fieldTracklist.getText(),fieldReleaseDate.getText()))  {
 
     		if(!fieldMediaImage.getText().equals(imageUrl)) {
     			submitImage(imageView, fieldMediaImage);
@@ -110,7 +110,7 @@ public class EditCDController extends MediasController {
             
             String mediaTitle = fieldMediaTitle.getText();
             String mediaImage = fieldMediaImage.getText();
-            int mediaValue = Integer.parseInt(fieldMediaValue.getText());
+            boolean mediaRushSupport = Boolean.parseBoolean(fieldMediaRushSupport.getValue());
             String mediaCategory = fieldMediaCategory.getText();
             double mediaPrice = Double.parseDouble(fieldMediaPrice.getText());
             int mediaQuantity = Integer.parseInt(fieldMediaQuantity.getText());
@@ -124,7 +124,7 @@ public class EditCDController extends MediasController {
                 protected Boolean call() {
                     try {
                     	Boolean result = false;
-						if(Datasource.getInstance().updateOneMedia(mediaId, mediaTitle, mediaImage, mediaValue, mediaPrice, mediaQuantity, mediaCategory)) {result = Datasource.getInstance().updateOneCD(artist, recordLabel, tracklist, releaseDate, mediaId);}
+						if(Datasource.getInstance().updateOneMedia(mediaId, mediaTitle, mediaImage, mediaRushSupport, mediaPrice, mediaQuantity, mediaCategory)) {result = Datasource.getInstance().updateOneCD(artist, recordLabel, tracklist, releaseDate, mediaId);}
 						if(result) {
 							  viewMediaResponse.setVisible(true);
 							  viewMediaResponse.setText("Media edited!");
@@ -181,7 +181,7 @@ public class EditCDController extends MediasController {
 			    fieldMediaTitle.setText(fillMediaTask.valueProperty().getValue().get(0).getName());
 			    fieldMediaPrice.setText(String.valueOf(fillMediaTask.valueProperty().getValue().get(0).getPrice()));
 			    fieldMediaQuantity.setText(String.valueOf(fillMediaTask.valueProperty().getValue().get(0).getQuantity()));
-			    fieldMediaValue.setText(String.valueOf(fillMediaTask.valueProperty().getValue().get(0).getValue()));
+			    fieldMediaRushSupport.setValue(String.valueOf(fillMediaTask.valueProperty().getValue().get(0).getRushSupport()));
 			    fieldMediaCategory.setText(fillMediaTask.valueProperty().getValue().get(0).getCategory());
 			    fieldMediaImage.setText(fillMediaTask.valueProperty().getValue().get(0).getImageUrl());
 			    fieldArtist.setText(fillMediaTask.valueProperty().getValue().get(0).getArtist());

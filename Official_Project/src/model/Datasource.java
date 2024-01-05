@@ -36,9 +36,9 @@ public class Datasource extends Media {
     public static final String COLUMN_PRODUCTS_PRICE = "price";
     public static final String COLUMN_PRODUCTS_QUANTITY = "quantity";
     public static final String COLUMN_PRODUCTS_CATEGORY = "category";
-    public static final String COLUMN_PRODUCTS_VALUE = "value";
+    public static final String COLUMN_PRODUCTS_RUSH = "rushSupport";
     public static final String COLUMN_PRODUCTS_TYPE = "type";
-    public static final String COLUMN_PRODUCTS_RUSHSUPPORT = "rushSupport";
+
 
     
     public static final String TABLE_CD = "CD";
@@ -216,9 +216,9 @@ public class Datasource extends Media {
                 media.setPrice(results.getDouble(4));
                 media.setQuantity(results.getInt(5));
                 media.setCategory(results.getString(6));
-                media.setValue(results.getInt(7));
+                media.setRushSupport(results.getBoolean(7));
                 media.setType(results.getString(8));
-                media.setrushSupport(results.getBoolean(9));
+                
 //                media.setNr_sales(results.getInt(7));
                 medias.add(media);
             }
@@ -257,7 +257,7 @@ public class Datasource extends Media {
                 media.setPrice(results.getDouble(4));
                 media.setQuantity(results.getInt(5));
                 media.setCategory(results.getString(6));
-                media.setValue(results.getInt(7));
+                media.setRushSupport(results.getBoolean(7));
                 medias.add(media);
             }
             return medias;
@@ -288,7 +288,7 @@ public class Datasource extends Media {
                 cd.setPrice(results.getDouble(8));
                 cd.setQuantity(results.getInt(9));
                 cd.setCategory(results.getString(10));
-                cd.setValue(results.getInt(11));
+                cd.setRushSupport(results.getBoolean(11));
                 cds.add(cd);
             }
 //            System.out.println(cds.get(0).getId());
@@ -322,7 +322,7 @@ public class Datasource extends Media {
                 dvd.setPrice(results.getDouble(10));
                 dvd.setQuantity(results.getInt(11));
                 dvd.setCategory(results.getString(12));
-                dvd.setValue(results.getInt(13));
+                dvd.setRushSupport(results.getBoolean(13));
                 dvds.add(dvd);
             }
 //            System.out.println(dvds.get(0).getId());
@@ -356,7 +356,7 @@ public class Datasource extends Media {
                 book.setPrice(results.getDouble(10));
                 book.setQuantity(results.getInt(11));
                 book.setCategory(results.getString(12));
-                book.setValue(results.getInt(13));
+                book.setRushSupport(results.getBoolean(13));
                 books.add(book);
             }
 //            System.out.println(books.get(0).getId());
@@ -446,7 +446,7 @@ public class Datasource extends Media {
                 media.setPrice(results.getDouble(4));
                 media.setQuantity(results.getInt(5));
                 media.setCategory(results.getString(6));
-                media.setValue(results.getInt(7));
+                media.setRushSupport(results.getBoolean(7));
                 medias.add(media);
             }
             return medias;
@@ -515,9 +515,9 @@ public class Datasource extends Media {
                 TABLE_PRODUCTS + "." + COLUMN_PRODUCTS_PRICE + ", " +
                 TABLE_PRODUCTS + "." + COLUMN_PRODUCTS_QUANTITY + ", " +
                 TABLE_PRODUCTS + "." + COLUMN_PRODUCTS_CATEGORY + ", " +
-                TABLE_PRODUCTS + "." + COLUMN_PRODUCTS_VALUE  + ", " +
-                TABLE_PRODUCTS + "." + COLUMN_PRODUCTS_TYPE  + ", " +
-                TABLE_PRODUCTS + "." + COLUMN_PRODUCTS_RUSHSUPPORT  +
+                TABLE_PRODUCTS + "." + COLUMN_PRODUCTS_RUSH  + ", " +
+                TABLE_PRODUCTS + "." + COLUMN_PRODUCTS_TYPE  + 
+                
                 " FROM " + TABLE_PRODUCTS
         );
     }
@@ -535,7 +535,7 @@ public class Datasource extends Media {
                 TABLE_PRODUCTS + "." + COLUMN_PRODUCTS_PRICE + ", " +
                 TABLE_PRODUCTS + "." + COLUMN_PRODUCTS_QUANTITY + ", " +
                 TABLE_PRODUCTS + "." + COLUMN_PRODUCTS_CATEGORY + ", " +
-                TABLE_PRODUCTS + "." + COLUMN_PRODUCTS_VALUE +
+                TABLE_PRODUCTS + "." + COLUMN_PRODUCTS_RUSH +
                 " FROM " + TABLE_CD +
                 " LEFT JOIN " + TABLE_PRODUCTS +
                 " ON " + TABLE_CD + "." + COLUMN_CD_ID +
@@ -559,7 +559,7 @@ public class Datasource extends Media {
                 TABLE_PRODUCTS + "." + COLUMN_PRODUCTS_PRICE + ", " +
                 TABLE_PRODUCTS + "." + COLUMN_PRODUCTS_QUANTITY + ", " +
                 TABLE_PRODUCTS + "." + COLUMN_PRODUCTS_CATEGORY + ", " +
-                TABLE_PRODUCTS + "." + COLUMN_PRODUCTS_VALUE +
+                TABLE_PRODUCTS + "." + COLUMN_PRODUCTS_RUSH +
                 " FROM " + TABLE_DVD +
                 " LEFT JOIN " + TABLE_PRODUCTS +
                 " ON " + TABLE_DVD + "." + COLUMN_DVD_ID +
@@ -581,7 +581,7 @@ public class Datasource extends Media {
                 TABLE_PRODUCTS + "." + COLUMN_PRODUCTS_PRICE + ", " +
                 TABLE_PRODUCTS + "." + COLUMN_PRODUCTS_QUANTITY + ", " +
                 TABLE_PRODUCTS + "." + COLUMN_PRODUCTS_CATEGORY + ", " +
-                TABLE_PRODUCTS + "." + COLUMN_PRODUCTS_VALUE +
+                TABLE_PRODUCTS + "." + COLUMN_PRODUCTS_RUSH +
                 " FROM " + TABLE_BOOK +
                 " LEFT JOIN " + TABLE_PRODUCTS +
                 " ON " + TABLE_BOOK + "." + COLUMN_BOOK_ID +
@@ -619,12 +619,12 @@ public class Datasource extends Media {
      * @return boolean      Returns true or false.
      * @since                   1.0.0
      */
-    public int insertNewMedia(String name, String image, int value, double price, int quantity, String category, String type) {
+    public int insertNewMedia(String name, String image, boolean rushSupport, double price, int quantity, String category, String type) {
 
         String sql = "INSERT INTO " + TABLE_PRODUCTS + " ("
                 + COLUMN_PRODUCTS_NAME + ", "
                 + COLUMN_PRODUCTS_IMAGE + ", "
-                + COLUMN_PRODUCTS_VALUE + ", "
+                + COLUMN_PRODUCTS_RUSH + ", "
                 + COLUMN_PRODUCTS_PRICE + ", "
                 + COLUMN_PRODUCTS_QUANTITY + ", "
                 + COLUMN_PRODUCTS_CATEGORY + ", "
@@ -634,7 +634,7 @@ public class Datasource extends Media {
         try (PreparedStatement statement = conn.prepareStatement(sql)) {
             statement.setString(1, name);
             statement.setString(2, image);
-            statement.setInt(3, value);
+            statement.setBoolean(3, rushSupport);
             statement.setDouble(4, price);
             statement.setInt(5, quantity);
             statement.setString(6, category);
@@ -722,11 +722,11 @@ public class Datasource extends Media {
      * @return boolean      Returns true or false.
      * @since                   1.0.0
      */
-    public boolean updateOneMedia(int media_id, String name, String image, int value, double price, int quantity, String category) {
+    public boolean updateOneMedia(int media_id, String name, String image, boolean rushSupport, double price, int quantity, String category) {
         String sql = "UPDATE " + TABLE_PRODUCTS + " SET "
                 + COLUMN_PRODUCTS_NAME + " = ?" + ", "
                 + COLUMN_PRODUCTS_IMAGE + " = ?" + ", "
-                + COLUMN_PRODUCTS_VALUE + " = ?" + ", "
+                + COLUMN_PRODUCTS_RUSH + " = ?" + ", "
                 + COLUMN_PRODUCTS_PRICE + " = ?" + ", "
                 + COLUMN_PRODUCTS_QUANTITY + " = ?" + ", "
                 + COLUMN_PRODUCTS_CATEGORY + " = ?" +
@@ -735,7 +735,7 @@ public class Datasource extends Media {
         try (PreparedStatement statement = conn.prepareStatement(sql)) {
             statement.setString(1, name);
             statement.setString(2, image);
-            statement.setInt(3, value);
+            statement.setBoolean(3, rushSupport);
             statement.setDouble(4, price);
             statement.setInt(5, quantity);
             statement.setString(6, category);
@@ -1202,6 +1202,40 @@ public class Datasource extends Media {
             return null;
         }
     }
+    
+//    public Order getOneOrder(int order_id) {
+//
+//        StringBuilder queryOrder = new StringBuilder("SELECT " +
+//                TABLE_ORDER + "." + COLUMN_ORDER_ID + ", " +
+//                TABLE_ORDER + "." + COLUMN_ORDER_DATE + ", " +
+//                TABLE_ORDER + "." + COLUMN_ORDER_TYPE + ", " +
+//                TABLE_ORDER + "." + COLUMN_ORDER_TOTAL + ", " +
+//                TABLE_ORDER + "." + COLUMN_ORDER_STATUS + 
+//                " FROM " + TABLE_ORDER  + " WHERE " + TABLE_ORDER + "." + COLUMN_ORDER_ID + " = " + order_id
+//        );
+//
+//      
+//        try (Statement statement = conn.createStatement();
+//             ResultSet results = statement.executeQuery(queryOrders.toString())) {
+//
+//            List<Order> orders = new ArrayList<>();
+//            while (results.next()) {
+//            	Order order = new Order();
+//                order.setId(results.getInt(1));
+//                order.setCreatedAt(results.getString(2));
+//                order.setType(results.getString(3));
+//                order.setTotalPrice(results.getDouble(4));
+//                order.setStatus(results.getString(5));
+////                order.setOrder_price(results.getDouble(8));
+//                orders.add(order);
+//            }
+//            return orders;
+//
+//        } catch (SQLException e) {
+//            System.out.println("Query failed: " + e.getMessage());
+//            return null;
+//        }
+//    }
 
     
     public List<Order> getAllOrders(int sortOrder) {
@@ -1262,8 +1296,8 @@ public class Datasource extends Media {
                 TABLE_USERS + "." + COLUMN_USERS_FULLNAME + ", " +
                 TABLE_PRODUCTS + "." + COLUMN_PRODUCTS_NAME + ", " +
                 TABLE_PRODUCTS + "." + COLUMN_PRODUCTS_PRICE +", "+
-                TABLE_CART + "." + COLUMN_CART_PU_QUANTITY + ", "+
-                TABLE_PRODUCTS + "." + COLUMN_PRODUCTS_RUSHSUPPORT +
+                TABLE_CART + "." + COLUMN_CART_PU_QUANTITY + 
+                
                 " FROM " + TABLE_CART
         );
 
@@ -1374,6 +1408,9 @@ public class Datasource extends Media {
 
     		 updateStatement.setString(1, status);
     		    updateStatement.setInt(2, order_id);
+    		    
+    		    updateStatement.executeUpdate();
+    	System.out.println(order_id);
     	
     		
     		    return true;

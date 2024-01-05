@@ -369,7 +369,7 @@ public class MediasController {
      * @since                   1.0.0
      */
     @FXML
-    boolean areMediaInputsValid(String fieldMediaName, String fieldMediaImage, String fieldMediaValue, String fieldMediaPrice, String fieldMediaQuantity, String fieldMediaCategory) {
+    boolean areMediaInputsValid(String fieldMediaName, String fieldMediaImage, String fieldMediaRushSupport, String fieldMediaPrice, String fieldMediaQuantity, String fieldMediaCategory) {
         
         String errorMessage = "";
 
@@ -379,7 +379,7 @@ public class MediasController {
         if (fieldMediaName == null || fieldMediaName.length() < 3) {
             errorMessage += "please enter a valid name!\n";
         }
-        if (fieldMediaValue == null) {
+        if (fieldMediaRushSupport == null) {
             errorMessage += "Description is not valid!\n";
         }
         if (fieldMediaCategory == null) {
@@ -411,14 +411,14 @@ public class MediasController {
     
     @FXML
 	protected
-    boolean areCDInputsValid(String fieldMediaName, String fieldMediaImage, String fieldMediaValue, String fieldMediaPrice, String fieldMediaQuantity, String fieldMediaCategory, String fieldArtist, String fieldRecordLabel, String fieldTracklist, String fieldReleaseDate) {
+    boolean areCDInputsValid(String fieldMediaName, String fieldMediaImage, String fieldMediaRushSupport, String fieldMediaPrice, String fieldMediaQuantity, String fieldMediaCategory, String fieldArtist, String fieldRecordLabel, String fieldTracklist, String fieldReleaseDate) {
         
         String errorMessage = "";
 
         if (fieldMediaName == null || fieldMediaName.length() < 3) {
             errorMessage += "please enter a valid name!\n";
         }
-        if (fieldMediaValue == null) {
+        if (fieldMediaRushSupport == null) {
             errorMessage += "Description is not valid!\n";
         }
         
@@ -465,14 +465,14 @@ public class MediasController {
 
     @FXML
   	protected
-      boolean areDVDInputsValid(String fieldMediaName, String fieldMediaImage, String fieldMediaValue, String fieldMediaPrice, String fieldMediaQuantity, String fieldMediaCategory, String fieldDiscType, String fieldDirector, String fieldRuntime, String fieldStudio, String fieldSubtitle, String fieldReleaseDate) {
+      boolean areDVDInputsValid(String fieldMediaName, String fieldMediaImage, String fieldMediaRushSupport, String fieldMediaPrice, String fieldMediaQuantity, String fieldMediaCategory, String fieldDiscType, String fieldDirector, String fieldRuntime, String fieldStudio, String fieldSubtitle, String fieldReleaseDate) {
           
           String errorMessage = "";
 
           if (fieldMediaName == null || fieldMediaName.length() < 3) {
               errorMessage += "please enter a valid name!\n";
           }
-          if (fieldMediaValue == null) {
+          if (fieldMediaRushSupport == null) {
               errorMessage += "Description is not valid!\n";
           }
           

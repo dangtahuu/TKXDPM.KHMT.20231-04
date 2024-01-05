@@ -133,7 +133,7 @@ public class UserInvoiceController {
 	  public void handleSuccessInvoice(int order_id) throws IOException {
 		  int user_id = UserSessionController.getUserId();
 		  Datasource.getInstance().createOrderMedia(order_id, user_id);
-		  Datasource.getInstance().updateOrder("PAID",order_id);
+		  Datasource.getInstance().updateOrder("SUCCESSFUL",order_id);
           Datasource.getInstance().emptyCart(user_id);     
        
     }

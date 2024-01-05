@@ -57,10 +57,7 @@ public class Interbank {
 	            if (target.equals("/vnpay_return") && request.getMethod().equals("GET")) {
 	                handleVnPayReturn(request, response, baseRequest);
 	                
-	            } else  if (target.equals("/vnpay_ipn") && request.getMethod().equals("GET")) {
-	                handleVnPayIPN(request, response, baseRequest);
-	         
-	            } else {
+	            }  else {
 	            	
 	                response.setContentType("text/plain");
 	                response.setStatus(HttpServletResponse.SC_NOT_FOUND);
@@ -69,14 +66,6 @@ public class Interbank {
 	            }
 	        }
 
-	        private void handleVnPayIPN(HttpServletRequest request, HttpServletResponse response, org.eclipse.jetty.server.Request baseRequest) throws IOException {
-	        	System.out.print("123");
-	            // Your custom handling logic for /vnpay GET requests goes here
-	            response.setContentType("text/plain");
-	            response.setStatus(HttpServletResponse.SC_OK);
-	            baseRequest.setHandled(true);
-	            response.getWriter().write("Hello, this is the server response for a GET request at /vnpay!");
-	        }
 	        
 	        private boolean handleVnPayReturn(HttpServletRequest request, HttpServletResponse response, org.eclipse.jetty.server.Request baseRequest) throws IOException {
 	        	  Map fields = new HashMap();
@@ -87,7 +76,7 @@ public class Interbank {
 	        	   
 	        	    if ((fieldValue != null) && (fieldValue.length() > 0)) {
 	        	        fields.put(fieldName, fieldValue);
-	        	        if(fieldName.equals("vnp_TransactionNo"))
+	        	        if(fieldName.equals("vnp_TxnRef"))
 	        	        		order_id=Integer.parseInt(fieldValue);
 	        	    }
 	        	    }
@@ -104,7 +93,7 @@ public class Interbank {
 	        	  response.setContentType("text/plain");
 	        	  
 	        	
-//	        	if (signValue.equals(vnp_SecureHash)) {
+	        	if (signValue.equals(vnp_SecureHash)) {
 	        	    if ("00".equals(request.getParameter("vnp_ResponseCode"))) {
 	        	    	 response.setStatus(HttpServletResponse.SC_OK);
 	     	            baseRequest.setHandled(true);
@@ -122,7 +111,7 @@ public class Interbank {
 	        	    	
 	        	    
 
-//	        	} 
+	        	} 
 	        	else {
 	        		 response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
 	     	            baseRequest.setHandled(true);
@@ -149,7 +138,7 @@ public class Interbank {
 				String orderType = "other";
 				long amount = (long) (fee*100)+1000000;
 				
-				String vnp_TxnRef = Config.getRandomNumber(8);
+				int vnp_TxnRef = order_id;
 				String vnp_IpAddr = "13.160.92.202";
 
 				String vnp_TmnCode = Config.vnp_TmnCode;
@@ -160,7 +149,7 @@ public class Interbank {
 				vnp_Params.put("vnp_TmnCode", vnp_TmnCode);
 				vnp_Params.put("vnp_Amount", String.valueOf(amount));
 				vnp_Params.put("vnp_CurrCode", "VND");
-				vnp_Params.put("vnp_TxnRef", vnp_TxnRef);
+				vnp_Params.put("vnp_TxnRef", String.valueOf(vnp_TxnRef));
 				vnp_Params.put("vnp_OrderInfo", "Thanh toan don hang:" + vnp_TxnRef);
 				vnp_Params.put("vnp_OrderType", orderType);
 				vnp_Params.put("vnp_Locale", "vn");
@@ -200,6 +189,7 @@ public class Interbank {
 				    }
 				}
 				String queryUrl = query.toString();
+				System.out.println(hashData);
 				String vnp_SecureHash = Config.hmacSHA512(Config.secretKey, hashData.toString());
 				queryUrl += "&vnp_SecureHash=" + vnp_SecureHash;
 				String paymentUrl = Config.vnp_PayUrl + "?" + queryUrl;
@@ -225,6 +215,97 @@ public class Interbank {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			} catch (URISyntaxException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+	    }
+	    
+ public void refund(int order_id, double d) throws IOException {
+	        
+	        try {
+				String vnp_Version = "2.1.0";
+				String vnp_Command = "refund";
+				
+				double vnp_Amount = d+1000000;
+				int vnp_TransactionType = 02;
+				
+				String vnp_RequestId = Config.getRandomNumber(8);
+				String vnp_TxnRef = Config.getRandomNumber(8);
+				String vnp_OrderInfo = "Hoan tra don hang:" + vnp_TxnRef;
+						
+				String vnp_IpAddr = "13.160.92.202";
+
+				String vnp_TmnCode = Config.vnp_TmnCode;
+				
+			
+
+				Calendar cld = Calendar.getInstance(TimeZone.getTimeZone("Etc/GMT+7"));
+				SimpleDateFormat formatter = new SimpleDateFormat("yyyyMMddHHmmss");
+				String vnp_CreateDate = formatter.format(cld.getTime());
+				String vnp_TransactionDate = vnp_CreateDate;
+				
+				String vnp_CreateBy = "admin"	;
+				
+				
+				cld.add(Calendar.MINUTE, 15);
+				String vnp_ExpireDate = formatter.format(cld.getTime());
+				
+				
+				Map<String, String> vnp_Params = new HashMap<>();
+				vnp_Params.put("vnp_RequestId", vnp_RequestId);
+				vnp_Params.put("vnp_Version", vnp_Version);
+				vnp_Params.put("vnp_Command", vnp_Command);
+				vnp_Params.put("vnp_TmnCode", vnp_TmnCode);
+				vnp_Params.put("vnp_Amount", String.valueOf(vnp_Amount));
+				
+				vnp_Params.put("vnp_TxnRef", vnp_TxnRef);
+				
+				vnp_Params.put("vnp_OrderInfo", "Thanh toan don hang:" + vnp_TxnRef);
+				
+				vnp_Params.put("vnp_IpAddr", vnp_IpAddr);
+				vnp_Params.put("vnp_CreateDate", vnp_CreateDate);
+				
+				vnp_Params.put("vnp_TransactionType", String.valueOf(vnp_TransactionType));
+				vnp_Params.put("vnp_TransactionDate", vnp_TransactionDate);
+				vnp_Params.put("vnp_CreateBy", vnp_CreateBy);
+				
+				
+				List fieldNames = new ArrayList(vnp_Params.keySet());
+				Collections.sort(fieldNames);
+				
+				StringBuilder query = new StringBuilder();
+				Iterator itr = fieldNames.iterator();
+				while (itr.hasNext()) {
+				    String fieldName = (String) itr.next();
+				    String fieldValue = (String) vnp_Params.get(fieldName);
+				    if ((fieldValue != null) && (fieldValue.length() > 0)) {
+				        
+				        //Build query
+				        query.append(URLEncoder.encode(fieldName, StandardCharsets.US_ASCII.toString()));
+				        query.append('=');
+				        query.append(URLEncoder.encode(fieldValue, StandardCharsets.US_ASCII.toString()));
+				        if (itr.hasNext()) {
+				            query.append('&');
+//				            hashData.append('&');
+				        }
+				    }
+				}
+				
+				String hashData = vnp_RequestId + "|" + vnp_Version + "|" + vnp_Command + "|" + vnp_TmnCode + "|" + vnp_TransactionType + "|" + vnp_TxnRef + "|" + vnp_Amount +  "|" + vnp_TransactionDate + "|" + vnp_CreateBy + "|" + vnp_CreateDate + "|" + vnp_IpAddr + "|" + vnp_OrderInfo;
+				String queryUrl = query.toString();
+				String vnp_SecureHash = Config.hmacSHA512(Config.secretKey, hashData);
+				queryUrl += "&vnp_SecureHash=" + vnp_SecureHash;
+				String paymentUrl = Config.vnp_RefundUrl + "?" + queryUrl;
+				System.out.println(vnp_SecureHash);
+				
+				System.out.println(paymentUrl);
+//				URI uri = new URI(paymentUrl);
+
+//			
+			} catch (UnsupportedEncodingException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			} catch (IOException e) {

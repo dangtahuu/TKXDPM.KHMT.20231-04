@@ -37,7 +37,7 @@ public class ViewBookController extends MediasController {
     public TextField fieldMediaQuantity;
 	
 	@FXML
-    public TextField fieldMediaValue;
+    public ComboBox<String> fieldMediaRushSupport;
 	
 	@FXML
     public TextField fieldMediaCategory;
@@ -100,7 +100,7 @@ public class ViewBookController extends MediasController {
 			    fieldMediaTitle.setText(fillMediaTask.valueProperty().getValue().get(0).getName());
 			    fieldMediaPrice.setText(String.valueOf(fillMediaTask.valueProperty().getValue().get(0).getPrice()));
 			    fieldMediaQuantity.setText(String.valueOf(fillMediaTask.valueProperty().getValue().get(0).getQuantity()));
-			    fieldMediaValue.setText(String.valueOf(fillMediaTask.valueProperty().getValue().get(0).getValue()));
+			    fieldMediaRushSupport.setValue(String.valueOf(fillMediaTask.valueProperty().getValue().get(0).getRushSupport()));
 			    fieldMediaCategory.setText(fillMediaTask.valueProperty().getValue().get(0).getCategory());
 			    fieldMediaImage.setText(fillMediaTask.valueProperty().getValue().get(0).getImageUrl());
 			    fieldAuthor.setText(fillMediaTask.valueProperty().getValue().get(0).getAuthor());
