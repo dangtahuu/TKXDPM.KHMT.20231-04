@@ -64,54 +64,54 @@ public class CustomersController {
             public TableCell<User, Void> call(final TableColumn<User, Void> param) {
                 return new TableCell<User, Void>() {
 
-                    private final Button viewButton = new Button("View");
+                
+                    private final Button unblockButton = new Button("Unblock");
+
                     {
-                        viewButton.getStyleClass().add("button");
-                        viewButton.getStyleClass().add("xs");
-                        viewButton.getStyleClass().add("info");
-                        viewButton.setOnAction((ActionEvent event) -> {
-                            User customerData = getTableView().getItems().get(getIndex());
-                            btnViewCustomer((int) customerData.getId());
-                            System.out.println("View User");
-                            System.out.println("customer id: " + customerData.getId());
-                            System.out.println("customer name: " + customerData.getFullname());
+                        unblockButton.getStyleClass().add("button");
+                        unblockButton.getStyleClass().add("xs");
+                        unblockButton.getStyleClass().add("primary");
+                        unblockButton.setOnAction((ActionEvent event) -> {
+                        	 User customerData = getTableView().getItems().get(getIndex());
+
+                             Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+                             alert.setHeaderText("Are you sure that you want to unblock " + customerData.getFullname() + " ?");
+                             alert.setTitle("Unblock " + customerData.getFullname() + " ?");
+                             Optional<ButtonType> unblockConfirmation = alert.showAndWait();
+
+                             if (unblockConfirmation.get() == ButtonType.OK) {
+                              
+                                 if (Datasource.getInstance().EditStatusSingleCustomer(customerData.getId(),"enabled")) {
+                                int rowIndex = getIndex();
+                                     User customer = getTableView().getItems().get(rowIndex);
+
+                                     // Modify the field you want to change
+                                     customer.setStatus("enabled");
+
+                                     // Optionally refresh the TableView if not bound to the data
+                                     getTableView().refresh();
+                                 }
+                             }
                         });
                     }
 
-                    private final Button editButton = new Button("Edit");
+                    private final Button blockButton = new Button("Block");
 
                     {
-                        editButton.getStyleClass().add("button");
-                        editButton.getStyleClass().add("xs");
-                        editButton.getStyleClass().add("primary");
-                        editButton.setOnAction((ActionEvent event) -> {
-                            User customerData = getTableView().getItems().get(getIndex());
-                            btnEditCustomer((int) customerData.getId());
-                            System.out.println("Edit User");
-                            System.out.println("customer id: " + customerData.getId());
-                            System.out.println("customer name: " + customerData.getFullname());
-                        });
-                    }
-
-                    private final Button deleteButton = new Button("Block");
-
-                    {
-                        deleteButton.getStyleClass().add("button");
-                        deleteButton.getStyleClass().add("xs");
-                        deleteButton.getStyleClass().add("danger");
-                        deleteButton.setOnAction((ActionEvent event) -> {
+                    	blockButton.getStyleClass().add("button");
+                    	blockButton.getStyleClass().add("xs");
+                    	blockButton.getStyleClass().add("danger");
+                    	blockButton.setOnAction((ActionEvent event) -> {
                             User customerData = getTableView().getItems().get(getIndex());
 
                             Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
                             alert.setHeaderText("Are you sure that you want to block " + customerData.getFullname() + " ?");
                             alert.setTitle("Delete " + customerData.getFullname() + " ?");
-                            Optional<ButtonType> deleteConfirmation = alert.showAndWait();
+                            Optional<ButtonType> blockConfirmation = alert.showAndWait();
 
-                            if (deleteConfirmation.get() == ButtonType.OK) {
-                                System.out.println("Delete User");
-                                System.out.println("customer id: " + customerData.getId());
-                                System.out.println("customer name: " + customerData.getFullname());
-                                if (Datasource.getInstance().deleteSingleCustomer(customerData.getId())) {
+                            if (blockConfirmation.get() == ButtonType.OK) {
+                             
+                                if (Datasource.getInstance().EditStatusSingleCustomer(customerData.getId(),"blocked")) {
                                int rowIndex = getIndex();
                                     User customer = getTableView().getItems().get(rowIndex);
 
@@ -131,7 +131,8 @@ public class CustomersController {
                         buttonsPane.setSpacing(10);
 //                        buttonsPane.getChildren().add(viewButton);
 //                        buttonsPane.getChildren().add(editButton);
-                        buttonsPane.getChildren().add(deleteButton);
+                        buttonsPane.getChildren().add(blockButton);
+                        buttonsPane.getChildren().add(unblockButton);
                     }
 
                     @Override

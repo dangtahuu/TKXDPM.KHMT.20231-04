@@ -11,6 +11,7 @@
         <columnConstraints>
             <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
             <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
         </columnConstraints>
         <rowConstraints>
             <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
@@ -43,6 +44,23 @@
                         </font>
                     </Label>
                     <Label text="Customers">
+                        <font>
+                            <Font size="30.0" />
+                        </font>
+                        <HBox.margin>
+                            <Insets left="10.0" />
+                        </HBox.margin>
+                    </Label>
+                </children>
+            </HBox>
+               <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="2">
+                <children>
+                    <Label fx:id="ordersCount" alignment="CENTER_RIGHT" text="0">
+                        <font>
+                            <Font size="50.0" />
+                        </font>
+                    </Label>
+                    <Label text="Orders">
                         <font>
                             <Font size="30.0" />
                         </font>

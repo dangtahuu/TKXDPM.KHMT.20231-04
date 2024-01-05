@@ -207,6 +207,7 @@ public class MediasController {
      */
     @FXML
     private void btnMediasSearchOnAction() {
+    	
         Task<ObservableList<Media>> searchMediasTask = new Task<ObservableList<Media>>() {
             @Override
             protected ObservableList<Media> call() {

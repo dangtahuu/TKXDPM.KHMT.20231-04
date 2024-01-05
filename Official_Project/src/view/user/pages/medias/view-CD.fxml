@@ -11,9 +11,10 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
+<?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.ComboBox?>
 
-<AnchorPane prefHeight="800.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.admin.pages.medias.Book.ViewBookController">
+<AnchorPane prefHeight="800.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.user.pages.medias.ViewCDController">
     <BorderPane layoutX="14.0" layoutY="14.0">
         <center>
             <GridPane fx:id="formViewMediaView" alignment="CENTER_RIGHT" prefHeight="332.0" prefWidth="712.0">
@@ -29,8 +30,6 @@
                     <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                     <RowConstraints minHeight="10.0" prefHeight="90.0" vgrow="SOMETIMES" />
                     <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                       <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                <RowConstraints />
                 </rowConstraints>
                  <TextField fx:id="fieldMediaId" disable="true" style="-fx-opacity: 1;" visible="false" GridPane.columnIndex="1" />
@@ -53,22 +52,16 @@
    
     
     
-   <Label text="Cover Type" GridPane.rowIndex="3"/>
-                    <TextField disable="true" style="-fx-opacity: 1;" fx:id="fieldCoverType" promptText="Cover Type" GridPane.columnIndex="1" GridPane.rowIndex="3"/>
-                    <Label text="Author" GridPane.rowIndex="3" GridPane.columnIndex="3" />
-                    <TextField disable="true" style="-fx-opacity: 1;" fx:id="fieldAuthor" promptText="Record label" GridPane.columnIndex="4" GridPane.rowIndex="3"/>
+   <Label text="Artist" GridPane.rowIndex="3" />
+                    <TextField fx:id="fieldArtist" disable="true" promptText="Artist name" style="-fx-opacity: 1;" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                    <Label text="Record label" GridPane.columnIndex="3" GridPane.rowIndex="3" />
+                    <TextField fx:id="fieldRecordLabel" disable="true" promptText="Record label" style="-fx-opacity: 1;" GridPane.columnIndex="4" GridPane.rowIndex="3" />
                     
-                      <Label text="Publisher" GridPane.rowIndex="4"/>
-                    <TextField disable="true" style="-fx-opacity: 1;" fx:id="fieldPublisher" promptText="Studio" GridPane.columnIndex="1" GridPane.rowIndex="4"/>
-                    <Label text="Language" GridPane.rowIndex="4" GridPane.columnIndex="3" />
-                    <TextField disable="true" style="-fx-opacity: 1;" fx:id="fieldLanguage" promptText="Subtitle" GridPane.columnIndex="4" GridPane.rowIndex="4"/>
-    
-         <Label text="Number of Pages" GridPane.rowIndex="5"/>
-                    <TextField disable="true" style="-fx-opacity: 1;" fx:id="fieldNumberOfPages" promptText="0.0" GridPane.columnIndex="1" GridPane.rowIndex="5"/>
-                    <Label text="Publish Date" GridPane.rowIndex="5" GridPane.columnIndex="3" />
-                    <TextField disable="true" style="-fx-opacity: 1;" fx:id="fieldPublishDate" promptText="Release Date" GridPane.columnIndex="4" GridPane.rowIndex="5"/>
-                    
-                    
+                      <Label text="Tracklist" GridPane.rowIndex="4" />
+                      <Text fx:id="fieldTracklist" style="-fx-opacity: 1;" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+                     <Label text="Release Date" GridPane.rowIndex="4" GridPane.columnIndex="3" />
+                    <TextField disable="true" style="-fx-opacity: 1;" fx:id="fieldReleaseDate" promptText="Release Date" GridPane.columnIndex="4" GridPane.rowIndex="4"/>
+           
             </GridPane>
         </center>
         <top>

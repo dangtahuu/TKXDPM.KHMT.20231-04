@@ -66,14 +66,10 @@
                           </TableColumn>
                           <TableColumn prefWidth="125.0" text="Category">
                               <cellValueFactory>
-                                  <PropertyValueFactory property="category_name" />
+                                  <PropertyValueFactory property="category" />
                               </cellValueFactory>
                           </TableColumn>
-                          <TableColumn prefWidth="75.0" text="Nr. Sales">
-                              <cellValueFactory>
-                                  <PropertyValueFactory property="nr_sales" />
-                              </cellValueFactory>
-                          </TableColumn>
+                        
                       </columns>
                       <columnResizePolicy>
                           <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />

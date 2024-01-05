@@ -60,6 +60,7 @@ public class MainDashboardController implements Initializable {
         HomeController homeController = fxmlLoader.getController();
         homeController.getDashboardProdCount();
         homeController.getDashboardCostCount();
+        homeController.getDashboardOrderCount();
     }
 
     /**
@@ -163,5 +164,6 @@ public class MainDashboardController implements Initializable {
         HomeController homeController = fxmlLoader.getController();
         homeController.getDashboardProdCount();
         homeController.getDashboardCostCount();
+        homeController.getDashboardOrderCount();
     }
 }
