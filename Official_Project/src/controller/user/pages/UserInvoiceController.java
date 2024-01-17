@@ -79,6 +79,7 @@ public class UserInvoiceController {
         dialogStage.setScene(scene);
         dialogStage.show();
     }
+	
 	@FXML
 	public void handleBacktoOrder(ActionEvent event) throws IOException {
 	    Stage dialogStage;
@@ -88,6 +89,19 @@ public class UserInvoiceController {
 
 
 	    Scene scene = new Scene(FXMLLoader.load(getClass().getResource("/view/user/main-dashboard.fxml")));
+	    System.out.print("home");
+	    dialogStage.setScene(scene);
+	    dialogStage.show();
+	}
+	@FXML
+	public void handleBacktoOrderAdmin(ActionEvent event) throws IOException {
+	    Stage dialogStage;
+	    Node node = (Node) event.getSource();
+	    dialogStage = (Stage) node.getScene().getWindow();
+	    dialogStage.close();
+
+
+	    Scene scene = new Scene(FXMLLoader.load(getClass().getResource("/view/admin/main-dashboard.fxml")));
 	    System.out.print("home");
 	    dialogStage.setScene(scene);
 	    dialogStage.show();
@@ -113,7 +127,7 @@ public class UserInvoiceController {
 		 }
 	 }
 	 private double calculateTotalPrice(ObservableList<CartMedia> orders) {
-	        double totalPrice = 0.0;
+	        double totalPrice = 0;
 	        for (CartMedia order : orders) {
 	            totalPrice += order.getPrice();
 	        }
@@ -185,7 +199,7 @@ public class UserInvoiceController {
 		  String instructions = ivinstructions.getText();
 		  String type = order_type.getText();
 		  
-  	  int order_id = Datasource.getInstance().insertNewOrder(city, address, phone, fee, date, user_id, instructions, type, totalAll);
+  	  int order_id = Datasource.getInstance().insertNewOrder(city, address, phone, fee, date, user_id, instructions, type,(int) totalAll);
   	  	insertNewMediaOrder(ordersData, order_id);
 		Interbank interbank = new Interbank();
 		Stage dialogStage;

@@ -1,6 +1,6 @@
 # TKXDPM.VN.20231-04
 
-This is a Capstone's source code for Software Design and Construction project
+The actual source code and report lives in the Official_Project folder
 
 ## Team member
 

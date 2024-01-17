@@ -1346,7 +1346,7 @@ System.out.println(id);
         }
     }
     
-    public int insertNewOrder(String city, String address, String phone, double fee, String date, int user_id, String instructions, String type, double total_price) {
+    public int insertNewOrder(String city, String address, String phone, double fee, String date, int user_id, String instructions, String type, int total_price) {
     	  ResultSet resultSet = null;
         String sql = "INSERT INTO "+ TABLE_ORDER  + " ("
                 + COLUMN_ORDER_CITY + ", "
@@ -1371,7 +1371,7 @@ System.out.println(id);
             statement.setInt(6, user_id);
             statement.setString(7, instructions);
             statement.setString(8, type);
-            statement.setDouble(9, total_price);
+            statement.setInt(9, total_price);
             
             int affectedRows = statement.executeUpdate();
           

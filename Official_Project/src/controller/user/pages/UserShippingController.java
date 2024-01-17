@@ -120,7 +120,7 @@ public class UserShippingController {
 			        		}
 			        		else {
 			        			if (ship_type.equals("Rush") && !ship_province.equals("Hà Nội")) {
-				        			
+				        			System.out.println("Vui lÃ²ng chá»�n tá»‰nh/thÃ nh phá»‘");
 					                HelperMethods.alertBox("You can only choose rush order when the address is in Hanoi", null, "Invalid!");
 				        		}
 			        			else {

@@ -72,7 +72,7 @@
         <bottom>
             <HBox alignment="CENTER_RIGHT" prefHeight="100.0" prefWidth="200.0" spacing="10.0" BorderPane.alignment="CENTER">
             	<Label  text="Total Price: " />
-        		<Label fx:id="SumTotalPrice" text="100000VND" />
+        		<Label fx:id="SumTotalPrice" text="0VND" />
             	<Button fx:id="btnPlaceOrder" styleClass="button, success, sm" onAction="#btnPlaceOrderAction" mnemonicParsing="false" text="Place Order" />
             	
             </HBox>
