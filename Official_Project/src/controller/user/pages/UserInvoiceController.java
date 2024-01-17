@@ -212,34 +212,6 @@ public class UserInvoiceController {
     	interbank.openPay(totalAll, order_id,  ordersData);
 	}
 	
-//	public void create(ActionEvent event) throws IOException {
-//		Interbank interbank = new Interbank();
-//		Stage dialogStage;
-//        Node node = (Node) event.getSource();
-//        dialogStage = (Stage) node.getScene().getWindow();
-//        dialogStage.close();
-//        Scene scene = new Scene(FXMLLoader.load(getClass().getResource("/view/user/main-dashboard.fxml")));
-//        dialogStage.setScene(scene);
-//        dialogStage.show();
-//    	interbank.openPay(totalAll);
-//	}
-	
-//	@FXML
-//	public void handleSuccessInvoice() throws IOException {
-//		confirmButton.setVisible(false);
-//		emptyCart();
-//		resultText.setVisible(false);
-//		resultText.setText("Payment success");
-//		backHome.setVisible(true);
-//	}
-//	
-//	@FXML
-//	public void handleFailedInvoice() throws IOException {
-//		confirmButton.setVisible(false);
-//		resultText.setVisible(false);
-//		resultText.setText("Payment failed");
-//		backHome.setVisible(true);
-//	}
 
 
 }
