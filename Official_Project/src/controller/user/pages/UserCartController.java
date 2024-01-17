@@ -124,7 +124,7 @@ public class UserCartController {
     
     
     private double calculateTotalPrice(ObservableList<CartMedia> medias) {
-        double totalPrice = 0.0;
+        double totalPrice = 0;
         for (CartMedia media : medias) {
             totalPrice += media.getPrice();
         }

@@ -272,7 +272,7 @@ public class UserMediasController {
         	        mediasContent.getChildren().clear();
         	        mediasContent.getChildren().add(root);
 
-        	        ViewDVDController controller = fxmlLoader.getController();
+        	        ViewCDController controller = fxmlLoader.getController();
         	        controller.fillViewingMediaFields(media_id);
         	        
         	} else if (media_type.equals("dvd")) {

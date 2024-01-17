@@ -3,17 +3,24 @@ package controller.admin.pages;
 import app.utils.HelperMethods;
 
 import controller.UserSessionController;
+import controller.user.pages.UserInvoiceController;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.concurrent.Task;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
+import javafx.stage.Stage;
 import javafx.util.Callback;
+import model.CartMedia;
 import model.Datasource;
 import model.Order;
 import model.User;
@@ -65,87 +72,65 @@ public class OrdersController {
      */
     @FXML
     private void addActionButtonsToTable() {
-        TableColumn colBtnEdit = new TableColumn("Actions");
+        TableColumn colBtnView = new TableColumn("Actions");
 
         Callback<TableColumn<Order, Void>, TableCell<Order, Void>> cellFactory = new Callback<TableColumn<Order, Void>, TableCell<Order, Void>>() {
             @Override
             public TableCell<Order, Void> call(final TableColumn<Order, Void> param) {
                 return new TableCell<Order, Void>() {
 
-//                    private final Button viewButton = new Button("View");
-//                    {
-//                        viewButton.getStyleClass().add("button");
-//                        viewButton.getStyleClass().add("xs");
-//                        viewButton.getStyleClass().add("info");
-//                        viewButton.setOnAction((ActionEvent event) -> {
-//                            User customerData = getTableView().getItems().get(getIndex());
-//                            btnViewCustomer((int) customerData.getId());
-//                            System.out.println("View User");
-//                            System.out.println("customer id: " + customerData.getId());
-//                            System.out.println("customer name: " + customerData.getFullname());
-//                        });
-//                    }
+                    private final Button viewButton = new Button("View");
 
-//                
-//                    private final Button acceptBtn = new Button("Accept");
-//
-//                    {
-//                    	acceptBtn.getStyleClass().add("button");
-//                    	acceptBtn.getStyleClass().add("xs");
-//                    	acceptBtn.getStyleClass().add("success");
-//                    	acceptBtn.setOnAction((ActionEvent event) -> {
-//                            Order orderData = getTableView().getItems().get(getIndex());
-//                            if (Datasource.getInstance().updateOrder("ACCEPTED",orderData.getId())) {
-//                                int rowIndex = getIndex();
-//                                     Order order = getTableView().getItems().get(rowIndex);
-//
-//                                     // Modify the field you want to change
-//                                     order.setStatus("ACCEPTED");
-//
-//                                     // Optionally refresh the TableView if not bound to the data
-//                                     getTableView().refresh();
-//                                 }
-//                      
-//                        });
-//                    }
-//                    
-//                    private final Button declineBtn = new Button("Decline");
-//
-//                    {
-//                    	declineBtn.getStyleClass().add("button");
-//                    	declineBtn.getStyleClass().add("xs");
-//                    	declineBtn.getStyleClass().add("success");
-//                    	declineBtn.setOnAction((ActionEvent event) -> {
-//                            Order orderData = getTableView().getItems().get(getIndex());
-//                            Interbank interbank = new Interbank();
-//                            try {
-//								interbank.refund(orderData.getId(), orderData.getTotalPrice());
-//							} catch (IOException e) {
-//								// TODO Auto-generated catch block
-//								e.printStackTrace();
-//							}
-////                            if (Datasource.getInstance().updateOrder("ACCEPTED",orderData.getId())) {
-////                                int rowIndex = getIndex();
-////                                     Order order = getTableView().getItems().get(rowIndex);
-////
-////                                     // Modify the field you want to change
-////                                     order.setStatus("ACCEPTED");
-////
-////                                     // Optionally refresh the TableView if not bound to the data
-////                                     getTableView().refresh();
-////                                 }
-//                      
-//                        });
-//                    }
+                    {
+                        viewButton.getStyleClass().add("button");
+                        viewButton.getStyleClass().add("xs");
+                        viewButton.getStyleClass().add("info");
+                        viewButton.setOnAction((ActionEvent event) -> {
+                        	
+                        	Order orderData = getTableView().getItems().get(getIndex());
+                        	
+                            Task<ObservableList<CartMedia>> getAllOrderMedias = new Task<ObservableList<CartMedia>>() {
+                                @Override
+                                protected ObservableList<CartMedia> call() {
+                                	
+                                    return FXCollections.observableArrayList(Datasource.getInstance().getOrderCartMedias(Datasource.ORDER_BY_NONE, orderData.getId() ));
+                                    
+                                }
+                            };
+                            getAllOrderMedias.setOnSucceeded(event1 -> {
+                            	System.out.print("1245");
+                            	ObservableList<CartMedia> listOrderMedias = getAllOrderMedias.getValue();                                                            
+                                double totalPrice = calculateTotalPrice(listOrderMedias);
+                                Stage dialogStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+				    	        FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/admin/pages/orders/orderview.fxml"));
+				    	        Parent root;
+								try {
+									root = loader.load();
 
+				    	        int user_id = UserSessionController.getUserId();
+				    	        int order_id = orderData.getId();
+				    	        UserInvoiceController invoiceController = loader.getController();				    	        
+				    	        invoiceController.setData(UserSessionController.getUserFullName(), Datasource.getInstance().getPhonebyOrderId(order_id),Datasource.getInstance().getAddressByOrderId(order_id), Datasource.getInstance().getInstructionsByOrderId(order_id),Datasource.getInstance().getCitybyOrderId(order_id), calculateTotalPrice( listOrderMedias),listOrderMedias, orderData.getType());
+				    	        invoiceController.listOrders();
+				    	        Scene scene = new Scene(root);
+				    	        dialogStage.setScene(scene);
+				    	        dialogStage.show();
+								} catch (IOException e) {
+									// TODO Auto-generated catch block
+									System.out.print("1245");
+									e.printStackTrace();
+								}
+                            });
+                            new Thread(getAllOrderMedias).start();
+                        });
+                    }
+
+                    
                     private final HBox buttonsPane = new HBox();
 
                     {
                         buttonsPane.setSpacing(10);
-//                        buttonsPane.getChildren().add(viewButton);
-//                        buttonsPane.getChildren().add(editButton);
-//                        buttonsPane.getChildren().add(acceptBtn);
-//                        buttonsPane.getChildren().add(declineBtn);
+                        buttonsPane.getChildren().add(viewButton);
                     }
 
                     @Override
@@ -162,10 +147,20 @@ public class OrdersController {
             }
         };
 
-        colBtnEdit.setCellFactory(cellFactory);
+        colBtnView.setCellFactory(cellFactory);
 
-        tableOrdersPage.getColumns().add(colBtnEdit);
+        tableOrdersPage.getColumns().add(colBtnView);
 
+    }
+    private double calculateTotalPrice(ObservableList<CartMedia> listOrderMedias) {
+        double totalPrice = 0.0;
+        if(listOrderMedias == null) {return 0;}
+        else {
+        for (CartMedia media : listOrderMedias) {
+            totalPrice += media.getPrice();
+        }
+        }
+        return totalPrice;
     }
 
 }

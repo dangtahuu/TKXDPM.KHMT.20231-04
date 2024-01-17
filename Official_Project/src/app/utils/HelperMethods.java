@@ -21,8 +21,7 @@ public class HelperMethods {
 //      [a-zA-Z]{4,}            # 4 or more ASCII letters
 //      (?: [a-zA-Z]+){0,2}     # 0 to 2 occurrences of a space followed with one or more ASCII letters
 //      $                       # end of string.
-        Matcher matcher = Pattern.compile("^[A-Z][a-zA-Z]{3,}(?: [A-Z][a-zA-Z]*){0,2}$", Pattern.CASE_INSENSITIVE).matcher(fullName);
-        return matcher.find();
+    	 return fullName.matches("[\\p{L} ]+");
     }
 
     /**
